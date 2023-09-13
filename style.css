@@ -90,7 +90,7 @@ nav .dropdown-content {
     top: 100%; 
     left: 0;
     background-color: #444;
-    min-width: 200px; /* Adjust this if you need a wider dropdown */
+    min-width: 250px; /* Adjust this if you need a wider dropdown */
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
