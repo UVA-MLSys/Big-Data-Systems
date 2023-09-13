@@ -39,6 +39,7 @@ nav ul {
 
 nav li {
     margin: 0 15px;
+    position: relative; /* Add this for dropdown */
 }
 
 nav a {
@@ -50,6 +51,32 @@ nav a {
 
 nav a:hover {
     background-color: #555;
+}
+
+/* Dropdown */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%; /* Position it right below the nav item */
+    left: 0;
+    background-color: #444; /* Use the same color as nav bar */
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #fff;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    background-color: #555;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 /* Main content */
