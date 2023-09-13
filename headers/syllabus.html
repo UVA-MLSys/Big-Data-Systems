@@ -4,18 +4,123 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Research - Big Data Systems</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <!-- Include similar structure: header, nav, etc. -->
 
+<header>
+    Course Syllabus
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#reading-section">Readings</a></li>
+        <li><a href="#participation-section">Participation</a></li>
+        <li><a href="#pa-section">Programming assignments</a></li>
+        <li><a href="#projects-section">Course projects</a></li>
+        <li><a href="#grading-section">Grading</a></li>
+        <li><a href="#late-section">Late Policy</a></li>
+        <li><a href="#academic-integrity-section">Academic Integrity</a></li>
+    </ul>
+</nav>
+
 <div class="container">
-    <div class="main-content">
-        <h2>Syllabus</h2>
-        <p>Syllabus coming soon...</p>
+    <div class = "main-content">
+        <div id="reading-section">
+            <h2>Readings</h2>
+            <p>
+                There are no official textbooks. Required readings are (most frequently) in the form of seminal research papers, online documentations, and/or selected textbook chapters There are several books that might be useful. Good thing is they are completely free:
+                <ul>
+                    <li>Operating Systems: Three Easy Pieces (OSTEP), by Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau, Aug, 2018 (v 1.00).</li>
+                    <li>Distributed Systems 3rd edition (2017), by Maarten van Steen and Andrew S. Tenenbaum (suggested optional readings will most frequently be drawn from this book).</li>
+                </ul>
+                I also strongly encourage you to discuss the assigned/optional readings (papers/tech reports/online documentations) with other students in the class — you may have insights that others do not, and vice versa. Oftentimes, students form reading groups, which I encourage; on the other hand, I would like to point out that group discussion is not an effective substitute for actually reading the paper.
+            </p>
+        </div>
+        <div id="participation-section">
+            <h2>Class Participation</h2>
+            <p>
+                In addition to lectures, we will use a discuss-orientede format. Class participation is required. We will discuss the design and the use (application) of a variety of modern big data systems that we’ll cover during this semester. Most of these systems have research papers, if not, online docs, which present the original/evolved design of them. One of the many great examples is Google’s MapReduce (and later the open-source implementation of MapReduce: Apache Hadoop), which opens a new era of what we call Big Data Systems today.
+            </p>
+            <p>
+                Specifically, the instructor (prof or the invited guest speaker) will lead the lecture. In some lectures we will have moderate discussions about the papers/articles that we will have all read before each class. For lectures that have a required reading assignment, I will provide you with a short review form that you must complete and submit before the class. The teaching staff (prof and the GTA) will go through your reviews the night before the class and answer questions that you may have in your reviews. You are encouraged to participate in discussions as your performance in class forms up to 5% of your overall grade, so it does matter that you 1. show up to class AND 2. participate in the discussion (which in fact requires you to do the required readings).
+            </p>
+        </div>
+        <div id="pa-section">
+            <h2>Programming Assignments</h2>
+            <p>
+                We will have three programming assignments during the first half of the semester:
+                <ul>
+                    <li>Assignment 0: Using AWS Academy and AWS EC2.</li>
+                    <li>Assignment 1: A tour of Apache HDFS and Spark.</li>
+                    <li>Assignment 2: Dask.distributed analytics</li>
+                </ul>
+            </p>
+        </div>
+        <div id="projects-section">
+            <h2>Course projects</h2>
+            <p>
+                Probably the most exciting part of this course is to complete an interesting project related to big data systems. I will provide you with a list of ideas around Week 4.
+            </p>
+        </div>
+        <div id="grading-section">
+            <h2>Grading</h2>
+            <p>
+                Grade will be calculated as follows:
+                <ul>
+                    <li>5% in-class participation</li>
+                    <li>5% reading review forms</li>
+                    <li>5% quizzes</li>
+                    <li>0% assignment 0</li>
+                    <li>10% assignment 1</li>
+                    <li>10% assignment 2</li>
+                    <li>15% midterm exams</li>
+                    <li>10% project checkpoint 1 report</li>
+                    <li>10% project checkpoint 2 report</li>
+                    <li>30% final project report, presentation, artifact eval</li>
+                </ul>
+            </p>
+            <h3>Grading Rules</h3>
+            <p>
+                Final grade is computed according to following scale:
+                <ul>
+                    <li>A+: >= 98%; A: [93%, 98%); A-: [88%, 93%)</li>
+                    <li>B+: [83%, 87%); B: [80%, 83%); B-: [80%, 83%)</li>
+                    <li>C+: [77%, 80%); C: [73%, 77%); C-: [70%, 73%)</li>
+                    <li>D+: [67%, 70%); D: [63%, 67%); D-: [60%, 63%)</li>
+                    <li>F: < 60%</li>
+                </ul>
+            </p>
+            <h3>Team Project Grading</h3>
+            <p>In cases where team members do not equally contribute to the project, we may assign different grades to different individuals, up to an extreme of deducting 50% of the team project grade for a student. We will evaluate each individual’s contribution on the basis of a variety of factors, including progress reports at project checkpoints, through inspecting version control history, through each students’ self-reflection, and through each students’ peer evaluation {during and/or} at the end of the project. We will make regular efforts to collect and distribute this feedback throughout the project — our ultimate goal is for all students to participate and receive full marks.</p>
+        </div>
+        <div id="late-section">
+            <p>Students must work individually on all assignments including the programming assignments and projects. We encourage you to have high-level discussions with other students in the class about the assignments, however, we require that when you turn in an assignment, it is only your work. That is, copying any part of another student’s assignment is strictly prohibited, and repercussions for doing so will be severe (up to and including failing the class outright). You are free to reuse small snippets of example code found on the Internet (e.g. via StackOverflow) provided that it is attributed. If you are concerned that by reusing and attributing that copied code it may appear that you didn’t complete the assignment yourself, then please raise a discussion with the instructor.</p>
+            <p>
+                Work is late if not turned in by deadline.
+                <ul>
+                    <li>10% will be deducted for late assignments turned in within 24 hours after the due date.</li>
+                    <li>Assignments submitted more than 24 hours late will receive a zero.</li>
+                </ul>
+            </p>
+            <p>
+                If you’re worried about being busy around the time of an assignment submission, please plan ahead and get started early. Assignment that does not compile or run will receive at most 50% credit.
+
+                For fairness to all, there are no exceptions to the above rules.
+            </p>
+        </div>
+        <div id="academic-integrity-section">
+            <p>
+                The School relies upon and cherishes its community of trust. We firmly endorse, uphold, and embrace the University’s Honor principle that students will not lie, cheat, or steal, nor shall they tolerate those who do. We recognize that even one honor infraction can destroy an exemplary reputation that has taken years to build. Acting in a manner consistent with the principles of honor will benefit every member of the community both while enrolled in the School of Data Science and in the future. Students are expected to be familiar with the university honor code, including the section on academic fraud.
+            </p>
+        </div>
     </div>
 </div>
 
 <!-- footer, etc. -->
+<footer>
+    <p>© 2023 Big Data Systems, UVAMLSys. All rights reserved.</p>
+</footer>
 </body>
 </html>
