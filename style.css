@@ -39,7 +39,7 @@ nav ul {
 
 nav li {
     margin: 0 15px;
-    position: relative; /* Add this for dropdown */
+    position: relative; /* This is important for absolute positioning of dropdown */
 }
 
 nav a {
@@ -49,46 +49,52 @@ nav a {
     display: block;
 }
 
-nav a:hover {
+nav a:hover, nav .dropdown-content a:hover {
     background-color: #555;
 }
 
-/* Existing Styles... */
+/* Main content */
+.main-content {
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.main-content h2 {
+    font-size: 1.5em;
+}
+
+.main-content p {
+    margin-bottom: 20px;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}
 
 /* Dropdown Styles */
 nav li.dropdown {
     position: relative;
-    display: inline-block; /* This is important to ensure inline display with other nav items */
-}
-
-.dropbtn:hover, .dropdown:hover .dropbtn {
-    background-color: #555;
 }
 
 nav .dropdown-content {
-    display: none;
+    display: none; 
     position: absolute;
     top: 100%; 
     left: 0;
-    background-color: #444; 
+    background-color: #444;
+    min-width: 200px; /* Adjust this if you need a wider dropdown */
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    width: 100%; /* ensure full width */
 }
 
-nav .dropdown-content a {
-    color: #fff;
-    padding: 10px 15px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-}
-
-.dropdown:hover .dropdown-content {
+nav .dropdown:hover .dropdown-content {
     display: block;
 }
-
-nav .dropdown-content a:hover {
-    background-color: #555;
-}
-
