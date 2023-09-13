@@ -3,6 +3,7 @@ body {
     font-family: Arial, sans-serif;
     color: #333;
     line-height: 1.5;
+    padding-top: 50px; /* Added padding to avoid content being hidden behind the fixed navbar */
 }
 
 .container {
@@ -27,6 +28,10 @@ header h1 {
 /* Navigation */
 nav {
     background-color: #444;
+    position: fixed; /* Makes the navbar fixed */
+    top: 0;
+    width: 100%; /* Full width */
+    z-index: 1000; /* Ensure the navbar stays above all other elements */
 }
 
 nav ul {
@@ -39,7 +44,7 @@ nav ul {
 
 nav li {
     margin: 0 15px;
-    position: relative; /* This is important for absolute positioning of dropdown */
+    position: relative;
 }
 
 nav a {
