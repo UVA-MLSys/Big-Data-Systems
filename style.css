@@ -1,41 +1,46 @@
 /* Basic layout */
 body {
-    font-family: Arial, sans-serif;
-    color: #333;
-    line-height: 1.5;
-    padding-top: 50px; /* To avoid content being hidden behind the fixed navbar */
-    margin: 0; /* Added to reset default margin */
+    font-family: 'Nunito', sans-serif; /* Changed to a modern font */
+    color: #2C2C2C; /* Darker text color for better readability */
+    line-height: 1.6;
+    padding-top: 60px; /* Adjusted to provide a bit more space from the top */
+    margin: 0; 
+    background-color: #f9f9f9; /* Light background to give a "lifted" effect to containers */
 }
 
 .container {
-    width: 80%;
+    width: 85%; /* Slightly wider main container */
     margin: 0 auto;
     padding: 20px;
+    background-color: #ffffff; /* Adding a white background for containers */
+    border-radius: 8px; /* Smooth rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04); /* Subtle shadow to lift the content */
 }
 
 /* Header */
 header {
-    background-color: #333;
+    background-color: #064a3f; /* Dark Forest Green */
     color: #fff;
     padding: 20px 0;
     text-align: center;
-    margin: 0; /* Ensure no margins */
+    margin: 0;
 }
 
 header h1 {
     margin: 0;
-    font-size: 2em;
+    font-size: 2.2em; /* Slightly larger text for the header */
 }
 
 /* Navigation */
 nav {
-    background-color: #444;
-    position: fixed; /* Makes the navbar fixed */
+    background-color: #076d58; /* Forest Green */
+    position: fixed;
     top: 0;
-    width: 100%; /* Full width */
-    z-index: 1000; /* Ensure the navbar stays above all other elements */
-    margin: 0; /* Added to ensure no margins */
-    padding: 0; /* Ensure no left/right padding */
+    width: 100%;
+    z-index: 1000;
+    margin: 0;
+    padding: 0 5%; /* Add some padding to the sides for larger screens */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow to lift the navbar */
 }
 
 nav ul {
@@ -56,20 +61,23 @@ nav a {
     text-decoration: none;
     padding: 10px 15px;
     display: block;
+    border-radius: 5px; /* Rounded edges for the navigation links */
+    transition: background-color 0.3s; /* Smooth transition on hover */
 }
 
 nav a:hover, nav .dropdown-content a:hover {
-    background-color: #555;
+    background-color: #064a3f; /* Darken the color slightly on hover */
 }
 
 /* Main content */
 .main-content {
-    background-color: #f5f5f5;
+    background-color: transparent; /* Letting the container handle the background */
     padding: 20px;
 }
 
 .main-content h2 {
-    font-size: 1.5em;
+    font-size: 1.7em; /* Slightly larger main headings */
+    margin-top: 20px; /* A bit more space at the top */
 }
 
 .main-content p {
@@ -78,16 +86,18 @@ nav a:hover, nav .dropdown-content a:hover {
 
 /* Footer */
 footer {
-    background-color: #333;
+    background-color: #064a3f;
     color: #fff;
-    padding: 20px 0;
+    padding: 25px 0; /* A bit more padding for the footer */
     text-align: center;
-    margin: 0; /* Ensure no margins */
+    margin: 0;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Shadow at the top of the footer */
 }
 
 footer p {
     margin: 0;
 }
+
 
 /* Dropdown Styles */
 nav li.dropdown {
@@ -133,4 +143,14 @@ nav .dropdown:hover .dropdown-content {
 .lecture .description {
     margin-top: 20px;
     font-size: 1.1em;
+}
+
+/* Image Styles */
+img {
+    max-width: 100%; /* Ensures the image doesn't exceed its container's width */
+    height: auto; /* Keeps the image's original aspect ratio */
+    display: block; /* Removes any unwanted whitespace below the image */
+    margin: 20px auto; /* Centers the image and gives some spacing */
+    border-radius: 5px; /* Optional: Adds rounded corners to match your design */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
 }
