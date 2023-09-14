@@ -3,7 +3,8 @@ body {
     font-family: Arial, sans-serif;
     color: #333;
     line-height: 1.5;
-    padding-top: 50px; /* Added padding to avoid content being hidden behind the fixed navbar */
+    padding-top: 50px; /* To avoid content being hidden behind the fixed navbar */
+    margin: 0; /* Added to reset default margin */
 }
 
 .container {
@@ -12,20 +13,19 @@ body {
     padding: 20px;
 }
 
-
 /* Header */
 header {
     background-color: #333;
     color: #fff;
     padding: 20px 0;
     text-align: center;
+    margin: 0; /* Ensure no margins */
 }
 
 header h1 {
     margin: 0;
     font-size: 2em;
 }
-
 
 /* Navigation */
 nav {
@@ -34,6 +34,8 @@ nav {
     top: 0;
     width: 100%; /* Full width */
     z-index: 1000; /* Ensure the navbar stays above all other elements */
+    margin: 0; /* Added to ensure no margins */
+    padding: 0; /* Ensure no left/right padding */
 }
 
 nav ul {
@@ -60,7 +62,6 @@ nav a:hover, nav .dropdown-content a:hover {
     background-color: #555;
 }
 
-
 /* Main content */
 .main-content {
     background-color: #f5f5f5;
@@ -75,19 +76,18 @@ nav a:hover, nav .dropdown-content a:hover {
     margin-bottom: 20px;
 }
 
-
 /* Footer */
 footer {
     background-color: #333;
     color: #fff;
     padding: 20px 0;
     text-align: center;
+    margin: 0; /* Ensure no margins */
 }
 
 footer p {
     margin: 0;
 }
-
 
 /* Dropdown Styles */
 nav li.dropdown {
@@ -95,12 +95,12 @@ nav li.dropdown {
 }
 
 nav .dropdown-content {
-    display: none; 
+    display: none;
     position: absolute;
-    top: 100%; 
+    top: 100%;
     left: 0;
     background-color: #444;
-    min-width: 225px; /* Adjust this if you need a wider dropdown */
+    min-width: 225px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
@@ -109,29 +109,28 @@ nav .dropdown:hover .dropdown-content {
     display: block;
 }
 
-
 /* Lecture Section */
 .lecture {
     background-color: #f5f5f5;
     padding: 20px;
     margin: 20px 0;
-    border-radius: 5px; /* Add rounded corners */
+    border-radius: 5px;
 }
 
 .lecture h2 {
     font-size: 1.8em;
-    margin-bottom: 20px; /* Space between the heading and the slide */
+    margin-bottom: 20px;
 }
 
 .lecture iframe {
     display: block;
-    margin: 0 auto; /* Center the slides */
-    border: none; /* Remove any border from iframe */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
-    border-radius: 5px; /* Optional: Add rounded corners to match the container */
+    margin: 0 auto;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
 }
 
 .lecture .description {
-    margin-top: 20px; /* Space between the slide and the description */
+    margin-top: 20px;
     font-size: 1.1em;
 }
