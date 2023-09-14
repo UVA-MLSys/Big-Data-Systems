@@ -12,6 +12,7 @@ body {
     padding: 20px;
 }
 
+
 /* Header */
 header {
     background-color: #333;
@@ -24,6 +25,7 @@ header h1 {
     margin: 0;
     font-size: 2em;
 }
+
 
 /* Navigation */
 nav {
@@ -58,6 +60,7 @@ nav a:hover, nav .dropdown-content a:hover {
     background-color: #555;
 }
 
+
 /* Main content */
 .main-content {
     background-color: #f5f5f5;
@@ -72,6 +75,7 @@ nav a:hover, nav .dropdown-content a:hover {
     margin-bottom: 20px;
 }
 
+
 /* Footer */
 footer {
     background-color: #333;
@@ -83,6 +87,7 @@ footer {
 footer p {
     margin: 0;
 }
+
 
 /* Dropdown Styles */
 nav li.dropdown {
@@ -102,4 +107,31 @@ nav .dropdown-content {
 
 nav .dropdown:hover .dropdown-content {
     display: block;
+}
+
+
+/* Lecture Section */
+.lecture {
+    background-color: #f5f5f5;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px; /* Add rounded corners */
+}
+
+.lecture h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px; /* Space between the heading and the slide */
+}
+
+.lecture iframe {
+    display: block;
+    margin: 0 auto; /* Center the slides */
+    border: none; /* Remove any border from iframe */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+    border-radius: 5px; /* Optional: Add rounded corners to match the container */
+}
+
+.lecture .description {
+    margin-top: 20px; /* Space between the slide and the description */
+    font-size: 1.1em;
 }

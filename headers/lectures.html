@@ -8,15 +8,36 @@
 </head>
 <body>
 <!-- Include similar structure: header, nav, etc. -->
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSfngnKgOyj2a05NG5VBSyOgWlHv1ygd0--OyHk1heLssCSwKKqd01ayCdEL9Cks8EIajWCknUvjJn6/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+<nav>
+    <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li class="dropdown">
+            <a class=dropbtn href="./lectures.html">Lectures</a>
+            <div class="dropdown-content">
+                <a href="#lecture-1">Lecture 1</a>
+                <a href="#lecture-2">Lecure 2</a>
+                <a href="#lecture-3">Lecture 3</a>
+            </div>
+        </li>
+    </ul>
+</nav>
 
 <div class="container">
     <div class="main-content">
-        <h2>Our Lectures</h2>
-        <p>Lectures coming soon...</p>
+        <div id="lecture-1">
+            <h2>Lecture 1</h2>
+            <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSfngnKgOyj2a05NG5VBSyOgWlHv1ygd0--OyHk1heLssCSwKKqd01ayCdEL9Cks8EIajWCknUvjJn6/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            <p>Information for said lecture.</p>
+        </div>
     </div>
 </div>
 
 <!-- footer, etc. -->
+
+<footer>
+    <p>© 2023 Big Data Systems, UVAMLSys. All rights reserved.</p>
+</footer>
+
 </body>
 </html>
