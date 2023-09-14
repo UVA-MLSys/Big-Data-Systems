@@ -32,24 +32,31 @@ header h1 {
 }
 
 /* Navigation */
+/* Navigation */
 nav {
     background-color: #076d58; /* Forest Green */
     position: fixed;
     top: 0;
-    width: 100%;
+    left: 0; /* Ensure the navbar starts at the left edge */
+    right: 0; /* Ensure the navbar stretches to the right edge */
+    width: auto; /* Let the width be automatically set by the left and right properties */
     z-index: 1000;
     margin: 0;
-    padding: 0 5%; /* Add some padding to the sides for larger screens */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow to lift the navbar */
+    padding: 0; /* Remove padding from the navbar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 nav ul {
     list-style-type: none;
     padding: 0;
-    margin: 0;
+    margin: 0 auto; /* Center the unordered list within the navbar */
     display: flex;
     justify-content: center;
+    width: 85%; /* Match the width of the .container for alignment */
 }
+
+/* ...rest of your CSS remains unchanged... */
+
 
 nav li {
     margin: 0 15px;
