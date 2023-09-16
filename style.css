@@ -1,62 +1,61 @@
-/* Basic layout */
+/* Global resets and basic layout */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    font-family: 'Nunito', sans-serif; /* Changed to a modern font */
-    color: #2C2C2C; /* Darker text color for better readability */
+    font-family: 'Nunito', sans-serif;
+    color: #2C2C2C;
     line-height: 1.6;
-    padding-top: 60px; /* Adjusted to provide a bit more space from the top */
-    margin: 0; 
-    background-color: #f9f9f9; /* Light background to give a "lifted" effect to containers */
+    padding-top: 60px;
+    background-color: #f9f9f9;
 }
 
 .container {
-    width: 85%; /* Slightly wider main container */
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff; /* Adding a white background for containers */
-    border-radius: 8px; /* Smooth rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04); /* Subtle shadow to lift the content */
+    width: 85%;
+    max-width: 1200px;
+    margin: 2em auto;
+    padding: 1em;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Header */
 header {
-    background-color: #064a3f; /* Dark Forest Green */
+    background-color: #076d58;
     color: #fff;
     padding: 20px 0;
     text-align: center;
-    margin: 0;
 }
 
 header h1 {
-    margin: 0;
-    font-size: 2.2em; /* Slightly larger text for the header */
+    font-size: 2.5em;
+    font-weight: 700;
 }
 
 /* Navigation */
-/* Navigation */
 nav {
-    background-color: #076d58; /* Forest Green */
+    background-color: #076d58;
     position: fixed;
     top: 0;
-    left: 0; /* Ensure the navbar starts at the left edge */
-    right: 0; /* Ensure the navbar stretches to the right edge */
-    width: auto; /* Let the width be automatically set by the left and right properties */
+    left: 0;
+    right: 0;
     z-index: 1000;
-    margin: 0;
-    padding: 0; /* Remove padding from the navbar */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 nav ul {
     list-style-type: none;
     padding: 0;
-    margin: 0 auto; /* Center the unordered list within the navbar */
+    margin: 0 auto;
     display: flex;
     justify-content: center;
-    width: 85%; /* Match the width of the .container for alignment */
+    align-items: center;
+    width: 85%;
 }
-
-/* ...rest of your CSS remains unchanged... */
-
 
 nav li {
     margin: 0 15px;
@@ -66,47 +65,16 @@ nav li {
 nav a {
     color: #fff;
     text-decoration: none;
-    padding: 10px 15px;
-    display: block;
-    border-radius: 5px; /* Rounded edges for the navigation links */
-    transition: background-color 0.3s; /* Smooth transition on hover */
+    padding: 12px 18px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
 nav a:hover, nav .dropdown-content a:hover {
-    background-color: #064a3f; /* Darken the color slightly on hover */
-}
-
-/* Main content */
-.main-content {
-    background-color: transparent; /* Letting the container handle the background */
-    padding: 20px;
-}
-
-.main-content h2 {
-    font-size: 1.7em; /* Slightly larger main headings */
-    margin-top: 20px; /* A bit more space at the top */
-}
-
-.main-content p {
-    margin-bottom: 20px;
-}
-
-/* Footer */
-footer {
     background-color: #064a3f;
-    color: #fff;
-    padding: 25px 0; /* A bit more padding for the footer */
-    text-align: center;
-    margin: 0;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Shadow at the top of the footer */
 }
 
-footer p {
-    margin: 0;
-}
-
-
-/* Dropdown Styles */
+/* Dropdowns */
 nav li.dropdown {
     position: relative;
 }
@@ -118,46 +86,66 @@ nav .dropdown-content {
     left: 0;
     background-color: #444;
     min-width: 225px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
     z-index: 1;
+    border-radius: 5px;
 }
 
 nav .dropdown:hover .dropdown-content {
     display: block;
 }
 
-/* Lecture Section */
-.lecture {
-    background-color: #f5f5f5;
+/* Main Content */
+.main-content {
     padding: 20px;
-    margin: 20px 0;
-    border-radius: 5px;
+    background-color: transparent;
 }
 
+.main-content h2 {
+    font-size: 2em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+/* Lecture Section */
 .lecture h2 {
-    font-size: 1.8em;
-    margin-bottom: 20px;
+    font-size: 2em;
+    margin-bottom: 1em;
 }
 
 .lecture iframe {
-    display: block;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 900px;
+    height: auto;
     border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .lecture .description {
-    margin-top: 20px;
-    font-size: 1.1em;
+    margin-top: 1em;
+    font-size: 1.2em;
+}
+
+/* Footer */
+footer {
+    background-color: #076d58;
+    color: #fff;
+    padding: 25px 0;
+    text-align: center;
+    border-top: 3px solid #064a3f;
+}
+
+footer p {
+    margin: 0;
 }
 
 /* Image Styles */
 img {
-    max-width: 100%; /* Ensures the image doesn't exceed its container's width */
-    height: auto; /* Keeps the image's original aspect ratio */
-    display: block; /* Removes any unwanted whitespace below the image */
-    margin: 20px auto; /* Centers the image and gives some spacing */
-    border-radius: 5px; /* Optional: Adds rounded corners to match your design */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
