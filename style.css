@@ -79,6 +79,7 @@ nav a:hover, nav .dropdown-content a:hover {
 .main-content {
     background-color: transparent; /* Letting the container handle the background */
     padding: 20px;
+    margin-bottom: 20px;
 }
 
 .main-content h2 {
