@@ -1,140 +1,99 @@
+/* Global Resets & Base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: all 0.3s;
+}
+
 body {
-    font-family: 'Nunito', sans-serif; /* Changed to a modern font */
-    color: #2C2C2C; /* Darker text color for better readability */
+    font-family: 'Nunito', sans-serif;
+    background-color: #28112B;
+    color: #DDB771;
     line-height: 1.6;
-    padding-top: 60px; /* Adjusted to provide a bit more space from the top */
-    margin: 0; 
-    background-color: #f9f9f9; /* Light background to give a "lifted" effect to containers */
+    overflow-x: hidden;
 }
 
 .container {
-    width: 85%; /* Slightly wider main container */
-    margin: 0 auto;
+    max-width: 1200px;
+    margin: 20px auto;
     padding: 20px;
-    background-color: #ffffff; /* Adding a white background for containers */
-    border-radius: 8px; /* Smooth rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04); /* Subtle shadow to lift the content */
+    background-color: #222E50;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Header */
-header {
-    background-color: #064a3f; /* Dark Forest Green */
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
-    margin: 0;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2.2em; /* Slightly larger text for the header */
-}
-
-/* Navigation */
 /* Navigation */
 nav {
-    background-color: #076d58; /* Forest Green */
     position: fixed;
     top: 0;
-    left: 0; /* Ensure the navbar starts at the left edge */
-    right: 0; /* Ensure the navbar stretches to the right edge */
-    width: auto; /* Let the width be automatically set by the left and right properties */
+    left: 0;
+    right: 0;
+    padding: 10px 0;
+    background-color: #222E50;
     z-index: 1000;
-    margin: 0;
-    padding: 0; /* Remove padding from the navbar */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 10px #60492C;
 }
 
 nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0 auto; /* Center the unordered list within the navbar */
     display: flex;
     justify-content: center;
-    width: 85%; /* Match the width of the .container for alignment */
+    align-items: center;
+    list-style: none;
 }
 
-/* ...rest of your CSS remains unchanged... */
-
-
 nav li {
-    margin: 0 15px;
-    position: relative;
+    margin: 0 10px;
 }
 
 nav a {
-    color: #fff;
     text-decoration: none;
-    padding: 10px 15px;
-    display: block;
-    border-radius: 5px; /* Rounded edges for the navigation links */
-    transition: background-color 0.3s; /* Smooth transition on hover */
+    color: #DDB771;
+    padding: 8px 16px;
+    border-radius: 5px;
 }
 
-nav a:hover, nav .dropdown-content a:hover {
-    background-color: #064a3f; /* Darken the color slightly on hover */
-}
-
-/* Main content */
-.main-content {
-    background-color: transparent; /* Letting the container handle the background */
-    padding: 20px;
-}
-
-.main-content h2 {
-    font-size: 1.7em; /* Slightly larger main headings */
-    margin-top: 20px; /* A bit more space at the top */
-}
-
-.main-content p {
-    margin-bottom: 20px;
-}
-
-/* Footer */
-footer {
-    background-color: #064a3f;
-    color: #fff;
-    padding: 25px 0; /* A bit more padding for the footer */
-    text-align: center;
-    margin: 0;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Shadow at the top of the footer */
-}
-
-footer p {
-    margin: 0;
-}
-
-
-/* Dropdown Styles */
-nav li.dropdown {
-    position: relative;
+nav a:hover,
+nav .dropdown-content a:hover {
+    background-color: #60492C;
 }
 
 nav .dropdown-content {
     display: none;
     position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #444;
-    min-width: 225px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    top: 40px;
+    background-color: #4D8B31;
+    border-radius: 5px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
 }
 
-nav .dropdown:hover .dropdown-content {
+nav li:hover .dropdown-content {
     display: block;
+}
+
+/* Main Content */
+.main-content {
+    margin-top: 80px; /* Offset for the fixed navbar */
+    padding: 20px;
+    color: #DDB771;
+}
+
+.main-content h2 {
+    border-bottom: 2px solid #4D8B31;
+    padding-bottom: 10px;
 }
 
 /* Lecture Section */
 .lecture {
-    background-color: #f5f5f5;
+    background: rgba(34, 46, 80, 0.9);
     padding: 20px;
-    margin: 20px 0;
     border-radius: 5px;
+    margin: 20px 0;
 }
 
 .lecture h2 {
-    font-size: 1.8em;
+    font-size: 2em;
+    color: #4D8B31;
     margin-bottom: 20px;
 }
 
@@ -142,21 +101,33 @@ nav .dropdown:hover .dropdown-content {
     display: block;
     margin: 0 auto;
     border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }
 
 .lecture .description {
     margin-top: 20px;
     font-size: 1.1em;
+    color: #DDB771;
 }
 
 /* Image Styles */
 img {
-    max-width: 100%; /* Ensures the image doesn't exceed its container's width */
-    height: auto; /* Keeps the image's original aspect ratio */
-    display: block; /* Removes any unwanted whitespace below the image */
-    margin: 20px auto; /* Centers the image and gives some spacing */
-    border-radius: 5px; /* Optional: Adds rounded corners to match your design */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+    max-width: 100%;
+    display: block;
+    margin: 20px auto;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px #60492C;
+}
+
+/* Footer */
+footer {
+    background-color: #222E50;
+    color: #DDB771;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 5px solid #4D8B31;
+}
+
+footer p {
+    margin: 0;
 }
