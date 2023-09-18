@@ -55,17 +55,19 @@ nav ul {
 }
 
 nav li {
-    margin: 0 30px;
+    margin: 0 20px; 
 }
 
 nav a {
     color: #fff;
     text-decoration: none;
-    padding: 10px 15px;
+    padding: 8px 12px; 
+    font-size: 0.9em; 
     display: block;
     border-radius: 5px;
     transition: background-color 0.3s;
 }
+
 
 nav a:hover, nav .dropdown-content a:hover {
     background-color: #2c3e50;
