@@ -20,7 +20,7 @@ body {
 header {
     background-color: #333a40; /* Updated cooler shade of dark gray */
     color: #fff;
-    padding: 10px 0; /* Reduced padding to make the header smaller */
+    padding: 20px 0; /* Reduced padding to make the header smaller */
     text-align: center;
     margin: 0;
 }
