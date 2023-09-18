@@ -20,7 +20,7 @@ body {
 header {
     background-color: #333a40; /* Updated cooler shade of dark gray */
     color: #fff;
-    padding: 25px 0; /* Reduced padding to make the header smaller */
+    padding: 20px 0; /* Reduced padding to make the header smaller */
     text-align: center;
     margin: 0;
 }
@@ -63,7 +63,7 @@ nav a {
     color: #fff;
     text-decoration: none;
     padding: 8px 12px; 
-    font-size: 1.0em; 
+    font-size: 0.95em; 
     display: block;
     border-radius: 5px;
     transition: background-color 0.3s;
