@@ -161,3 +161,16 @@ img {
     border-radius: 5px; /* Optional: Adds rounded corners to match your design */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
 }
+
+/* Youtube Video Embed*/
+.video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Adjust as needed */
+}
+
+.video-container {
+    text-align: center;
+}
+
