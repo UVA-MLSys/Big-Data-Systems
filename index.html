@@ -16,11 +16,11 @@
 
     <!-- Navbar -->
     <div class="navbar" id="navbar">
-        <a href="/bdsys-book/index.html" class="active">Home</a>
-        <a href="/bdsys-book/headers/syllabus.html">Syllabus</a>
-        <a href="/bdsys-book/headers/lectures.html">Lecture Slides</a>
-        <a href="/bdsys-book/headers/book.html">Book</a>
-        <a href="/bdsys-book/headers/schedule.html">Schedule</a>
+        <a href="/Big-Data-Systems/index.html" class="active">Home</a>
+        <a href="/Big-Data-Systems/headers/syllabus.html">Syllabus</a>
+        <a href="/Big-Data-Systems/headers/lectures.html">Lecture Slides</a>
+        <a href="/Big-Data-Systems/headers/book.html">Book</a>
+        <a href="/Big-Data-Systems/headers/schedule.html">Schedule</a>
     </div>
 
     <!-- Content -->
@@ -55,8 +55,8 @@
                 "headers/schedule.html"
             ];
 
-            // var currentPage = window.location.href.replace(window.location.origin + "/bdsys-book/headers", "");
-            var currentPage = window.location.pathname.replace("/bdsys-book/", "") || "index.html";
+            // var currentPage = window.location.href.replace(window.location.origin + "/Big-Data-Systems/headers", "");
+            var currentPage = window.location.pathname.replace("/Big-Data-Systems/", "") || "index.html";
 
             currentIndex = pages.indexOf(currentPage);
 
@@ -75,7 +75,7 @@
             }
 
             function navigateToPage() {
-                var base_url = window.location.origin + "/bdsys-book/";
+                var base_url = window.location.origin + "/Big-Data-Systems/";
                 var page = pages[currentIndex];
                 window.location.href = base_url + page;
             }
