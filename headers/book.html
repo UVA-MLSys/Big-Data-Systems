@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <!-- Header & Toggle Button -->
+    <div class="header" id="header">
+        Big Data Systems
+        <button class="toggle-btn" onclick="toggleNavbar()">Toggle Navbar</button>
+    </div>
+
+    <!-- Navbar -->
+    <div class="navbar" id="navbar">
+        <a href="/bdsys-book/index.html">Home</a>
+        <a href="/bdsys-book/headers/syllabus.html">Syllabus</a>
+        <a href="/bdsys-book/headers/lectures.html">Lecture Slides</a>
+        <a href="/bdsys-book/headers/book.html" class="active">Book</a>
+        <a href="/bdsys-book/headers/schedule.html">Schedule</a>
+    </div>
+
+    <!-- Content -->
+    <div class="container" id="contentArea">
+        <div class="main-content">
+            <h2>Distributed Systems Book:</h2>
+            <a href="https://www.distributed-systems.net/index.php/books/ds3/">PDF Download</a>
+        </div>
+    </div>
+
+    <!-- Arrows for navigation -->
+    <div class="arrow left" onclick="prevPage()" id="leftArrow">&lt;</div>
+    <div class="arrow right" onclick="nextPage()" id="rightArrow">&gt;</div>
+
+    <!-- Javascript for navigation -->
+    <script>
+        var pages = [
+                "index.html",
+                "headers/syllabus.html",
+                "headers/lectures.html",
+                "headers/book.html",
+                "headers/schedule.html"
+            ];
+
+        // var currentPage = window.location.href.replace(window.location.origin + "/bdsys-book/headers", "");
+        var currentPage = window.location.pathname.replace("/bdsys-book/", "") || "index.html";
+
+        currentIndex = pages.indexOf(currentPage);
+
+        function prevPage() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                navigateToPage();
+            }
+        }
+
+        function nextPage() {
+            if (currentIndex < pages.length - 1) {
+                currentIndex++;
+                navigateToPage();
+            }
+        }
+
+        function navigateToPage() {
+            var base_url = window.location.origin + "/bdsys-book/";
+            var page = pages[currentIndex];
+            window.location.href = base_url + page;
+        }
+
+
+        function toggleNavbar() {
+            var navbar = document.getElementById('navbar');
+            var contentArea = document.getElementById('contentArea');
+            var header = document.getElementById('header');
+            var leftArrow = document.querySelector('.arrow.left');
+            
+            if (!navbar || !contentArea || !header || !leftArrow) {
+                console.error("One or more elements not found!");
+                return;
+            }
+            
+            if (navbar.style.display === 'none') {
+                navbar.style.display = 'block';
+                contentArea.style.marginLeft = "230px";
+                header.style.left = "230px";
+                header.style.width = "calc(100% - 230px)";
+                leftArrow.style.left = "240px";
+            } 
+
+            else {
+                navbar.style.display = 'none';
+                contentArea.style.marginLeft = "0";
+                header.style.left = "0";
+                header.style.width = "100%";
+                leftArrow.style.left = "20px";
+            }
+        }
+</script>
+</body>
+</html>

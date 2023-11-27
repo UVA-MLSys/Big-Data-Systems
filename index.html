@@ -3,71 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Big Data Systems</title>
-    <link rel="stylesheet" href="style.css"> 
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-
-<header>
-    <h1>Big Data Systems</h1>
-</header>
-
-<nav>
-    <ul>
-        <li><a href="headers/syllabus.html">Course Syllabus</a></li>
-        <li><a href="headers/schedule.html">Course Schedule</a></li>
-        <li><a href="headers/lectures.html">Lectures</a></li>
-        <li><a href="headers/staff.html">Staff</a></li>
-        <li><a href="headers/assignments.html">Assignments</a></li>
-        <li><a href="headers/notebook_setup.html">Notebook Setup Tutorial</a></li>
-        <li><a href="headers/project.html">Project</a></li>
-        <li><a href="headers/reading_list.html">Reading List</a></li>
-    </ul>
-</nav>
-
-<div class="container">
-    <div class="main-content">
-        <img src="./images/code_image_main.jpeg" alt="Header Code Image"/>
-        <h2>Overview</h2>
-        <p>Welcome to the graduate course on Big Data Systems. Scalable big data systems are a central part of modern data science. This course will cover topics including design and use of parallel dataflow systems (MapReduce/Hadoop and Spark), scalable and parallel Python analytics frameworks, cloud data systems (cloud storage, cloud-native data processing), and machine learning systems. A major component of this course is hands-on programming using scalable analytics tools and cloud resources on Amazon Web Services (AWS) and Google Cloud.</p>
-
-        <h2>Info</h2>
-        <p>
-            <ul style="list-style-type:square">
-                <li>Instructor: Judy Fox</li>
-                <li>Meeting Time: Friday, 5-6pm</li>
-                <li>Location: Zoom</li>
-            </ul>
-        </p>
-
-        <h2>Topics (tentative):</h2>
-        <p>
-            <ul style="list-style-type:square">
-                <li>Basic of computer systems, principles of parallel and distributed computing</li>
-                <li>Google big data infrastructures (MapReduce, Google File System)</li>
-                <li>Spark RDD</li>
-                <li>Parallel Python Analytics</li>
-                <li>Large-scale databases, cloud storage systems (Amazon Dynamo/AWS DynamoDB)</li>
-                <li>Cloud Computing</li>
-                <li>Cloud-native big data systems (serverless computing, serverless analytics)</li>
-                <li>Machine learning systems (Ray, federated learning)</li>
-                <li>Data warehouse/datacenter (Alibaba)</li>
-            </ul>
-        </p>
-
-        <h2>Prerequisite</h2>
-        <p>
-            <ul style="list-style-type:square">
-                <li>All students should be comfortable with programming in one of the following programming languages: Python, Java, Go, C/C++. This is a strong requirement as DS 5110 features hands-on programming.</li>
-            </ul>
-        </p>
+    <!-- Header & Toggle Button -->
+    <div class="header" id="header">
+        Big Data Systems
+        <button class="toggle-btn" onclick="toggleNavbar()">Toggle Navbar</button>
     </div>
-</div>
 
-<footer>
-    <p>© 2023 Big Data Systems, UVAMLSys. All rights reserved.</p>
-</footer>
+    <!-- Navbar -->
+    <div class="navbar" id="navbar">
+        <a href="/bdsys-book/index.html" class="active">Home</a>
+        <a href="/bdsys-book/headers/syllabus.html">Syllabus</a>
+        <a href="/bdsys-book/headers/lectures.html">Lecture Slides</a>
+        <a href="/bdsys-book/headers/book.html">Book</a>
+        <a href="/bdsys-book/headers/schedule.html">Schedule</a>
+    </div>
 
+    <!-- Content -->
+    <div class="container" id="contentArea">
+        <div class="main-content">
+            <div>
+                <h1>DS 5110 SPRING 2024 SYLLABUS</h1>
+                <img src="./pics/headerpic.png">
+            </div>
+            <div>
+                <h2>Led by: Professor Judy Fox (ckw9mp@virginia.edu)</h2>
+                <p>Click on the arrow to the right to learn more!</p>
+            </div>
+            <div>
+                <h1>Office Hours Information:</h1>
+                <p>Coming soon...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Arrows for navigation -->
+    <div class="arrow left" onclick="prevPage()" id="leftArrow">&lt;</div>
+    <div class="arrow right" onclick="nextPage()" id="rightArrow">&gt;</div>
+
+    <!-- Javascript for navigation -->
+    <script>
+            var pages = [
+                "index.html",
+                "headers/syllabus.html",
+                "headers/lectures.html",
+                "headers/book.html",
+                "headers/schedule.html"
+            ];
+
+            // var currentPage = window.location.href.replace(window.location.origin + "/bdsys-book/headers", "");
+            var currentPage = window.location.pathname.replace("/bdsys-book/", "") || "index.html";
+
+            currentIndex = pages.indexOf(currentPage);
+
+            function prevPage() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    navigateToPage();
+                }
+            }
+
+            function nextPage() {
+                if (currentIndex < pages.length - 1) {
+                    currentIndex++;
+                    navigateToPage();
+                }
+            }
+
+            function navigateToPage() {
+                var base_url = window.location.origin + "/bdsys-book/";
+                var page = pages[currentIndex];
+                window.location.href = base_url + page;
+            }
+
+
+            function toggleNavbar() {
+                var navbar = document.getElementById('navbar');
+                var contentArea = document.getElementById('contentArea');
+                var header = document.getElementById('header');
+                var leftArrow = document.querySelector('.arrow.left');
+                
+                if (!navbar || !contentArea || !header || !leftArrow) {
+                    console.error("One or more elements not found!");
+                    return;
+                }
+                
+                if (navbar.style.display === 'none') {
+                    navbar.style.display = 'block';
+                    contentArea.style.marginLeft = "230px";
+                    header.style.left = "230px";
+                    header.style.width = "calc(100% - 230px)";
+                    leftArrow.style.left = "240px";
+                } 
+
+                else {
+                    navbar.style.display = 'none';
+                    contentArea.style.marginLeft = "0";
+                    header.style.left = "0";
+                    header.style.width = "100%";
+                    leftArrow.style.left = "20px";
+                }
+            }
+    </script>
 </body>
 </html>

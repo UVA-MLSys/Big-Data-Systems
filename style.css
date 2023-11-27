@@ -1,166 +1,152 @@
-body {
-    font-family: 'Noto Sans', sans-serif;
-    color: #2C2C2C;
-    line-height: 1.6;
-    padding-top: 60px;
+/* General Reset */
+* {
     margin: 0;
-    background-color: #f9f9f9;
-}
-
-.container {
-    width: 85%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
-}
-
-/* Header */
-header {
-    background-color: #333a40; /* Updated cooler shade of dark gray */
-    color: #fff;
-    padding: 20px 0; /* Reduced padding to make the header smaller */
-    text-align: center;
-    margin: 0;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2em; /* You can adjust this if the text size also feels big */
-}
-
-
-/* Navigation */
-nav {
-    background-color: #34495e;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: auto;
-    z-index: 1000;
-    margin: 0;
-    padding: 0 0 10px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-nav ul {
-    list-style-type: none;
     padding: 0;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 85%;
+    box-sizing: border-box;
 }
 
-nav li {
-    margin: 0 20px; 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;  /* Adjusted to a light gray for contrast */
+    color: #333;
 }
 
-nav a {
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 12px; 
-    font-size: 0.95em; 
-    display: block;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-
-nav a:hover, nav .dropdown-content a:hover {
-    background-color: #2c3e50;
-}
-
-/* Dropdown Styles */
-nav li.dropdown {
-    position: relative;
-}
-
-nav .dropdown-content {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #555;
-    min-width: 225px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-nav li.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* Main content */
+/* Improved spacing for main content */
 .main-content {
-    background-color: transparent;
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 20px 40px;  /* Add padding for inner spacing */
 }
 
 .main-content h2 {
-    font-size: 1.7em;
     margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 24px;
+    color: #333;
 }
 
 .main-content p {
     margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
 }
 
-/* Footer */
-footer {
-    background-color: #34495e;
+.main-content ul {
+    margin-left: 30px;  /* Indentation for the list */
+}
+
+.main-content li {
+    margin-bottom: 10px;  /* Spacing between list items */
+}
+
+
+.container {
+    margin-left: 280px;  /* Width of the navbar */
+    margin-top: 70px;
+    padding: 40px;
+    transition: margin-left 0.3s;  /* Smooth transition */
+    background-color: #ffffff;  /* Main content area background color */
+}
+
+
+
+/* Header Styles */
+.header {
+    position: fixed;
+    top: 0;
+    left: 230px; /* starting after the navbar */
+    width: calc(100% - 230px); /* Taking the full width minus the navbar width */
+    height: 60px;
+    background-color: #222; /* Dark color */
+    color: #ddd; /* Light gray text color */
+    line-height: 60px;
+    padding: 0 20px; /* Some spacing for the text and button */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 24px;
+    display: flex; /* To align items */
+    justify-content: space-between; /* Space between title and button */
+    transition: all 0.3s; /* Smooth transition */
+}
+
+.full-width-header {
+    left: 0;
+    width: 100%;
+}
+
+
+
+/* Button Styles */
+.toggle-btn {
+    background-color: #444; /* Slightly different shade for contrast */
     color: #fff;
-    padding: 25px 0;
-    text-align: center;
-    margin: 0;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-}
-
-footer p {
-    margin: 0;
-}
-
-/* Lecture Section */
-.lecture {
-    background-color: #f5f5f5;
-    padding: 20px;
-    margin: 20px 0;
-    border-radius: 5px;
-}
-
-.lecture h2 {
-    font-size: 1.8em;
-    margin-bottom: 20px;
-}
-
-.lecture iframe {
-    display: block;
-    margin: 0 auto;
     border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px; /* Slight rounding of corners */
+    font-size: 16px;
+    transition: background-color 0.3s; /* Smooth transition on hover */
 }
 
-.lecture .description {
-    margin-top: 20px;
-    font-size: 1.1em;
+.toggle-btn:hover {
+    background-color: #555;
 }
 
-/* Image Styles */
-img {
-    max-width: 100%;
-    height: auto;
+
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 230px;
+    background-color: #222;  /* Dark color for navbar */
+    overflow-y: auto;
+    border-right: 1px solid #333;
+    transition: all 0.3s;  /* Smooth transition */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
+}
+
+.navbar a {
     display: block;
-    margin: 20px auto;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #ddd;  /* Light gray text color */
+    padding: 10px 15px;
+    text-decoration: none;
 }
 
-/* Youtube Video Embed */
-.video-container {
+.navbar a:hover, .navbar a.active {
+    background-color: #333;  /* Slightly lighter color for hover/active state */
+    color: #fff;  /* White text for hover/active state */
+}
+
+
+
+/* Arrows for navigation */
+.arrow {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #333;
     text-align: center;
+    line-height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.arrow:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.arrow.left {
+    left: 240px;
+}
+
+.arrow.right {
+    right: 20px;
+}
+
+.full-width {
+    margin-left: 0;
 }

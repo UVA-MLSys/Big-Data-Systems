@@ -3,132 +3,454 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Syllabus - Big Data Systems</title>
+    <title>Syllabus</title>
     <link rel="stylesheet" href="../style.css">
 </head>
+
 <body>
-<!-- Include similar structure: header, nav, etc. -->
+    <!-- Header & Toggle Button -->
+    <div class="header" id="header">
+        Big Data Systems
+        <button class="toggle-btn" onclick="toggleNavbar()">Toggle Navbar</button>
+    </div>
 
-<header>
-    <h1>Course Syllabus</h1>
-</header>
+    <!-- Navbar -->
+    <div class="navbar" id="navbar">
+        <a href="/bdsys-book/index.html">Home</a>
+        <a href="/bdsys-book/headers/syllabus.html" class="active">Syllabus</a>
+        <a href="/bdsys-book/headers/lectures.html">Lecture Slides</a>
+        <a href="/bdsys-book/headers/book.html">Book</a>
+        <a href="/bdsys-book/headers/schedule.html">Schedule</a>
+    </div>
 
-<nav>
-    <ul>
-        <li><a href="../index.html">Home</a></li>
-        <li class="dropdown">
-            <a class=dropbtn href="./syllabus.html">Syllabus</a>
-            <div class="dropdown-content">
-                <a href="#reading-section">Readings</a>
-                <a href="#participation-section">Participation</a>
-                <a href="#pa-section">Programming Assignments</a>
-                <a href="#projects-section">Course Projects</a>
-                <a href="#grading-section">Grading</a>
-                <a href="#late-section">Late Policy</a>
-                <a href="#academic-integrity-section">Academic Integrity</a>
+    <!-- Content -->
+    <div class="container" id="contentArea">
+        <div class="main-content">
+            <div>
+                <h1>Syllabus / Class Information</h1>
             </div>
-        </li>
-    </ul>
-</nav>
+            <div> <img src="/pics/sylheader.png"> </div>
+            <div>
+                <h3>What is this class about?</h3>
+                <p>
+                    Big data is everywhere. A fundamental goal across numerous modern businesses and sciences is to be able to utilize as many machines as possible, to consume as much information as possible and as fast as possible. The big challenge is "how to turn data into useful knowledge".
+                    This is a moving target as both the underlying hardware and our ability to collect data evolve. In this class, we will discuss how to design big data systems, data structures and algorithms for key data-driven areas, including distributed systems, Parallel systems, graph systems, 
+                    SQL/noSQL, machine learning and neural networks. We will see how they all rely on the same set of very basic concepts and we will learn how to synthesize efficient solutions for any problem across these areas using those basic concepts.
+                </p>
+            </div>
+            <div>
+                <h3>What is a big data system?</h3>
+                <p>
+                    Data systems are literally everywhere. We are using them directly or indirectly every day all day long for numerous basic or not so basic tasks, e.g., when we are buying coffee to when we are booking airplane tickets or training a neural network. 
+                    They provide the backbone of all modern businesses to manage their data and of course they provide the backbone of online businesses and environments such as social networks and search engines. 
+                    They are also used increasingly in science as data analytics becomes more and more the fundamental barrier in generating knowledge.
+                </p>
+            </div>
+            <div>
+                <h3>What is this class NOT about?</h3>
+                <p>
+                    This class is not a traditional introduction on how we use a database system and how to write SQL. Instead, this is a systems class about data system design. 
+                    You will learn how big data systems work at their core and how to design new systems for emerging data- driven applications and hardware By the way, if you know how systems work, you also become better at using them!
+                </p>
+            </div>
+            <div>
+                <h3>Why take this class?</h3>
+                <p>
+                    Data is everywhere. Every year we create even more data. As it stands, every two days we create as much data as much we created from the dawn of humanity up to 2003. Sciences, businesses, and everyday life are substantially affected. Data systems are in the middle of all this. Data systems are how we store and access data, i.e., they are the backbone of any data-driven application. It is a $100B industry, growing 10% every year [Economist, “Data, data everywhere”].
 
-<div class="container">
-    <div class = "main-content">
-        <div id="reading-section">
-            <h2>Readings</h2>
-            <p>
-                There are no official textbooks. Required readings are (most frequently) in the form of seminal research papers, online documentations, and/or selected textbook chapters There are several books that might be useful. Good thing is they are completely free:
-                <ul>
-                    <li>Operating Systems: Three Easy Pieces (OSTEP), by Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau, Aug, 2018 (v 1.00).</li>
-                    <li>Distributed Systems 3rd edition (2017), by Maarten van Steen and Andrew S. Tenenbaum (suggested optional readings will most frequently be drawn from this book).</li>
-                </ul>
-                I also strongly encourage you to discuss the assigned/optional readings (papers/tech reports/online documentations) with other students in the class — you may have insights that others do not, and vice versa. Oftentimes, students form reading groups, which I encourage; on the other hand, I would like to point out that group discussion is not an effective substitute for actually reading the paper.
-            </p>
-        </div>
-        <div id="participation-section">
-            <h2>Class Participation</h2>
-            <p>
-                In addition to lectures, we will use a discuss-orientede format. Class participation is required. We will discuss the design and the use (application) of a variety of modern big data systems that we’ll cover during this semester. Most of these systems have research papers, if not, online docs, which present the original/evolved design of them. One of the many great examples is Google’s MapReduce (and later the open-source implementation of MapReduce: Apache Hadoop), which opens a new era of what we call Big Data Systems today.
-            </p>
-            <p>
-                Specifically, the instructor (prof or the invited guest speaker) will lead the lecture. In some lectures we will have moderate discussions about the papers/articles that we will have all read before each class. For lectures that have a required reading assignment, I will provide you with a short review form that you must complete and submit before the class. The teaching staff (prof and the GTA) will go through your reviews the night before the class and answer questions that you may have in your reviews. You are encouraged to participate in discussions as your performance in class forms up to 5% of your overall grade, so it does matter that you 1. show up to class AND 2. participate in the discussion (which in fact requires you to do the required readings).
-            </p>
-        </div>
-        <div id="pa-section">
-            <h2>Programming Assignments</h2>
-            <p>
-                We will have three programming assignments during the first half of the semester:
-                <ul>
-                    <li>Assignment 0: Using AWS Academy and AWS EC2.</li>
-                    <li>Assignment 1: A tour of Apache HDFS and Spark.</li>
-                    <li>Assignment 2: Dask.distributed analytics</li>
-                </ul>
-            </p>
-        </div>
-        <div id="projects-section">
-            <h2>Course Projects</h2>
-            <p>
-                Probably the most exciting part of this course is to complete an interesting project related to big data systems. I will provide you with a list of ideas around Week 4.
-            </p>
-        </div>
-        <div id="grading-section">
-            <h2>Grading</h2>
-            <p>
-                Grade will be calculated as follows:
-                <ul>
-                    <li>5% in-class participation</li>
-                    <li>5% reading review forms</li>
-                    <li>5% quizzes</li>
-                    <li>0% assignment 0</li>
-                    <li>10% assignment 1</li>
-                    <li>10% assignment 2</li>
-                    <li>15% midterm exams</li>
-                    <li>10% project checkpoint 1 report</li>
-                    <li>10% project checkpoint 2 report</li>
-                    <li>30% final project report, presentation, artifact eval</li>
-                </ul>
-            </p>
-            <h3>Grading Rules</h3>
-            <p>
-                Final grade is computed according to following scale:
-                <ul>
-                    <li>A+: >= 98%; A: [93%, 98%); A-: [88%, 93%)</li>
-                    <li>B+: [83%, 87%); B: [80%, 83%); B-: [80%, 83%)</li>
-                    <li>C+: [77%, 80%); C: [73%, 77%); C-: [70%, 73%)</li>
-                    <li>D+: [67%, 70%); D: [63%, 67%); D-: [60%, 63%)</li>
-                    <li>F: < 60%</li>
-                </ul>
-            </p>
-            <h3>Team Project Grading</h3>
-            <p>In cases where team members do not equally contribute to the project, we may assign different grades to different individuals, up to an extreme of deducting 50% of the team project grade for a student. We will evaluate each individual’s contribution on the basis of a variety of factors, including progress reports at project checkpoints, through inspecting version control history, through each students’ self-reflection, and through each students’ peer evaluation {during and/or} at the end of the project. We will make regular efforts to collect and distribute this feedback throughout the project — our ultimate goal is for all students to participate and receive full marks.</p>
-        </div>
-        <div id="late-section">
-            <h2>Late Policy</h2>
-            <p>Students must work individually on all assignments including the programming assignments and projects. We encourage you to have high-level discussions with other students in the class about the assignments, however, we require that when you turn in an assignment, it is only your work. That is, copying any part of another student’s assignment is strictly prohibited, and repercussions for doing so will be severe (up to and including failing the class outright). You are free to reuse small snippets of example code found on the Internet (e.g. via StackOverflow) provided that it is attributed. If you are concerned that by reusing and attributing that copied code it may appear that you didn’t complete the assignment yourself, then please raise a discussion with the instructor.</p>
-            <p>
-                Work is late if not turned in by deadline.
-                <ul>
-                    <li>10% will be deducted for late assignments turned in within 24 hours after the due date.</li>
-                    <li>Assignments submitted more than 24 hours late will receive a zero.</li>
-                </ul>
-            </p>
-            <p>
-                If you’re worried about being busy around the time of an assignment submission, please plan ahead and get started early. Assignment that does not compile or run will receive at most 50% credit.
+                    At the same time big data systems research and the whole industry are going through a major and continuous transition; given that new data-driven scenarios and applications continuously pop up, there is a continuous need to redefine what is a good data system design in such a dynamic environment.
 
-                For fairness to all, there are no exceptions to the above rules.
-            </p>
-        </div>
-        <div id="academic-integrity-section">
-            <h2>Academic Integrity</h2>
+                    DS5110 exposes students to the core internals of big data systems making it possible to understand core trends in system design and to be one of the few who know how to design and evaluate systems. In addition, due to the way the course is taught (focus on interactive problem solving, open topics and the latest research results) this is also a great class for those who want to understand what CS research is all about and how to engage in doing research.
+                </p>
+            </div>
+            <div>
+                <h3>Expected Learning Outcome</h3>
+                <p>
+                    <ul style="list-style-type:square">
+                        <li>Learn state-of-the-art research and industry trends in big data systems.</li>
+                        <li>Understand the tradeoffs in designing and implementing modern big data systems.</li>
+                        <li>Be able to make design decisions in big data driven scenarios.</li>
+                        <li>Understand the fundamental principles that govern all systems out how these apply across diverse areas: Distributed and Parallel Systems, SQL/NoSQL, Neural Networks, Graphs, and Data Science.</li>
+                        <li>Develop basic research skills: reading, writing and understanding research papers.</li>
+                        <li>Deepen programming, debugging, and performance profiling skills.</li>
+                    </ul>
+                </p>
+            </div>
+            <div>
+                <h3>Class Philosophy</h3>
+                <p>
+                    DS5110 has unlimited office hours, unlimited late days for project deliverables, relies on the latest research papers instead of a standard text book, lectures are based on interaction and discussion instead of just “lecturing”, many of the quizzes and problem sets are actually open research problems and most of all it is fun! The instructor and the TFs are here to help you every day and at all times throughout the semester. You may request as many meetings as you like and as much help as you want.
+
+                    The course is also geared towards engaging creative thinking and problem solving to give students a feeling of how computer science research takes place. Many of our students in the past have successfully engaged in research projects with DASlab and published research papers.
+                </p>
+            </div>
+            <div>
+                <h3>How much work is it?</h3>
+                <p>
+                    You may have heard stories about CS165 and wondering if DS5110 is going to be equally hard or you may have taken CS165 and wondering if this is going to be a similar amount of work. CS165 and DS5110 are different style of classes. While CS165 is much more focused on implementation leading to a full system prototype, DS5110 is more focused on ideas and design. In other words, you may have written 5-10K lines of code (some even more!) for CS165 but in DS5110 you are more likely going to write small amounts of code and mostly play with alternative ways to design a specific functionality, structure or algorithm to highlight the effect of different choices and to find out new ways to solve a specific problem.
+                </p>
+            </div>
+            <div>
+                <h3>Lectures</h3>
+                <p>
+                    This class meets once per week.
+                    More info can be found on the lectures page.
+                </p>
+            </div>
+            <div>
+                <h3>Interaction in Every Class</h3>
+                <p>
+                    While the instructor will do a few lectures through the semester, the class is going to be primarily discussion based. Think of this as an extended brainstorming session, a round table discussion about a specific problem in each class. The goal is to create the maximum possible interaction.
+
+                    Our discussion will aim at bringing up design trends and tradeoffs, as well as algorithmic issues. Another significant part of our discussions will focus on examining open problems and to highlight opportunities for innovation.
+
+                    At the very beginning of the semester the instructor will do 5-6 lectures to provide the necessary background. After that, each class will be based on a student presentation about a recent research paper which will work as a trigger for the day’s brainstorming. Depending on the needs of the class, the instructor will do additional lectures during class time or during our extra research sessions.
+                </p>
+            </div>
+            <div id="oh-lab">
+                <h3>Office Hours & Labs</h3>
+                <p>
+                    Interaction does not stop at lecture time. DS5110 is designed to maximize interaction as we truly believe this is the best way to learn; we offer daily office hours and labs.
+                </p>
+                <p>
+                    Starting Week 1, Prof. Fox and TAs will hold office hours during the week and additional  times periodically during the weekend. Labs are offered by the TAs. The goal of labs is to get hands-on help for the projects (coding). Bring your your questions about specific project parts you need help with. Labs are the place to go when you have a persistent bug, when you need help with a specific tool for the project (e.g., for debugging or performance testing) or to get feedback about the quality of your coding.
+                </p>
+            </div>
+            <div id="attendance">
+                <h3>Attendance</h3>
+                <p>
+                    Based on the philosophy of the course, attendance in lectures and labs. Office hours is optional. The best way to learn, though, is through discussion and interaction with the instructor and the TAs. Our classes are not about “lecturing” - they are about interaction. We hope to see you there!
+                </p>
+            </div>
+            <div id="recordings">
+                <h3>Lecture Recordings</h3>
+                <p>
+                    All classes and interactive sessions in class will be recorded and will be available online. So even if you miss a class it will be easy to catch up and you can also use these recordings to recite specific material throughout the semester (e.g., to prepare for midterms).
+                </p>
+            </div>
+            <div id="sections">
+                <h3>Sections</h3>
+                <p>
+                    Another component of the course is sections. Sections are used to deliver material about the class, i.e., to go more deeply into some of the concepts discussed in class, to do additional quizzes, or to deliver background material that is needed to follow next week’s class or for the project. There will be no actual section meeting. Instead, all sections will be recored by the teaching staff and videos will be posted online. The material posted will be tailored to present a step by step guide for any of the topics presented to make it easy to follow everything without having to be physically present in an actual section. However, if there are still questions about the material presented in sections, you will be able to ask those questions either during the daily office hours and labs.
+                </p>
+            </div>
+            <div id="research">
+                <h3>Research Sessions</h3>
+                <p>
+                    Throughout the semester, on select days the instructor, and DASlab PhDs and postdocs, will discuss about research! First, DASlab researchers will present their recent work on data systems research and connect it with the material you are learning in class. Then, you will get the chance to talk with them about their research, open problems and be exposed to open research opportunities. Snacks and drinks will be provided.
+                </p>
+            </div>
+            <div id="weekly-reviews">
+                <h3>Weekly Reviews</h3>
+                <p>
+                    Each student will provide two paper reviews per week. This prepares you to be ready for the discussion in class. Reviews should be no more than two page long.
+                    Each review should have text for at least the following 9 points:
+                </p>
+                <ul style="list-style-type:square">
+                    <li>What is the problem?</li>
+                    <li>Why is it important?</li>
+                    <li>Why is it hard?</li>
+                    <li>Why do existing solutions not work?</li>
+                    <li>What is the core intuition for the solution?</li>
+                    <li>Does the paper prove its claims?</li>
+                    <li>What is the setup of analysis/experiments? is it sufficient?</li>
+                    <li>Are there any gaps in the logic/proof?</li>
+                    <li>What are next steps?</li>
+                </ul>
+                <p>
+                    Reviews should be no more than two pages long. PDF. Single column. 8pt font. 1 inch margins. Submission will be through Canvas. The deadline for each paper review is the starting time of the respective class. This is a hard deadline. The first four reviews will not be graded; we will use them only to provide feedback on the quality of the review and the grade that this review would get. Every second week we will have a special OH meeting to review the student reviews.
+                </p>
+            </div>
+            <div id="presentations">
+                <h3>Presentations</h3>
+                <p>
+                    Each student will do at least one paper presentation during the semester. Presentations should follow similar guidelines as the guidelines for reviews. There should be 1-2 slides for each one of the nine core points in the review guidelines. In addition, there should be detailed slides that describe the core idea of the paper.
+                </p>
+                <p>
+                    Your slides should not be a multiple sheets of bullet lists - in fact try to avoid bullet lists altogether - your slides should follow the generic formatting you will see in the first four lectures, that is: make slides as simple as possible - avoid text unless absolutely needed - no full phrases unless you need to give an
+                    exact definition of something - use figures and visual examples, one slide one message=each slide should have a single goal that you
+                    should be able to describe within a single phrase.
+                </p>
+                <p>
+                    Your slides should be reviewed by the instructor at least 24 hours before the class you are presenting.  The final deck of slides should
+                    be available 30 minutes before class so we can upload online. You are welcome to join for OH for help >>1 while you prepare your slides!
+                </p>
+            </div>
+            <div id="who-take">
+                <h3>Who should take this class?</h3>
+                <p>
+                    IF you have taken DS, DS, DS: skip this next part. Else:
+                </p>
+                <p>
+                    Background: Naturally, the more background you have the smoother your experience in DS5110 will be. Prior knowledge of Python programming and systems programming, as well as a good understanding of computer architecture and in particular the memory hierarchy (cache memories) is very important for this class. Courses providing systems background (like DS and in particular DS or equivalent) are essential. Good hacking, algorithm designing, and data structures skills are also required.
+                </p>
+                <p>
+                    If you are graduate student and have taken a mix of systems (database, operating and distributed systems) classes in the past, then you will be OK and we will provide enough background so you can follow. DS5110 does satisfy the systems requirement towards a PhD.
+                </p>
+            </div>
+            <div id="greatness">
+                <h3>How can I do great in DS5110?</h3>
+                <p>
+                    Just utilize all resources provided. Show up in class to participate in interactive sessions. There are also daily office hours and labs; show up as often as possible so we can help with anything you need! When you find yourself stuck with the project either with a design decision or just a bug, it is normal to struggle for a while — it is part of the learning process — but after some time grab your laptop and come by!
+                </p>
+            </div>
+            <div id="preparation">
+                <h3>What can I do to prepare?</h3>
+                <p>
+                    Especially if you have not taken CS165 it is a good idea to spend some time preparing before the semester starts and during the early weeks of the semester even if you consider yourself an expert systems student. The best approach is to browse some fundamental readings in data systems architectures. We propose that you take a look at the following texts from the CS165 readings:
+                </p>
+                <p>
+                    1. Get familiar with the very basics of traditional database architectures: Architecture of a Database System. By J. Hellerstein, M. Stonebraker and J. Hamilton. Foundations and Trends in Databases, 2007
+                </p>
+                <p>
+                    2. Get familiar with very basics of modern database architectures: The Design and Implementation of Modern Column-store Database Systems. By D. Abadi, P. Boncz, S. Harizopoulos, S. Idreos, S. Madden. Foundations and Trends in Databases, 201
+                </p>
+                <p>
+                    3. Get familiar with very basics of modern database architectures:
+                    <ul style="list-style-type:square">
+                        <li>The Design and Implementation of Modern Column-store Database Systems. By D. Abadi, P. Boncz, S. Harizopoulos, S. Idreos, S. Madden. Foundations and Trends in Databases, 201</li>
+                        <li>Distributed Systems: Principles and Paradigms, Andrew S. Tanenbaum et al. (2nd Edition) Prentice Hall Publishers, NJ 07458, USA. </li>
+                        <li>The Deep Learning textbook (MIT Press) by Ian Goodfellow, Yoshua Bengio and Aaron Courville</li>
+                        <li>Distributed Systems and Cloud Computing: From Parallel Processing to the Internet of Things, Kai Hwang et al., Morgan Kaufmann Publishers, an imprint of Elsevier, Inc., Burlington, MA 01803, USA.</li>
+                        <li>High Performance Computing, Kevin Dowd & Charles Severance, O'Reilly Publisher, CA 95472, USA.</li>
+                    </ul>
+                </p>
+                <p>
+                    Test 0: We provide a Test 0 that is designed to 1) help you get an idea about how fit you are for the class and 2) bootstrap your C coding skills. Essentially Test 0 consists of an independent data structure design and implementation in Python that will allow you to practice basic system design, coding and debugging skills. In addition, several fundamental section videos are posted on the class website about system coding and profiling to help you with that.
+                </p>
+            </div>
+            <div id="grading">
+                <h3>Grading Scale</h3>
+                <p>
+                    <ul style="list-style-type:square">
+                        <li>Class Discussion & Quizzes: 20%</li>
+                        <li>Labs: 20%</li>
+                        <li>Paper Presentation: 10%</li>
+                        <li>Semester Project: 30%</li>
+                        <li>Midway Check-In: 20%</li>
+                    </ul>
+                </p>
+            </div>
+            <div id="semester-project">
+                <h3>Semester Project</h3>
+                <p>
+                    Each student completes a semester project. There are two kinds of semester projects:
+                    <ul style="list-style-type:square">
+                        <li>a systems project, and</li>
+                        <li>a research project</li>
+                    </ul>
+                </p>
+                <p>
+                    Systems projects are tailored to provide background on state-of-the-art systems, data structures and algorithms. They include a design component and an implementation component in Python or Java, dealing with low level systems issues such as memory management, hardware conscious processing, parallel processing, managing read/write tradeoffs and scalability. This year’s systems project is about designing and implementing a key-value store in the form of a Log Structured Tree that can accommodate fast reads and writes.
+                </p>
+                <p>
+                    The research project, on the other hand, is much more tailored on design and proof of concept implementations trying to solve open problems. Research projects are tailored to give a taste of research to students and lead to publications. When working on a research project, students will work closely with the instructor and members of DASlab on active research projects of the lab. Students will work on groups of three. Such projects are mainly about thinking, reading and writing and  much  less  about  coding  although  proof  of  concept implementations will be our end target in some cases.This year we will be working on the following research projects: 1) Self-designing NoSQL Key-value stores, 2) The Periodic Table of Data Structures, 3) Fast Neural Networks, 4) Adaptive Blockchain, and 5) Image Storage for AI.
+                </p>
+                <p>
+                    Research projects will be offered to students who have taken CS165 in the past and students who already have a significant systems background. This will be done in consultation with the instructor.
+                </p>
+                <p>
+                    In special cases where a student wants to work on an alternative research project, i.e., a project which is inspired by existing research that the student is already doing (e.g., as part of a PhD for a grad student or a continuation of the CS165 project for an undergrad) we will work to accommodate such requests on a case by case basis. This will be done in consultation with the instructor and only if students probably would not benefit from doing a systems project as they know this material already. Assuming there is a strong plan and drive for a specific project, such requests will most likely be granted.
+                </p>
+                <p>
+                    Systems project can evolve into research projects throughout the semester for students that progress fast and want to continue with research.
+                </p>
+                <p>
+                    What is a successful project? For systems projects we will give out specific functionality and performance metrics you have to achieve as part of the description of the project. For research projects we will give out specific questions you need to answer when we set-up each individual research project.
+                </p>
+                <p>
+                    Evaluation: There is no final or midterms. At the end of the semester each student will have a meeting with the instructor and another meeting with the TFs where students will demonstrate their projects and answer design questions about the project. [Tip: Past experience shows that frequent participation in office hours, brainstorming sessions and sections means that the instructor and the TFs are very well aware of your system and your progress which makes the final evaluation a mere formality for these cases.]
+                </p>
+                <p>
+                    Collaboration policy: The systems project is an individual project: the final deliverable should be personal, you must write from scratch all the code of your system and all documentation and reports. Discussing the design and implementation problems with other students is allowed and encouraged! We will do so in the class and during office hours and brainstorming sessions. Research projects are going to be in groups of three and similar to the systems project we encourage discussions across teams but in the end each team should deliver a project that is clearly theirs.
+                </p>
+                <p>
+                    Late days policy: All projects are due at the end of the semester and this is when they will be graded. The more input you give us, through the semester though, the more we can help you learn. In the systems project description you can find a detailed time- schedule that we propose you follow. Similarly, we will set up specific timelines for each research project. All timelines represent an ideal plan and you have the freedom to adjust according to your schedule.
+                </p>
+                <p>
+                    There are no late days for reviews. This is because reviews are essential for you to follow each class.
+                </p>
+                <p>
+                    Note: Experience says that every year a number of students cannot handle the freedom to self-pace, and end up significantly deviating from the schedule. We will send you frequent reminders but you should know that deviating from the schedule by more than a couple of weeks will most likely mean that you will not be able to finish the whole project by the end of the semester (unless you are an experienced systems student).
+                </p>
+                <p>
+                    Midway Check-in: The goal here is to demonstrate that you are having decent progress and mainly to avoid falling behind. By early March each student working on a systems project should deliver 1) a design document and 2) one performance experiment that demonstrates an early result (10%). A template of the expected design document will be provided early in the semester.
+                </p>
+            </div>
+            <div id="guest-lectures">
+                <h3>Guest Lectures</h3>
+                <p>
+                    Every semester we arrange a few guest lectures by leaders in data system design from industry and academia. Past guest lecturers in our classes include: Guy Lohman from IBM Research, Erietta Liarou from EPFL Lausanne, Alkis Simitsis and Georgia Koutrika from HP Labs, Nikita Shamgunov from MemSQL, Laura Haas from IBM Research, Nga Tran from Vertica, Jignesh Patel from University of Wisconsin, Johannes Gherke, from Microsoft, Marcin Zukowski from Snowflake, Richard Hipp from SQLite, Ryan Johnson from Logicblox.
+                    You will get the opportunity to both attend a guest lecture and to actively participate in discussions with our guest speakers.
+                </p>
+            </div>
+            <div id="textbook">
+                <h3>Required Textbook</h3>
+                <p>
+                    he class is about state-of-the-art data system design. There are reference books for that. We also use recent research papers and surveys which will be posted on the course website.
+                </p>
+            </div>
+            <div id="feedback">
+                <h3>Feedback on Progress</h3>
+                <p>
+                    We welcome feedback and ideas about the course at any point during the semester. Just come and chat with us during office hours! Tell us how you are keeping up and how we can make it easier for you. 
+                    We provide feedback continuously. The main thing that you will need feedback on is your semester project and the paper reviews. The way to get feedback is to show up to our daily office hours and labs and share your design decisions, code, and test results with the staff or ask us to go with you over your paper reviews. In this way, you will get hands-on help and feedback. Specifically for reviews we will hold a special session every second week to “review the reviews”.
+                </p>
+            </div>
+            <div id="online-disc">
+                <h3>Online Discussion</h3>
+                <p>
+                    We will use ED Discussions as a forum for online discussions. The links are posted on the class website. You are welcome to post any question that might help you understand the material better or help you with the project. Anonymous posting (to other students) will be enabled so that students feel more comfortable posting.
+                </p>
+                <p>
+                    BASIC RULES: We only have a few basic rules so we can keep the forum functional and useful for the students as well as manageable for the staff.
+                    <ul style="list-style-type:square">
+                        <li>We ask that you first search the forum well before posting a question so that we do not have duplicate entries.</li>
+                        <li>Please make sure to stay on top of all Instructor/TA posts (especially those that are pinned). Anything we post at the forum we consider “known”.</li>
+                        <li>Do not use the forum to post code or ask for help with debugging. While it can work in some cases remote debugging is a pain and takes a lot of time. We have labs every week. Join remotely and we will help you via a shared screen mode.</li>
+                        <li>Do not use the forum for anything that is not about a technical question or a question about class logistics. If you want to discuss any concerns about your progress, fit for the class, or anything else you should come to office hours.</li>
+                    </ul>
+                </p>
+            </div>
+            <div id="plagiarism">
+                <h3>Plagiarism</h3>
+                <p>
+                    You are responsible for understanding University of Virginia and School of Data Science policies on academic integrity and how to use sources responsibly. 
+                </p>
+            </div>
+            <div id="accessibility">
+                <h3>Accessibility</h3>
+                <p>
+                    University of Virginia are committed to providing an accessible academic community. The Disability Services Office offers a variety of accommodations for more information and do not hesitate to contact prof. Idreos directly, by email, with any questions or concerns you might have. 
+                </p>
+            </div>
+            <div id="extension">
+                <h3>Extension</h3>
+                <p>
+                    DS5110 is a heavily hands-on and research oriented course that is structured in a very different way than other classes, valuing and promoting critical thinking. For most students this requires a transitions phase. Please check the syllabus and requirements carefully before committing to this course.
+
+                    In addition, keep in mind that taking this course successfully will in practice require participation in Lab sessions. Tthey are critical for students to understand how to think about the material and how to design solutions. Especially if you do not have all the background described in the syllabus (i.e., if you have not taken a research oriented systems course with a heavy systems project), you should budget time for frequent participation in both Labs and office hours and many hours of additional work every week to build the foundations needed.   
+                </p>
+                <p>
+                    Lecture: All lectures will be broadcasted live. Lectures will also be available for on- demand broadcast within 24 hours after each class. Students will be able to watch the live or recorded broadcast through their browser. The link to the broadcasts for DS5110 will be available through the canvas website for this class and will also be posted on the class website before the first lecture.
+                </p>
+                <p>
+                    Participation: Extension school students will be able to participate live in classes, office hours and labs via web-conference tools (we will use Zoom). The course staff will be online with Zoom during each session that is marked as “remote” and you will be able to actively interact with the staff. Other than standard chatting and talking features Zoom also offers screen sharing features which can be used for when you need help with specific issues such as debugging.
+                </p>
+                <p>
+                    Grading: Even though we encourage extension school students to utilize the opportunity to interact with the staff and participate in class live we know that for practical reasons this will not be possible for all remote students. For this reason for extension school students there will be no “class participation” grade. The rest of the course is exactly the same as what local students do. For this reason the portion of the class participation grade (20%) will be distributed to other class components and the final grade break down is as follows: project (50%), presentation (20%) and reviews (20%). The 10% for the midway check-in completes the grade distribution for extension school.
+                </p>
+                <p>
+                    Discussion Forum: Given that remote students have usually a different set of needs due to the distance, there is a separate forum tailored to extension school. Look at the class website for the forum link for extension school students.
+                </p>
+                <p>
+                    Office Hours and Labs: Extension school OH and Labs take place remotely during the weekend, which is typically more convenient for most students. In this way, we can have more flexibility to accommodate students with day jobs that cannot attend during the week. The schedule will be posted at the beginning of the semester on the class website and the forum.
+                </p>
+            </div>
+            <!-- <img src="./images/code_image_main.jpeg" alt="Header Code Image"/> -->
+            <!-- <h2>Overview</h2>
+            <p>Welcome to the graduate course on Big Data Systems. Scalable big data systems are a central part of modern data science. This course will cover topics including design and use of parallel dataflow systems (MapReduce/Hadoop and Spark), scalable and parallel Python analytics frameworks, cloud data systems (cloud storage, cloud-native data processing), and machine learning systems. A major component of this course is hands-on programming using scalable analytics tools and cloud resources on Amazon Web Services (AWS) and Google Cloud.</p>
+    
+            <h2>Info</h2>
             <p>
-                The School relies upon and cherishes its community of trust. We firmly endorse, uphold, and embrace the University’s Honor principle that students will not lie, cheat, or steal, nor shall they tolerate those who do. We recognize that even one honor infraction can destroy an exemplary reputation that has taken years to build. Acting in a manner consistent with the principles of honor will benefit every member of the community both while enrolled in the School of Data Science and in the future. Students are expected to be familiar with the university honor code, including the section on academic fraud.
+                <ul style="list-style-type:square">
+                    <li>Instructor: Judy Fox</li>
+                    <li>Meeting Time: Friday, 5-6pm</li>
+                    <li>Location: Zoom</li>
+                </ul>
             </p>
+    
+            <h2>Topics (tentative):</h2>
+            <p>
+                <ul style="list-style-type:square">
+                    <li>Basic of computer systems, principles of parallel and distributed computing</li>
+                    <li>Google big data infrastructures (MapReduce, Google File System)</li>
+                    <li>Spark RDD</li>
+                    <li>Parallel Python Analytics</li>
+                    <li>Large-scale databases, cloud storage systems (Amazon Dynamo/AWS DynamoDB)</li>
+                    <li>Cloud Computing</li>
+                    <li>Cloud-native big data systems (serverless computing, serverless analytics)</li>
+                    <li>Machine learning systems (Ray, federated learning)</li>
+                    <li>Data warehouse/datacenter (Alibaba)</li>
+                </ul>
+            </p>
+    
+            <h2>Prerequisite</h2>
+            <p>
+                <ul style="list-style-type:square">
+                    <li>All students should be comfortable with programming in one of the following programming languages: Python, Java, Go, C/C++. This is a strong requirement as DS 5110 features hands-on programming.</li>
+                </ul>
+            </p> -->
         </div>
     </div>
-</div>
 
-<!-- footer, etc. -->
-<footer>
-    <p>© 2023 Big Data Systems, UVAMLSys. All rights reserved.</p>
-</footer>
+    <!-- Arrows for navigation -->
+    <div class="arrow left" onclick="prevPage()" id="leftArrow">&lt;</div>
+    <div class="arrow right" onclick="nextPage()" id="rightArrow">&gt;</div>
+
+    <!-- Javascript for navigation -->
+    <script>
+        var pages = [
+                "index.html",
+                "headers/syllabus.html",
+                "headers/lectures.html",
+                "headers/book.html",
+                "headers/schedule.html"
+            ];
+
+        // var currentPage = window.location.href.replace(window.location.origin + "/bdsys-book/headers", "");
+        var currentPage = window.location.pathname.replace("/bdsys-book/", "") || "index.html";
+
+        currentIndex = pages.indexOf(currentPage);
+
+        function prevPage() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                navigateToPage();
+            }
+        }
+
+        function nextPage() {
+            if (currentIndex < pages.length - 1) {
+                currentIndex++;
+                navigateToPage();
+            }
+        }
+
+        function navigateToPage() {
+            var base_url = window.location.origin + "/bdsys-book/";
+            var page = pages[currentIndex];
+            window.location.href = base_url + page;
+        }
+
+
+        function toggleNavbar() {
+            var navbar = document.getElementById('navbar');
+            var contentArea = document.getElementById('contentArea');
+            var header = document.getElementById('header');
+            var leftArrow = document.querySelector('.arrow.left');
+            
+            if (!navbar || !contentArea || !header || !leftArrow) {
+                console.error("One or more elements not found!");
+                return;
+            }
+            
+            if (navbar.style.display === 'none') {
+                navbar.style.display = 'block';
+                contentArea.style.marginLeft = "230px";
+                header.style.left = "230px";
+                header.style.width = "calc(100% - 230px)";
+                leftArrow.style.left = "240px";
+            } 
+
+            else {
+                navbar.style.display = 'none';
+                contentArea.style.marginLeft = "0";
+                header.style.left = "0";
+                header.style.width = "100%";
+                leftArrow.style.left = "20px";
+            }
+        }
+</script>
 </body>
 </html>

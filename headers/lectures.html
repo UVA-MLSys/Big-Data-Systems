@@ -3,67 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lectures - Big Data Systems</title>
+    <title>Getting Started</title>
     <link rel="stylesheet" href="../style.css">
 </head>
+
 <body>
-<!-- Include similar structure: header, nav, etc. -->
+    <!-- Header & Toggle Button -->
+    <div class="header" id="header">
+        Big Data Systems
+        <button class="toggle-btn" onclick="toggleNavbar()">Toggle Navbar</button>
+    </div>
 
-    <nav>
-        <ul>
-            <li><a href="../index.html">Home</a></li>
-            <li class="dropdown">
-                <a class=dropbtn href="./lectures.html">Lectures</a>
-                <div class="dropdown-content">
-                    <a href="#lecture-1">Lecture 1 - Intro</a>
-                    <a href="#lecture-2">Lecure 2 - Basics</a>
-                    <a href="#lecture-3">Lecture 3 - Programs</a>
-                </div>
-            </li>
-        </ul>
-    </nav>
+    <!-- Navbar -->
+    <div class="navbar" id="navbar">
+        <a href="/bdsys-book/index.html">Home</a>
+        <a href="/bdsys-book/headers/syllabus.html">Syllabus</a>
+        <a href="/bdsys-book/headers/lectures.html" class="active">Lecture Slides</a>
+        <a href="/bdsys-book/headers/book.html">Book</a>
+        <a href="/bdsys-book/headers/schedule.html">Schedule</a>
+    </div>
 
-
-<div class="container">
-    <div class="main-content">
-        <div id="lecture-1">
-            <h2>Lecture 1: Introduction</h2>
-            <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQ8Uo1R48G8HiI_LODWkCsX6z3DrG9CgU1qy98e54ltkn3hJta8-juEIKZK465MjUJmTslgMr3czGyd/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-            <h3>Learning Objectives:</h3>
-            <p>In this lecture you will learn:</p>
-            <ul>
-                <li>a little bit about the scope of data.</li>
-                <li>how this course will be organized, and what will be expected from you.</li>
-            </ul>
-            <h3>Video:</h3>
-            <div class = "video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/IDDmrzzB14M?si=53g3i0S_UuIjymW8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <!-- Content -->
+    <div class="container" id="contentArea">
+        <div class="main-content">
+            <h2>Lectures and Slides</h2>
+            <!-- <p>This class meets once per week. Lecture slides will be uploaded following each class and will be stored here.</p>
+            <p>To be updated later...</p> -->
+            <div>
+                <h3>Lecture 1: Introduction (date)</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vS6V3VSkHY_Q2yCEvquip6j_MgpEa6rlbudeOT6yqjMGbu7uu5sk_4Z-s7cPOlrfSTV0ncA9EXPfYhB/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 2: Cloud Computing 1 (date)</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSkrXcVuhZoTcCTycSQtGr8LzIZSy33MbDkFf8lMI-2L-xdWZo6ES3ksbhMmtvZuGtFEiUTXh4P8XYz/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 3: Cloud Computing 2 (date)</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTXqAbl1Q3uTZLOX0auqxcOukEjvY4vS_IZfKMYBp0sNivZRPCRFklKTJAOHHbHPgTYaEAbsW-oAanQ/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 4: Cloud Computing 3</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRXaWfKPZPUGn4n_maKJkcoUi2BJ8Qx3drk0hvl66l32onysFxVk8UPYqH8zz9eJjJiDqjBQGXcNcky/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 5: Virtualization</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSubK6zdmGhAmklB9J1wf-eXT9u29uWzyUfhoB_YPXOyxpext8uh1xd0mlvibD4Njvt0CWIPDTkEz-W/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 6: Cloud Infrastructure 1</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRezToR4zLK1wn05aogYwONLQzm8f1deliW7vCVKFW9yzwQUFAO8ON5fUew7TKuupg7kDU0foHUNEm7/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 7: Cloud Infstracture 2</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vR7KVi9Swjto2O08J5YeysgRIlvpwQtJhNauYXRKIO6Cf0hWf4gyXaHs4VM5xv4RQ5ZWGrfBd-BPoZN/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 8: Cloud Software</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTLBJA4kvfcJrolHp9THvZART13-nZrkhar-QKci5lb8D_sCwI0y3WaHExqlJN6v6ALLdJGk-utHqS4/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 9: Cloud Applications 1</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQ2gYMVV9CP3Y7BFJJlTs-5jVMqRLvEX19mXqM0SPiw2IInyzTYHPnQAUFNlQsrzn763-AP2zFZkqpf/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 10: Cloud Applications 2</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vS1s54ERVw1zYScU9DmZBfC0MUd1HuduC02sV1N55NDqu2_CjXj4mcNloAMQ8QgcIyatMCi14xEvX-d/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 11: Parallel Computing Analogies</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSJwIYShzCj-yznDTPqANpf6mhppCI_EvLYtOMG2DHPHBuJ7YzpfP-U-atlpTUmcw_LGBs32yh9txOa/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 12: Decomposition</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRFhf4Az5GK3vg5l1KOTTAteG2ManF5ZIa7DP2K4AN-lIQFSGeC8ozcQ8aePYjnb1KMEWkvSfed3XNL/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 13: Parallel Processing in Society</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTUnucNsnuMk1tevVTANYcKF484E2OI1fZp3drigzycquPIgOM6Z5CE4GYT0NHDFupXXGQ8Gevii9Gg/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 14: Parallel Processing for Hadrian's Wall</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTNrH9mGMLcLU4DDdUFZTcQ3SpkZkMwEVNWI_hzQmJNAfxqLeomSWSS3Ym-zJQlu9pmx93HEmFoTYXf/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 15: Real Parallel Computing</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQxA_g9X0mPxCQqpk7shx7GHOEQXvJX1jdgm-Rhe33jnoWmhlhunlY_BJaF8zzwcYuGHXlfFLvR7fnU/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 16: Cloud Computing Unit for E534 BDAA Course, Part M: Cloud Storage</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRRxpHp6yC78zOG2Up2IRvanhRvMetHPgFHQnLsWsA5_RlyZqSZ0t9WBAhPyablDDDw1JdQkvPA6-_S/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 17: HPC and Clouds</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTTnm348tCuKYE_6CVi5fwXQFMPu6slCG1I_obVZYU6uj6W2FSdRjhISdtOHfS1t1gF7XCxTVnrnamD/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 18: Comparison of Data Analytics with Simulation</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRRg2fww9Twg4acVHhakpr_ikuzFfYvhRf0-I1SSmjpmuvr8ntp0_-_4Gg6V2hstoDTPZz5lLs-ONDo/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 19: The Future</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTg6Rag27C1X1ymDttgdmp5TCkn-WV6lKkwrMg_Uu3i2JoaQxtvPlT7VZUU-ajmKTht7l8NuyG0o2Mr/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 20: The Future 2</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vS4IDwJ8VPXlV9WCPDDif3OEMA_tybVF1MeCKc9bfcT42hXP7QX_rhWbcyH3kPnAWMwiRC8RdEAXJV4/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div>
+                <h3>Lecture 21: The Future 3</h3>
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQhh6flQtuLC-SrjNmJS3tfmvN7qLJgao00EuEKc20Hibn-8TZNrLB8DhCi7DT-gofbttokagpkXIrk/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
             </div>
         </div>
     </div>
 
-    <div class="main-content">
-        <div id="lecture-2">
-            <h2>Lecture 2: Basics</h2>
-            <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQYuUeinhScSrCydSMAODHhdkvMwkcrPfFjzpR_F9insM85xMG7Wthp8WysXbLYcxA18oVOG1nw7Kgm/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-            <h3>Learning Objectives:</h3>
-            <p>In this lecture you will learn:</p>
-            <ul>
-                <li>Lec2a: basics of computer architecture, main hardware.</li>
-                <li>Lec2b: basics of digital representation of data (binary data, data types).</li>
-                <li>Lec2c: basics of data locality, memory management, and the commonly-used data formats (CSV, JSON, SQL DBs).</li>
-            </ul>
-            <h3>Video:</h3>
-            <p>Coming soon...</p>
-        </div>
-    </div>
-</div>
+    <!-- Arrows for navigation -->
+    <div class="arrow left" onclick="prevPage()" id="leftArrow">&lt;</div>
+    <div class="arrow right" onclick="nextPage()" id="rightArrow">&gt;</div>
 
-<!-- footer, etc. -->
+    <!-- Javascript for navigation -->
+    <script>
+        var pages = [
+                "index.html",
+                "headers/syllabus.html",
+                "headers/lectures.html",
+                "headers/book.html",
+                "headers/schedule.html"
+            ];
 
-<footer>
-    <p>© 2023 Big Data Systems, UVAMLSys. All rights reserved.</p>
-</footer>
+        // var currentPage = window.location.href.replace(window.location.origin + "/bdsys-book/headers", "");
+        var currentPage = window.location.pathname.replace("/bdsys-book/", "") || "index.html";
 
+        currentIndex = pages.indexOf(currentPage);
+
+        function prevPage() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                navigateToPage();
+            }
+        }
+
+        function nextPage() {
+            if (currentIndex < pages.length - 1) {
+                currentIndex++;
+                navigateToPage();
+            }
+        }
+
+        function navigateToPage() {
+            var base_url = window.location.origin + "/bdsys-book/";
+            var page = pages[currentIndex];
+            window.location.href = base_url + page;
+        }
+
+
+        function toggleNavbar() {
+            var navbar = document.getElementById('navbar');
+            var contentArea = document.getElementById('contentArea');
+            var header = document.getElementById('header');
+            var leftArrow = document.querySelector('.arrow.left');
+            
+            if (!navbar || !contentArea || !header || !leftArrow) {
+                console.error("One or more elements not found!");
+                return;
+            }
+            
+            if (navbar.style.display === 'none') {
+                navbar.style.display = 'block';
+                contentArea.style.marginLeft = "230px";
+                header.style.left = "230px";
+                header.style.width = "calc(100% - 230px)";
+                leftArrow.style.left = "240px";
+            } 
+
+            else {
+                navbar.style.display = 'none';
+                contentArea.style.marginLeft = "0";
+                header.style.left = "0";
+                header.style.width = "100%";
+                leftArrow.style.left = "20px";
+            }
+        }
+</script>
 </body>
 </html>
