@@ -12,22 +12,26 @@ body {
 }
 
 /* Improved spacing for main content */
+/* Improved spacing for main content */
 .main-content {
     padding: 20px 40px;  /* Add padding for inner spacing */
 }
 
-.main-content h2 {
-    margin-top: 20px;
-    margin-bottom: 15px;
-    font-size: 24px;
-    color: #333;
+.main-content div {
+    padding: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0; /* subtle bottom border */
+    background-color: #f9f9f9; /* light background for each section */
 }
 
-.main-content p {
-    margin-bottom: 20px;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #555;
+.main-content h3 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 22px; /* larger font size for titles */
+}
+
+.main-content p, .main-content ul {
+    margin-bottom: 15px; /* more space after paragraphs and lists */
 }
 
 .main-content ul {
@@ -152,6 +156,7 @@ body {
 }
 
 /* Dropdown Styles */
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -195,3 +200,10 @@ body {
     font-size: 12px; /* Smaller arrow */
 }
 
+
+.anchor {
+    display: block;
+    position: relative;
+    top: -70px; /* Height of your fixed header */
+    visibility: hidden;
+}
