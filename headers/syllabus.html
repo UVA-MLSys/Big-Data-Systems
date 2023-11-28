@@ -17,7 +17,13 @@
     <!-- Navbar -->
     <div class="navbar" id="navbar">
         <a href="/Big-Data-Systems/index.html">Home</a>
-        <a href="/Big-Data-Systems/headers/syllabus.html" class="active">Syllabus</a>
+        <div class="dropdown">
+            <a href="/Big-Data-Systems/headers/syllabus.html" class="active dropdown-toggle">Syllabus</a>
+            <div class="dropdown-content">
+                <a href="/Big-Data-Systems/headers/syllabus.html#class-info">Class Information</a>
+                <a href="/Big-Data-Systems/headers/syllabus.html#learning-outcome">Learning Outcome</a>
+            </div>
+        </div>
         <a href="/Big-Data-Systems/headers/lectures.html">Lecture Slides</a>
         <a href="/Big-Data-Systems/headers/book.html">Book</a>
         <a href="/Big-Data-Systems/headers/schedule.html">Schedule</a>
@@ -29,8 +35,8 @@
             <div>
                 <h1>Syllabus / Class Information</h1>
             </div>
-            <div> <img src="/pics/sylheader.png"> </div>
-            <div>
+            <img src="/pics/sylheader.png">
+            <div id="class-info">
                 <h3>What is this class about?</h3>
                 <p>
                     Big data is everywhere. A fundamental goal across numerous modern businesses and sciences is to be able to utilize as many machines as possible, to consume as much information as possible and as fast as possible. The big challenge is "how to turn data into useful knowledge".
@@ -63,7 +69,7 @@
                     DS5110 exposes students to the core internals of big data systems making it possible to understand core trends in system design and to be one of the few who know how to design and evaluate systems. In addition, due to the way the course is taught (focus on interactive problem solving, open topics and the latest research results) this is also a great class for those who want to understand what CS research is all about and how to engage in doing research.
                 </p>
             </div>
-            <div>
+            <div id="learning-outcome">
                 <h3>Expected Learning Outcome</h3>
                 <p>
                     <ul style="list-style-type:square">
