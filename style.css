@@ -127,7 +127,9 @@ body {
     color: #fff;  /* White text for hover/active state */
 }
 
-
+.navbar a:hover i {
+    color: #fff; 
+}
 
 /* Arrows for navigation */
 .arrow {
