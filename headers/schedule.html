@@ -1,10 +1,163 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
+
 <body>
-    
+    <!-- Header & Toggle Button -->
+    <div class="header" id="header">
+        Big Data Systems
+        <button class="toggle-btn" onclick="toggleNavbar()">
+            <i class="fa-solid fa-bars"></i> Toggle Navbar
+        </button>        
+    </div>
+
+    <!-- Navbar -->
+    <div class="navbar" id="navbar">
+        <a href="/Big-Data-Systems/index.html"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="/Big-Data-Systems/headers/syllabus.html"><i class="fa-regular fa-clipboard"></i> Syllabus</a>
+        <a href="/Big-Data-Systems/headers/lectures.html"><i class="fa-regular fa-file-powerpoint"></i> Lecture Slides</a>
+        <a href="/Big-Data-Systems/headers/book.html"><i class="fa-solid fa-book"></i> Book</a>
+        <a href="/Big-Data-Systems/headers/schedule.html" class="active"><i class="fa-regular fa-calendar" ></i> Schedule</a>
+
+    </div>
+
+    <!-- Content -->
+    <div class="container" id="contentArea">
+        <div class="main-content">
+            <h2>Course Schedule</h2>
+        <table border="1"> <!-- Added border for visibility -->
+            <tr>
+                <th>Modules</th>
+                <th>Lectures</th>
+                <th>Topics</th>
+                <th>Literature</th>
+                <th>Labs</th>
+                <th>Assignments</th>
+            </tr>
+            <tr>
+                <td rowspan="2">Foundation</td>
+                <td>Lecture 1</td>
+                <td>Introduction to Big Data Systems</td>
+                <td>Applying for AWS Academy account</td>
+                <td>Lab 1</td>
+                <td>Test 0</td>
+            </tr>
+            <tr>
+                <td>Lecture 2</td>
+                <td>Big Data Learning Systems and Applications</td>
+                <td>Term project ideas</td>
+                <td>Lab 2</td>
+                <td>Torch Introduction, K-Means Walkthrough</td>
+            </tr>
+            <tr>
+                <td rowspan="4">Advanced Topics</td>
+                <td>Lecture 5</td>
+                <td>Synchronization*, Consistency and Replications*, Fault Tolerance</td>
+                <td>Chapter 6 (T.), Chapter 7 (T.), Chapter 8 (T.)</td>
+                <td>Lab 5</td>
+                <td>LSTM Anomaly Detection</td>
+            </tr>
+            <tr>
+                <td>Lecture 6</td>
+                <td>Real-Time Machine Learning, Streaming Data Analysis</td>
+                <td></td>
+                <td>Lab 6</td>
+                <td>Apache Storm</td>
+            </tr>
+            <tr>
+                <td>Lecture 7</td>
+                <td>Midterm Presentation</td>
+                <td></td>
+                <td></td>
+                <td>Midterm Report Due</td>
+            </tr>
+            <tr>
+                <td>Lecture 8</td>
+                <td>High Performance Computing Architectures, Measuring Performance, CPU, GPU, AI chips</td>
+                <td></td>
+                <td>Lab 7</td>
+                <td>Edge TPU</td>
+            </tr>
+            <!-- Add more rows as needed for other lectures and modules -->
+        </table>
+    </div>
+        </div>
+    </div>
+
+    <!-- Arrows for navigation -->
+    <div class="arrow left" onclick="prevPage()" id="leftArrow">&lt;</div>
+    <div class="arrow right" onclick="nextPage()" id="rightArrow">&gt;</div>
+
+    <!-- Javascript for navigation -->
+    <script>
+            var pages = [
+                "index.html",
+                "headers/syllabus.html",
+                "headers/lectures.html",
+                "headers/book.html",
+                "headers/schedule.html"
+            ];
+
+            // var currentPage = window.location.href.replace(window.location.origin + "/Big-Data-Systems/headers", "");
+            var currentPage = window.location.pathname.replace("/Big-Data-Systems/", "") || "index.html";
+
+            currentIndex = pages.indexOf(currentPage);
+
+            function prevPage() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    navigateToPage();
+                }
+            }
+
+            function nextPage() {
+                if (currentIndex < pages.length - 1) {
+                    currentIndex++;
+                    navigateToPage();
+                }
+            }
+
+            function navigateToPage() {
+                var base_url = window.location.origin + "/Big-Data-Systems/";
+                var page = pages[currentIndex];
+                window.location.href = base_url + page;
+            }
+
+
+            function toggleNavbar() {
+                var navbar = document.getElementById('navbar');
+                var contentArea = document.getElementById('contentArea');
+                var header = document.getElementById('header');
+                var leftArrow = document.querySelector('.arrow.left');
+                
+                if (!navbar || !contentArea || !header || !leftArrow) {
+                    console.error("One or more elements not found!");
+                    return;
+                }
+                
+                if (navbar.style.display === 'none') {
+                    navbar.style.display = 'block';
+                    contentArea.style.marginLeft = "230px";
+                    header.style.left = "230px";
+                    header.style.width = "calc(100% - 230px)";
+                    leftArrow.style.left = "240px";
+                } 
+
+                else {
+                    navbar.style.display = 'none';
+                    contentArea.style.marginLeft = "0";
+                    header.style.left = "0";
+                    header.style.width = "100%";
+                    leftArrow.style.left = "20px";
+                }
+            }
+    </script>
 </body>
 </html>
