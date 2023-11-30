@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,13 +9,11 @@
 </head>
 
 <body>
-    <!-- Header & Toggle Button -->
     <div class="header" id="header">
         Big Data Systems
         <button class="toggle-btn" onclick="toggleNavbar()">Toggle Navbar</button>
     </div>
 
-    <!-- Navbar -->
     <div class="navbar" id="navbar">
         <a href="/Big-Data-Systems/index.html"><i class="fa-solid fa-house"></i> Home</a>
         <a href="/Big-Data-Systems/headers/syllabus.html"><i class="fa-regular fa-clipboard"></i> Syllabus</a>
@@ -24,12 +22,10 @@
         <a href="/Big-Data-Systems/headers/schedule.html"><i class="fa-regular fa-calendar"></i> Schedule</a>
     </div>
 
-    <!-- Content -->
     <div class="container" id="contentArea">
         <div class="main-content">
             <h2>Lectures and Slides</h2>
-            <!-- <p>This class meets once per week. Lecture slides will be uploaded following each class and will be stored here.</p>
-            <p>To be updated later...</p> -->
+            <p>To be updated later...</p> 
             <div>
                 <h3>Lecture 1: Introduction (date)</h3>
                 <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vS6V3VSkHY_Q2yCEvquip6j_MgpEa6rlbudeOT6yqjMGbu7uu5sk_4Z-s7cPOlrfSTV0ncA9EXPfYhB/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
@@ -117,11 +113,9 @@
         </div>
     </div>
 
-    <!-- Arrows for navigation -->
     <div class="arrow left" onclick="prevPage()" id="leftArrow">&lt;</div>
     <div class="arrow right" onclick="nextPage()" id="rightArrow">&gt;</div>
 
-    <!-- Javascript for navigation -->
     <script>
         var pages = [
                 "index.html",
@@ -131,7 +125,6 @@
                 "headers/schedule.html"
             ];
 
-        // var currentPage = window.location.href.replace(window.location.origin + "/Big-Data-Systems/headers", "");
         var currentPage = window.location.pathname.replace("/Big-Data-Systems/", "") || "index.html";
 
         currentIndex = pages.indexOf(currentPage);
@@ -185,5 +178,206 @@
             }
         }
 </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .lecture-slide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header" id="header">
+        Big Data Systems
+        <button class="toggle-btn" onclick="toggleNavbar()">Toggle Navbar</button>
+    </div>
+
+    <div class="navbar" id="navbar">
+        <a href="/Big-Data-Systems/index.html"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="/Big-Data-Systems/headers/syllabus.html"><i class="fa-regular fa-clipboard"></i> Syllabus</a>
+        <a href="/Big-Data-Systems/headers/lectures.html" class="active"><i class="fa-regular fa-file-powerpoint"></i> Lecture Slides</a>
+        <a href="/Big-Data-Systems/headers/book.html"><i class="fa-solid fa-book"></i> Book</a>
+        <a href="/Big-Data-Systems/headers/schedule.html"><i class="fa-regular fa-calendar"></i> Schedule</a>
+    </div>
+
+    <div class="container" id="contentArea">
+        <div class="main-content">
+            <h2>Lectures and Slides</h2>
+            
+            <select id="lectureSelect" onchange="showSlide()">
+                <option value="">Select a Lecture</option>
+                <option value="lecture1">Lecture 1: Introduction</option>
+                <option value="lecture2">Lecture 2: Cloud Computing 1</option>
+                <option value="lecture3">Lecture 3: Cloud Computing 2</option>
+                <option value="lecture4">Lecture 4: Cloud Computing 3</option>
+                <option value="lecture5">Lecture 5: Virtualization</option>
+                <option value="lecture6">Lecture 6: Cloud Infrastructure 1</option>
+                <option value="lecture7">Lecture 7: Cloud Infstracture 2</option>
+                <option value="lecture8">Lecture 8: Cloud Software</option>
+                <option value="lecture9">Lecture 9: Cloud Applications 1</option>
+                <option value="lecture10">Lecture 10: Cloud Applications 2</option>
+                <option value="lecture11">Lecture 11: Parallel Computing Analogies</option>
+                <option value="lecture12">Lecture 12: Decomposition</option>
+                <option value="lecture13">Lecture 13: Parallel Processing in Society</option>
+                <option value="lecture14">Lecture 14: Parallel Processing for Hadrian's Wall</option>
+                <option value="lecture15">Lecture 15: Real Parallel Computing</option>
+                <option value="lecture16">Lecture 16: Cloud Computing Unit for E534 BDAA Course, Part M: Cloud Storage</option>
+                <option value="lecture17">Lecture 17: HPC and Clouds</option>
+                <option value="lecture18">Lecture 18: Comparison of Data Analytics with Simulation</option>
+                <option value="lecture19">Lecture 19: The Future</option>
+                <option value="lecture20">Lecture 20: The Future 2</option>
+                <option value="lecture21">Lecture 21: The Future 3</option>
+            </select>
+
+            <div id="lecture1" class="lecture-slide">
+                <h3>Lecture 1: Introduction (date)</h3>
+            </div>
+            <div id="lecture2" class="lecture-slide">
+                <h3>Lecture 2: Cloud Computing 1 (date)</h3>
+            </div>
+            <div id="lecture3" class="lecture-slide">
+                <h3>Lecture 3: Cloud Computing 2 (date)</h3>
+            </div>
+            <div id="lecture4" class="lecture-slide">
+                <h3>Lecture 4: Cloud Computing 3 (date)</h3>
+            </div>
+            <div id="lecture5" class="lecture-slide">
+                <h3>Lecture 5: Virtualization (date)</h3>
+            </div>
+            <div id="lecture6" class="lecture-slide">
+                <h3>Lecture 6: Cloud Infrastructure 1 (date)</h3>
+            </div>
+            <div id="lecture7" class="lecture-slide">
+                <h3>Lecture 7: Cloud Infstracture 2 (date)</h3>
+            </div>
+            <div id="lecture8" class="lecture-slide">
+                <h3>Lecture 8: Cloud Software (date)</h3>
+            </div>
+            <div id="lecture9" class="lecture-slide">
+                <h3>Lecture 9: Cloud Applications 1 (date)</h3>
+            </div>
+            <div id="lecture10" class="lecture-slide">
+                <h3>Lecture 10: Cloud Applications 2 (date)</h3>
+            </div>
+            <div id="lecture11" class="lecture-slide">
+                <h3>Lecture 11: Parallel Computing Analogies (date)</h3>
+            </div>
+            <div id="lecture12" class="lecture-slide">
+                <h3>Lecture 12: Decomposition (date)</h3>
+            </div>
+            <div id="lecture13" class="lecture-slide">
+                <h3>Lecture 13: Parallel Processing in Society (date)</h3>
+            </div>
+            <div id="lecture14" class="lecture-slide">
+                <h3>Lecture 14: Parallel Processing for Hadrian's Wall (date)</h3>
+            </div>
+            <div id="lecture15" class="lecture-slide">
+                <h3>Lecture 15: Real Parallel Computing (date)</h3>
+            </div>
+            <div id="lecture16" class="lecture-slide">
+                <h3>Lecture 16: Cloud Computing Unit for E534 BDAA Course, Part M: Cloud Storage (date)</h3>
+            </div>
+            <div id="lecture17" class="lecture-slide">
+                <h3>Lecture 17: HPC and Clouds (date)</h3>
+            </div>
+            <div id="lecture18" class="lecture-slide">
+                <h3>Lecture 18: Comparison of Data Analytics with Simulation (date)</h3>
+            </div>
+            <div id="lecture19" class="lecture-slide">
+                <h3>Lecture 19: The Future (date)</h3>
+            </div>
+            <div id="lecture20" class="lecture-slide">
+                <h3>Lecture 20: The Future 2 (date)</h3>
+            </div>
+            <div id="lecture21" class="lecture-slide">
+                <h3>Lecture 21: The Future 3 (date)</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="arrow left" onclick="prevPage()" id="leftArrow">&lt;</div>
+    <div class="arrow right" onclick="nextPage()" id="rightArrow">&gt;</div>
+
+    <script>
+        var pages = [
+            "index.html",
+            "headers/syllabus.html",
+            "headers/lectures.html",
+            "headers/book.html",
+            "headers/schedule.html"
+        ];
+
+        var currentPage = window.location.pathname.replace("/Big-Data-Systems/", "") || "index.html";
+        currentIndex = pages.indexOf(currentPage);
+
+        function prevPage() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                navigateToPage();
+            }
+        }
+
+        function nextPage() {
+            if (currentIndex < pages.length - 1) {
+                currentIndex++;
+                navigateToPage();
+            }
+        }
+
+        function navigateToPage() {
+            var base_url = window.location.origin + "/Big-Data-Systems/";
+            var page = pages[currentIndex];
+            window.location.href = base_url + page;
+        }
+
+        function toggleNavbar() {
+            var navbar = document.getElementById('navbar');
+            var contentArea = document.getElementById('contentArea');
+            var header = document.getElementById('header');
+            var leftArrow = document.querySelector('.arrow.left');
+            
+            if (!navbar || !contentArea || !header || !leftArrow) {
+                console.error("One or more elements not found!");
+                return;
+            }
+            
+            if (navbar.style.display === 'none') {
+                navbar.style.display = 'block';
+                contentArea.style.marginLeft = "230px";
+                header.style.left = "230px";
+                header.style.width = "calc(100% - 230px)";
+                leftArrow.style.left = "240px";
+            } else {
+                navbar.style.display = 'none';
+                contentArea.style.marginLeft = "0";
+                header.style.left = "0";
+                header.style.width = "100%";
+                leftArrow.style.left = "20px";
+            }
+        }
+
+        function showSlide() {
+            var selectedLecture = document.getElementById("lectureSelect").value;
+
+            var slides = document.querySelectorAll(".lecture-slide");
+            slides.forEach(function(slide) {
+                slide.style.display = "none";
+            });
+
+            if (selectedLecture) {
+                document.getElementById(selectedLecture).style.display = "block";
+            }
+        }
+    </script>
 </body>
 </html>
