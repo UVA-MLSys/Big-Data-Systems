@@ -231,3 +231,34 @@ body {
 .lecture-slide.active {
     display: block;
 }
+
+/* Table Styles */
+table {
+    width: 100%; /* Full width */
+    border-collapse: collapse; /* Removes the space between borders */
+    margin-bottom: 20px; /* Spacing after the table */
+}
+
+th, td {
+    border: 1px solid #ddd; /* Light grey border */
+    text-align: left; /* Align text to the left */
+    padding: 8px; /* Padding inside cells */
+}
+
+th {
+    background-color: #f4f4f4; /* Light grey background for headers */
+    color: #333; /* Dark text for contrast */
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Zebra striping for rows */
+}
+
+/* Responsive Table */
+@media screen and (max-width: 600px) {
+    table {
+        width: 100%;
+        display: block;
+        overflow-x: auto; /* Allows table to scroll horizontally on small screens */
+    }
+}
