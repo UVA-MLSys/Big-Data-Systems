@@ -7,14 +7,13 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;  /* Adjusted to a light gray for contrast */
+    background-color: #f4f4f4;  
     color: #333;
 }
 
-/* Improved spacing for main content */
-/* Improved spacing for main content */
+/* Main Content */
 .main-content {
-    padding: 20px 40px;  /* Add padding for inner spacing */
+    padding: 20px 40px; 
 }
 
 .main-content div {
@@ -27,28 +26,28 @@ body {
 .main-content h3 {
     color: #333;
     margin-bottom: 10px;
-    font-size: 22px; /* larger font size for titles */
+    font-size: 22px;
 }
 
 .main-content p, .main-content ul {
-    margin-bottom: 15px; /* more space after paragraphs and lists */
+    margin-bottom: 15px; 
 }
 
 .main-content ul {
-    margin-left: 30px;  /* Indentation for the list */
+    margin-left: 30px;  
 }
 
 .main-content li {
-    margin-bottom: 10px;  /* Spacing between list items */
+    margin-bottom: 10px; 
 }
 
 
 .container {
-    margin-left: 280px;  /* Width of the navbar */
+    margin-left: 280px; 
     margin-top: 70px;
     padding: 40px;
-    transition: margin-left 0.3s;  /* Smooth transition */
-    background-color: #ffffff;  /* Main content area background color */
+    transition: margin-left 0.3s; 
+    background-color: #ffffff; 
 }
 
 
@@ -57,18 +56,18 @@ body {
 .header {
     position: fixed;
     top: 0;
-    left: 230px; /* starting after the navbar */
-    width: calc(100% - 230px); /* Taking the full width minus the navbar width */
+    left: 230px; 
+    width: calc(100% - 230px); 
     height: 60px;
-    background-color: #222; /* Dark color */
-    color: #ddd; /* Light gray text color */
+    background-color: #222; 
+    color: #ddd; 
     line-height: 60px;
-    padding: 0 20px; /* Some spacing for the text and button */
+    padding: 0 20px; 
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     font-size: 24px;
-    display: flex; /* To align items */
-    justify-content: space-between; /* Space between title and button */
-    transition: all 0.3s; /* Smooth transition */
+    display: flex;
+    justify-content: space-between; 
+    transition: all 0.3s; 
 }
 
 .full-width-header {
@@ -80,14 +79,14 @@ body {
 
 /* Button Styles */
 .toggle-btn {
-    background-color: #444; /* Slightly different shade for contrast */
+    background-color: #444;
     color: #fff;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    border-radius: 5px; /* Slight rounding of corners */
+    border-radius: 5px; 
     font-size: 16px;
-    transition: background-color 0.3s; /* Smooth transition on hover */
+    transition: background-color 0.3s; 
 }
 
 .toggle-btn:hover {
@@ -103,16 +102,16 @@ body {
     left: 0;
     height: 100%;
     width: 230px;
-    background-color: #222;  /* Dark color for navbar */
+    background-color: #222;  
     overflow-y: auto;
     border-right: 1px solid #333;
-    transition: all 0.3s;  /* Smooth transition */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
+    transition: all 0.3s;  
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);  
 }
 
 .navbar a {
     display: block;
-    color: #ddd;  /* Light gray text color */
+    color: #ddd;  
     padding: 10px 15px;
     text-decoration: none;
 }
@@ -123,8 +122,8 @@ body {
 }
 
 .navbar a:hover, .navbar a.active {
-    background-color: #333;  /* Slightly lighter color for hover/active state */
-    color: #fff;  /* White text for hover/active state */
+    background-color: #333;  
+    color: #fff;  
 }
 
 .navbar a:hover i {
@@ -173,7 +172,7 @@ body {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9; /* Light background for dropdown */
+    background-color: #f9f9f9; 
     min-width: 160px;
     width: 100%;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -181,16 +180,16 @@ body {
 }
 
 .dropdown-content a {
-    color: #333; /* Darker text color for dropdown links */
-    padding: 8px 12px; /* Slightly smaller padding */
-    font-size: 14px; /* Smaller font size */
+    color: #333; 
+    padding: 8px 12px; 
+    font-size: 14px; 
     text-decoration: none;
     display: block;
-    background-color: #f0f0f0; /* Lighter background for dropdown items */
+    background-color: #f0f0f0;
 }
 
 .dropdown-content a:hover {
-    background-color: #e0e0e0; /* Slightly darker background on hover */
+    background-color: #e0e0e0; 
 }
 
 .dropdown:hover .dropdown-content {
@@ -198,20 +197,20 @@ body {
 }
 
 .dropdown-toggle {
-    color: #bbb; /* Lighter color for dropdown toggle */
-    font-size: 16px; /* Keeping the font size same as other links */
+    color: #bbb; 
+    font-size: 16px; 
 }
 
 .dropdown-toggle:after {
     content: ' ▼';
-    font-size: 12px; /* Smaller arrow */
+    font-size: 12px; 
 }
 
 
 .anchor {
     display: block;
     position: relative;
-    top: -70px; /* Height of your fixed header */
+    top: -70px; 
     visibility: hidden;
 }
 
@@ -234,24 +233,24 @@ body {
 
 /* Table Styles */
 table {
-    width: 100%; /* Full width */
-    border-collapse: collapse; /* Removes the space between borders */
-    margin-bottom: 20px; /* Spacing after the table */
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-bottom: 20px; 
 }
 
 th, td {
-    border: 1px solid #ddd; /* Light grey border */
-    text-align: left; /* Align text to the left */
-    padding: 8px; /* Padding inside cells */
+    border: 1px solid #ddd; 
+    text-align: left; 
+    padding: 8px; 
 }
 
 th {
-    background-color: #f4f4f4; /* Light grey background for headers */
-    color: #333; /* Dark text for contrast */
+    background-color: #f4f4f4; 
+    color: #333; 
 }
 
 tr:nth-child(even) {
-    background-color: #f9f9f9; /* Zebra striping for rows */
+    background-color: #f9f9f9; 
 }
 
 /* Responsive Table */
@@ -259,6 +258,6 @@ tr:nth-child(even) {
     table {
         width: 100%;
         display: block;
-        overflow-x: auto; /* Allows table to scroll horizontally on small screens */
+        overflow-x: auto; 
     }
 }
