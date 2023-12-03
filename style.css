@@ -261,3 +261,21 @@ tr:nth-child(even) {
         overflow-x: auto; 
     }
 }
+
+.important-messages {
+    background-color: #ffcc00; /* Bright background for visibility */
+    color: #333; /* Text color */
+    padding: 20px; /* Padding for spacing */
+    margin: 20px 0; /* Margin for spacing */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+}
+
+.important-messages h2 {
+    margin-bottom: 15px; /* Spacing below the heading */
+    font-size: 24px; /* Font size for heading */
+}
+
+.important-messages p {
+    font-size: 18px; /* Font size for paragraph */
+}
