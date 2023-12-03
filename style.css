@@ -287,3 +287,17 @@ tr:nth-child(even) {
 .important-messages p {
     font-size: 18px; /* Font size for paragraph */
 }
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+.animated-text {
+    display: inline-block;
+    overflow: hidden; /* Hide the text as it 'types' */
+    white-space: nowrap; /* Keep text in a single line */
+    animation: typing 3s steps(40, end); /* Apply typing animation */
+    border-right: 3px solid #333; /* Cursor-like effect */
+    box-sizing: border-box;
+}
