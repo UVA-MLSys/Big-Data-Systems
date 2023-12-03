@@ -254,30 +254,40 @@ tr:nth-child(even) {
     background-color: #f9f9f9; 
 }
 
-/* Responsive Table */
 @media screen and (max-width: 768px) {
     .important-messages {
         margin-left: 20px;
         margin-right: 20px;
-        max-width: none; /* Allow full width on smaller screens */
+        max-width: none;
     }
 
     .container {
-        margin-left: 20px; /* Adjust for smaller screens */
+        margin-left: 20px;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .navbar {
+        width: 230px;
+    }
+
+    .important-messages, .container {
+        margin-left: 230px;
     }
 }
 
 
+
 .important-messages {
-    text-align: center; /* Center align the text */
+    text-align: center;
     padding: 20px;
-    margin: 20px auto; /* Auto margins for horizontal centering */
-    max-width: calc(100% - 260px); /* Adjust width considering navbar */
+    margin: 20px 0 20px 230px; /* Adjust left margin to avoid navbar overlap */
     background-color: #ffcc00;
     color: #333;
     border-radius: 10px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
 }
+
 
 .important-messages h2 {
     margin-bottom: 15px; /* Spacing below the heading */
@@ -295,9 +305,10 @@ tr:nth-child(even) {
 
 .animated-text {
     display: inline-block;
-    overflow: hidden; /* Hide the text as it 'types' */
-    white-space: nowrap; /* Keep text in a single line */
-    animation: typing 3s steps(40, end); /* Apply typing animation */
-    border-right: 3px solid #333; /* Cursor-like effect */
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 3s steps(40, end);
+    border-right: 3px solid #333;
     box-sizing: border-box;
 }
+
