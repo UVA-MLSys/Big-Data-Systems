@@ -311,3 +311,12 @@ tr:nth-child(even) {
     box-sizing: border-box;
 }
 
+.centered-image {
+    text-align: center; 
+    margin: 0 auto; 
+}
+
+.centered-image img {
+    max-width: 100%;
+    height: auto;
+}
