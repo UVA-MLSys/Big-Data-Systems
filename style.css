@@ -21,6 +21,10 @@ body {
     background-color: #f9f9f9; 
 }
 
+.main-content h2 {
+    margin-bottom: 10px;
+}
+
 .main-content h3 {
     color: #333;
     margin-bottom: 10px;
