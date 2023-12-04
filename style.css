@@ -27,6 +27,10 @@ body {
     font-size: 22px;
 }
 
+.main-content h4 {
+    margin-bottom: 10px;
+}
+
 .main-content p, .main-content ul {
     margin-bottom: 15px; 
 }
