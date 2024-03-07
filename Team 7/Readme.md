@@ -11,7 +11,7 @@ Data Scientists and analysts have developed several metrics for determining a pl
 
 Feature Selection and basic modeling notebook.
   
-`MVP.ipynb`:
+`DataCleaning_EDA.ipynb`:
   
 Exploratory notebook where the data is cleaned; includes some basic EDA.
 
