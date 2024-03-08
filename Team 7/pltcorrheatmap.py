@@ -3,6 +3,25 @@ import seaborn as sns
 import numpy as np
 
 def plot_corr_heatmap(corr_matrix, selected_feature_names, threshold=0.65):
+    """
+    Plots a heatmap of the correlation matrix for selected features.
+
+    Parameters:
+    -----------
+    corr_matrix : pandas DataFrame
+        The correlation matrix containing correlation coefficients between features.
+
+    selected_feature_names : list
+        List of selected feature names for which correlations will be visualized.
+
+    threshold : float, optional
+        The threshold above which correlation values will be annotated on the heatmap.
+        Default is 0.65.
+
+    Returns:
+    --------
+    None
+    """
     selected_indices = [corr_matrix.columns.get_loc(col) for col in selected_feature_names]
     corr_matrix_selected = corr_matrix.iloc[selected_indices, selected_indices]
 

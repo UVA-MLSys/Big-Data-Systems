@@ -1,8 +1,7 @@
 # **Introduction**
 
 ## **Project Goal**:
-
-Historically, there have been several metrics that data scientists and analysts have developed and used to determine how valuable a given player is to their team's success. Some examples are VORP, Box-Plus-Minus, and Win Shares, amongst others. We aim to develop a formula/equation that weights each of these parameters based on how well they predict MVP rankings, then apply it to untrained years to see if our developed "MVP index" can correctly predict the MVP rankings in those years. We can tinker with the formula as we see fit based on what we believe is vital to a player's value and compare it to other methods developed by reputable analyst companies (i.e., the RAPTOR metric developed by FiveThirtyEight)
+Data Scientists and analysts have developed several metrics for determining a player's value to their team's success. Prominent examples include Value Over Replacement Player (VORP), Box Plus/Minus (BPM), and FiveThirtyEight's Robust Algorithm (using) Player Tracking (and) On/Off Ratings (RAPTOR)​. We aim to develop a multivariate index that weighs these parameters based on how well they predict MVP rankings, then test it on unseen data for the most recent five seasons to see if our "MVP index" correctly predicts the MVP rankings.​ We will experiment with the index formula and compare it to other methods developed by reputable analyst sources.
 
 ## **Manifest**:
 
@@ -12,7 +11,7 @@ Historically, there have been several metrics that data scientists and analysts 
 
 Feature Selection and basic modeling notebook.
   
-`MVP.ipynb`:
+`DataCleaning_EDA.ipynb`:
   
 Exploratory notebook where the data is cleaned; includes some basic EDA.
 
