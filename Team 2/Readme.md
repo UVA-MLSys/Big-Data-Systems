@@ -1,1 +1,31 @@
-# Introduction
+# Batch & Stream
+### Alex Lilly, RJ Cubarrubia, Abigail Snyder​
+
+## Project Goals
+Use AWS to batch and stream data from an API​.  
+
+Specifically, our aim is to demonstrate a process for data ingestion that is near real time (streaming) or as new data is available at some frequency interval (batch)​
+
+## Dataset
+
+The EPA provides access to the Air Quality System (AQS) API that contains “ambient air sample data collected by state, local, tribal, and federal air pollution control agencies from thousands of monitors across the nation.”​
+
+This API contains data on current and forecasted air quality from a number of observation points around the U.S. (and globally)​
+
+Data (PM2.5, PM10, Ozone, CO, NOx, SOx) is updated ~hourly​
+
+- ~3,200 observations ​​
+- Historical data back to 2008​​
+- Single query limitations to ~10,000 observations. ​​
+- Wall time = 11.7s for 5100 observations​​
+
+## Motivation
+
+As a result of climate change, people are more often being affected by poor air quality. Poor air quality can be detrimental to one’s health, especially with preexisting medical conditions, which influences individuals’ behavior and migration. ​
+
+Air quality forecasts enable individuals to plan activities in the short term, and long-term forecasts enable long term planning. ​
+
+Climate scientists can also use air quality data in conjunction with meteorological data to build climate models. These models are critical to convincing regulators of the impact and risks associated with climate change. ​
+
+The air quality data stream can benefit from big data solutions to provide efficient data streaming services at scale.  ​
+
