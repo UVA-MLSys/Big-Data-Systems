@@ -7,39 +7,39 @@ Data Scientists and analysts have developed several metrics for determining a pl
 
 ### **Jupyter Notebooks**:
 
-`FeatureSelection.ipynb`:
+#### FeatureSelection.ipynb:
 
 Feature Selection notebook where we use the `preprocess_and_train` function from `preptrain.py` and ensemble the methods to generate the best 10 features.
   
-`DataCleaning_EDA.ipynb`:
+#### DataCleaning_EDA.ipynb:
   
 Exploratory notebook where the data is cleaned; includes some basic EDA.
 
-`Models.ipynb`:
+#### Models.ipynb:
 
 Modeling notebook where we use the selected features (from `df_selected.csv`) to train and evaluate a range of models and extract their feature importance. These results will inform how we weight features in the index.
 
 ### **Data Files**:
 
-`df_clean.csv`:
+#### df_clean.csv:
   
 Main .csv file used for training and validation.
 
-`df_last.csv`:
+#### df_last.csv:
   
 Testing .csv file for examining model performance on last 5 seasons (2018-22).
 
-`df_selected.csv`:
+#### df_selected.csv:
 
 Selected features .csv containing the subset of predictor variables.
 
 ### **Python Module Files (helper functions, classes)**
 
-`pltcorrheatmap.py`:
+#### pltcorrheatmap.py:
   
 Custom function for generating correlation heat maps as we determine feature importance.
 
-`preptrain.py`:
+#### preptrain.py:
   
 Custom function/pipeline for preprocessing and feature selection, described below:
 
