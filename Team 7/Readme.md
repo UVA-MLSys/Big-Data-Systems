@@ -47,6 +47,10 @@ Custom function for generating correlation heat maps as we determine feature imp
   
 Custom function/pipeline for preprocessing and feature selection, described below:
 
+<details>
+
+<summary><b>Expand for preptrain.py description</b></summary>
+
 - Defining Numeric Columns (Excluding "Pos"):
 
 This step identifies the numeric columns in the input DataFrame `df`, excluding the column labeled "Pos" for player position.
@@ -105,3 +109,4 @@ Extracts the selected features from the preprocessed training and testing data a
 - Returning Results:
 
 The function returns various components: the selected features from each method (features_filter, features_wrapper, features_embedded), the names of the selected features (feature_names), and the preprocessed training and testing data along with their corresponding labels.
+</details>
