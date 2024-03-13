@@ -8,15 +8,15 @@ Data Scientists and analysts have developed several metrics for determining a pl
 <details>
 <summary>Jupyter Notebooks</summary>
 
-* #### FeatureSelection.ipynb:
+- #### FeatureSelection.ipynb:
 
 Feature Selection notebook where we use the `preprocess_and_train` function from `preptrain.py` and ensemble the methods to generate the best 10 features.
   
-* #### DataCleaning_EDA.ipynb:
+- #### DataCleaning_EDA.ipynb:
   
 Exploratory notebook where the data is cleaned; includes some basic EDA.
 
-* #### Models.ipynb:
+- #### Models.ipynb:
 
 Modeling notebook where we use the selected features (from `df_selected.csv`) to train and evaluate a range of models and extract their feature importance. These results will inform how we weight features in the index.
 </details>
@@ -24,19 +24,19 @@ Modeling notebook where we use the selected features (from `df_selected.csv`) to
 <details>
 <summary>Date Files</summary>
 
-* #### df_clean.csv:
+- #### df_clean.csv:
   
 Main .csv file used for training and validation.
 
-* #### df_last.csv:
+- #### df_last.csv:
   
 Testing .csv file for examining model performance on last 5 seasons (2018-22).
 
-* #### df_selected.csv:
+- #### df_selected.csv:
 
 Selected features .csv containing the subset of predictor variables.  
 
-* #### mvp_data.csv:  
+- #### mvp_data.csv:  
 
 Initial NBA mvp data set. Reduced in MVP.ipynb code to essential rows and columns of study.
 </details>
@@ -44,11 +44,11 @@ Initial NBA mvp data set. Reduced in MVP.ipynb code to essential rows and column
 <details>
 <summary>Python Module Files (helper functions, classes)</summary>
 
-* #### pltcorrheatmap.py:
+- #### pltcorrheatmap.py:
   
 Custom function for generating correlation heat maps as we determine feature importance.
 
-* #### preptrain.py:
+- #### preptrain.py:
   
 Custom function/pipeline for preprocessing and feature selection; you can see descriptions for each step in the process using the dropdown menu below:
 
