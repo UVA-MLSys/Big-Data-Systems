@@ -11,9 +11,8 @@ import sagemaker
 from torchvision import transforms
 
 class S3DogDataset(Dataset):
-    def __init__(self, file_ref_csv, transform=None):
+    def __init__(self, file_ref_csv, bucket_name = "sagemaker-team11-stanford-dogs", transform=None):
         ref = pd.read_csv(file_ref_csv)
-        bucket_name = "sagemaker-team11-stanford-dogs"
         session = boto3.session.Session()
         sagemaker_session = sagemaker.Session(default_bucket = bucket_name)
         region = session.region_name
@@ -52,12 +51,12 @@ class S3DogDataset(Dataset):
             return None, label
         else:
             # retrieve image from bucket
-            img_obj = self.s3.get_object(Bucket="sagemaker-team11-stanford-dogs", Key=img_path)
+            img_obj = self.s3.get_object(Bucket=bucket_name, Key=img_path)
             img_data = img_obj['Body'].read()
             image = Image.open(BytesIO(img_data)).convert('RGB')
 
             # crop to the bounds from the annotations
-            ann_obj = self.s3.get_object(Bucket="sagemaker-team11-stanford-dogs", Key=ann_path)
+            ann_obj = self.s3.get_object(Bucket=bucket_name, Key=ann_path)
             data = ann_obj['Body'].read()
             root = ET.fromstring(data)
             bndbox = root.find('object').find('bndbox')
