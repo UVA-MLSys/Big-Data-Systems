@@ -5,105 +5,111 @@ Data Scientists and analysts have developed several metrics for determining a pl
 
 ## **Manifest**:
 
-### **Jupyter Notebooks**:
+<details>
+<summary>Jupyter Notebooks</summary>
 
-#### FeatureSelection.ipynb:
+* #### FeatureSelection.ipynb:
 
 Feature Selection notebook where we use the `preprocess_and_train` function from `preptrain.py` and ensemble the methods to generate the best 10 features.
   
-#### DataCleaning_EDA.ipynb:
+* #### DataCleaning_EDA.ipynb:
   
 Exploratory notebook where the data is cleaned; includes some basic EDA.
 
-#### Models.ipynb:
+* #### Models.ipynb:
 
 Modeling notebook where we use the selected features (from `df_selected.csv`) to train and evaluate a range of models and extract their feature importance. These results will inform how we weight features in the index.
+</details>
 
-### **Data Files**:
+<details>
+<summary>Date Files</summary>
 
-#### df_clean.csv:
+* #### df_clean.csv:
   
 Main .csv file used for training and validation.
 
-#### df_last.csv:
+* #### df_last.csv:
   
 Testing .csv file for examining model performance on last 5 seasons (2018-22).
 
-#### df_selected.csv:
+* #### df_selected.csv:
 
 Selected features .csv containing the subset of predictor variables.  
 
-#### mvp_data.csv:  
+* #### mvp_data.csv:  
 
 Initial NBA mvp data set. Reduced in MVP.ipynb code to essential rows and columns of study.
+</details>
 
-### **Python Module Files (helper functions, classes)**
+<details>
+<summary>Python Module Files (helper functions, classes)</summary>
 
-#### pltcorrheatmap.py:
+* #### pltcorrheatmap.py:
   
 Custom function for generating correlation heat maps as we determine feature importance.
 
-#### preptrain.py:
+* #### preptrain.py:
   
 Custom function/pipeline for preprocessing and feature selection; you can see descriptions for each step in the process using the dropdown menu below:
+</details>
 
-<details>
-<summary><b>Expand to access preprocessing and feature selection details</b></summary>
+  <details>
+  <summary><b>Expand to access preprocessing and feature selection details</b></summary>
 
-- Defining Numeric Columns (Excluding "Pos"):
+  - Defining Numeric Columns (Excluding "Pos"):
 
-This step identifies the numeric columns in the input DataFrame `df`, excluding the column labeled "Pos" for player position.
+  This step identifies the numeric columns in the input DataFrame `df`, excluding the column labeled "Pos" for player position.
 
-- Splitting Data into Training and Testing Sets:
+  - Splitting Data into Training and Testing Sets:
 
-Splits the input data into training and testing sets using the `train_test_split` function from `scikit-learn`.
+  Splits the input data into training and testing sets using the `train_test_split` function from `scikit-learn`.
 
-- Defining Preprocessing Steps:
+  - Defining Preprocessing Steps:
 
-Defines the preprocessing steps using pipelines. For numeric features, we impute missing values with the median value and then scale the features using standardization (subtracting the mean and dividing by the standard deviation). For categorical features (specifically "Pos"), we apply one-hot encoding while ignoring unknown categories.
+  Defines the preprocessing steps using pipelines. For numeric features, we impute missing values with the median value and then scale the features   using standardization (subtracting the mean and dividing by the standard deviation). For categorical features (specifically "Pos"), we apply one-  hot encoding while ignoring unknown categories.
 
-- Preprocessing Training and Testing Data:
+  - Preprocessing Training and Testing Data:
 
-Applies the preprocessing separately to the training and testing datasets using the `fit_transform` and `transform` methods of the `ColumnTransformer`.
+  Applies the preprocessing separately to the training and testing datasets using the `fit_transform` and `transform` methods of the     `ColumnTransformer`.
 
-- Extracting Feature Names:
+  - Extracting Feature Names:
 
-Extracts the feature names from the `ColumnTransformer` object. This step removes any prefixes such as "num__" or "cat__".
+  Extracts the feature names from the `ColumnTransformer` object. This step removes any prefixes such as "num__" or "cat__".
 
-- Filter Method - SelectKBest:
+  - Filter Method - SelectKBest:
 
-Uses SelectKBest with ANOVA F-value to select the top 10 features based on their scores. These scores represent the strength of the relationship between each feature and the target variable.
+  Uses SelectKBest with ANOVA F-value to select the top 10 features based on their scores. These scores represent the strength of the relationship   between each feature and the target variable.
 
-- Wrapper Method 1 - Random Forest Feature Importance:
+  - Wrapper Method 1 - Random Forest Feature Importance:
 
-Trains a Random Forest Regressor on the preprocessed training data to determine feature importance and selects the top 10 features with the highest feature importance scores.
+  Trains a Random Forest Regressor on the preprocessed training data to determine feature importance and selects the top 10 features with the     highest feature importance scores.
 
-- Embedded Method - L1-based feature selection using Lasso:
+  - Embedded Method - L1-based feature selection using Lasso:
 
-LassoCV (Lasso Cross-validation) is employed to perform L1-based feature selection. It iteratively fits Lasso models with different regularization strengths (alphas) and selects features based on non-zero coefficients.
+  LassoCV (Lasso Cross-validation) is employed to perform L1-based feature selection. It iteratively fits Lasso models with different   regularization strengths (alphas) and selects features based on non-zero coefficients.
 
-- Performs Principal Component Analysis (PCA):
+  - Performs Principal Component Analysis (PCA):
 
-Performs PCA to reduce the dimensionality of the data and select the top 10 principal components as features.
+  Performs PCA to reduce the dimensionality of the data and select the top 10 principal components as features.
 
-- Stability Selection with Lasso:
-Uses Stability Selection with Lasso to select features. We apply LassoCV within SelectFromModel to select features based on stability across multiple Lasso models.
+  - Stability Selection with Lasso:
+  Uses Stability Selection with Lasso to select features. We apply LassoCV within SelectFromModel to select features based on stability across   multiple Lasso models.
 
-- Recursive Feature Elimination with Cross-Validation (RFECV):
+  - Recursive Feature Elimination with Cross-Validation (RFECV):
 
-Applies RFECV, a wrapper method that recursively selects features by recursively training the model and selecting the best-performing subset of features through cross-validation.
+  Applies RFECV, a wrapper method that recursively selects features by recursively training the model and selecting the best-performing subset of   features through cross-validation.
 
-- Wrapper Method 2 - Gradient Boosting Machine Feature Importance
+  - Wrapper Method 2 - Gradient Boosting Machine Feature Importance
 
-Trains a Gradient Boosting Machine model on the preprocessed training data to determine feature importance and selects the top 10 features with the highest feature importance scores.
+  Trains a Gradient Boosting Machine model on the preprocessed training data to determine feature importance and selects the top 10 features with   the highest feature importance scores.
 
-- Embedded Method 2 - Support Vector Regressor
+  - Embedded Method 2 - Support Vector Regressor
 
-Uses Support Vector Regressor (SVR) within SelectFromModel to perform embedded feature selection. Features are selected based on the coefficients obtained from the SVR model.
+  Uses Support Vector Regressor (SVR) within SelectFromModel to perform embedded feature selection. Features are selected based on the coefficients   obtained from the SVR model.
 
-- Preparing Final Data for Training:
+  - Preparing Final Data for Training:
 
-Extracts the selected features from the preprocessed training and testing data and prepares the final datasets (X_train, X_test, y_train, y_test) for model training and evaluation.
+  Extracts the selected features from the preprocessed training and testing data and prepares the final datasets (X_train, X_test, y_train, y_test)   for model training and evaluation.
 
 - Returning Results:
 
