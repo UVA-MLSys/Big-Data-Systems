@@ -16,6 +16,7 @@ class S3DogDataset(Dataset):
         session = boto3.session.Session()
         sagemaker_session = sagemaker.Session(default_bucket = bucket_name)
         region = session.region_name
+        self.bucket_name = bucket_name
         self.s3 = boto3.Session().client(service_name="s3", region_name=region)
         
         self.transform = transform
@@ -51,12 +52,12 @@ class S3DogDataset(Dataset):
             return None, label
         else:
             # retrieve image from bucket
-            img_obj = self.s3.get_object(Bucket=bucket_name, Key=img_path)
+            img_obj = self.s3.get_object(Bucket=self.bucket_name, Key=img_path)
             img_data = img_obj['Body'].read()
             image = Image.open(BytesIO(img_data)).convert('RGB')
 
             # crop to the bounds from the annotations
-            ann_obj = self.s3.get_object(Bucket=bucket_name, Key=ann_path)
+            ann_obj = self.s3.get_object(Bucket=self.bucket_name , Key=ann_path)
             data = ann_obj['Body'].read()
             root = ET.fromstring(data)
             bndbox = root.find('object').find('bndbox')
