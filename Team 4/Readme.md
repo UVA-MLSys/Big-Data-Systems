@@ -8,7 +8,7 @@ We will also utilize AWS and the larger dataset to determine if there are other 
 # Dataset
 Ryanair – Passenger Experience Reviews​
 
-CSV source file​
-2249 records, 21 columns​
-Flight data from 2012-2024​
-Various useful metadata e.g., "Seat Type", "Inflight Entertainment", "Wi-Fi & Connectivity"​
+*CSV source file​
+*2249 records, 21 columns​
+*Flight data from 2012-2024​
+*Various useful metadata e.g., "Seat Type", "Inflight Entertainment", "Wi-Fi & Connectivity"​
