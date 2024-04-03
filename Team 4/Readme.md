@@ -17,26 +17,26 @@ Ryanair – Passenger Experience Reviews​
 * Various useful metadata e.g., "Seat Type", "Inflight Entertainment", "Wi-Fi & Connectivity"​
 
 Data Fields:  
- 1   Date Published \n
- 2   Overall Rating
- 3   Passenger Country
- 4   Trip_verified
- 5   Comment title
- 6   Comment
- 7   Aircraft
- 8   Type Of Traveller
- 9   Seat Type
- 10  Origin
- 11  Destination
- 12  Date Flown
- 13  Seat Comfort
- 14  Cabin Staff Service
- 15  Food & Beverages
- 16  Ground Service
- 17  Value For Money
- 18  Recommended
- 19  Inflight Entertainment
- 20  Wifi & Connectivity
+* Date Published
+* Overall Rating
+* Passenger Country
+* Trip_verified
+* Comment title
+* Comment
+* Aircraft
+* Type Of Traveller
+* Seat Type
+* Origin
+* Destination
+* Date Flown
+* Seat Comfort
+* Cabin Staff Service
+* Food & Beverages
+* Ground Service
+* Value For Money
+* Recommended
+* Inflight Entertainment
+* Wifi & Connectivity
 
 # Process
 Our team will process, analyze, and build predictive models that can accurately predict ratings given customer experience reviews.​
