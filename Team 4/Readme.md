@@ -16,7 +16,7 @@ Ryanair – Passenger Experience Reviews​
 * Flight data from 2012-2024​
 * Various useful metadata e.g., "Seat Type", "Inflight Entertainment", "Wi-Fi & Connectivity"​
 
-Data Fields:  
+Dataset Columns:  
 * Date Published
 * Overall Rating
 * Passenger Country
