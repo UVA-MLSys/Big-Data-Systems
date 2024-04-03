@@ -17,7 +17,7 @@ Ryanair – Passenger Experience Reviews​
 * Various useful metadata e.g., "Seat Type", "Inflight Entertainment", "Wi-Fi & Connectivity"​
 
 Data Fields:  
- 1   Date Published
+ 1   Date Published \n
  2   Overall Rating
  3   Passenger Country
  4   Trip_verified
