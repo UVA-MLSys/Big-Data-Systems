@@ -1,2 +1,6 @@
 # Introduction
 The aim of this project is to design an image classification model. With a unique set of data estimating over 8,900 images taken by people who are blind. These images fall into 200 different categories which range from a multitude of household items. Using AI/ML to help visually impaired people to locate the correct items around the house is how innovation through data science is used to improve peoples lives . Applying this Neural Network model to device such as Smart Glasses, which is a type of wearable assistive technology designed to help people who are blind or have low vision by scanning and evaluating what it is based on our training model of household images and use speech responses to inform the individual. 
+
+
+
+## Dataset : https://vizwiz.org/tasks-and-datasets/image-classification/
