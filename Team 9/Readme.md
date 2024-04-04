@@ -1,6 +1,26 @@
-# Introduction
-The aim of this project is to design an image classification model. With a unique set of data estimating over 8,900 images taken by people who are blind. These images fall into 200 different categories which range from a multitude of household items. Using AI/ML to help visually impaired people to locate the correct items around the house is how innovation through data science is used to improve peoples lives . Applying this Neural Network model to device such as Smart Glasses, which is a type of wearable assistive technology designed to help people who are blind or have low vision by scanning and evaluating what it is based on our training model of household images and use speech responses to inform the individual. 
+# Procesing Data for ML Project: Image Classification Model
 
+## Project Description
+This project aims to explore the impact of fusion voting on third-party viability in American politics. The two-party system has long dominated American politics, but there's growing interest in fostering the viability of third parties. Fusion voting, a practice where a third party cross-nominates a candidate from one of the major parties, offers a potential avenue for third-party relevance without risking election spoilers. This project focuses on comparing the longevity, cost, and success of third parties in states where fusion voting is legal versus those where it is not.
 
+## Data Sources
 
-## Dataset : https://vizwiz.org/tasks-and-datasets/image-classification/
+Dataset : https://vizwiz.org/tasks-and-datasets/image-classification/
+
+## AWS Resources
+- S3 Bucket for storage
+- Sagemaker for jupyter notebook
+- Rekognition
+
+## Repository Contents
+- **Data:** Stored in an s3 bucket
+- **Notebooks:**  Notebooks created in SageMaker used for data preprocessing and analysis
+
+## Team Members
+- Sophia Williams
+- Wilmer Maldonado
+- Victor Teelucksingh
+
+## License
+This project is licensed under the MIT License - see the LICENSE.md file for details.
+
