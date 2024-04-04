@@ -33,3 +33,6 @@ The air quality data stream can benefit from big data solutions to provide effic
 1. Must first configure your AWS CLI.
 2. Then run bash setup_infra.sh <your_bucket_name>. Ensure that this bucket name meets AWS's naming requirements, and matches what's referenced in the lambda_function.py file.
 3. Go into the AWS Lambda interface on the web portal and click Layers. Add the pandas layer.
+
+## Outcomes
+Once the data is stored in the AWS S3 bucket, it is available for immediate access.​ From here, it can be used to develop models, create visualizations, etc. ​For our project, we created several visualizations just to illustrate what can be done with the data in the S3 buckets. In reality, the end use of a batch & stream process like this one could be much larger—including weather or health advisories, supporting AI/ML development, or comparing measured and forecasted air quality estimates to help improve forecasting models. ​
