@@ -1,5 +1,7 @@
+from skopt import BayesSearchCV
+from skopt.space import Categorical, Real, Integer
 from sklearn.decomposition import PCA
-from sklearn.linear_model import LassoCV
+from sklearn.linear_model import LassoCV, LinearRegression
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
@@ -8,10 +10,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_selection import SelectKBest, f_regression, SelectFromModel, RFE, RFECV, mutual_info_regression
 from sklearn.cluster import FeatureAgglomeration
 from sklearn.metrics import mean_absolute_error, r2_score, mean_squared_error
-from sklearn.feature_selection import SelectKBest, f_regression
 from sklearn.model_selection import train_test_split, GridSearchCV, RandomizedSearchCV
 from sklearn import metrics, linear_model
-from sklearn.linear_model import LinearRegression
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from sklearn.impute import SimpleImputer
@@ -36,15 +36,14 @@ def preprocess_and_train(df, df_last, labels):
     - Wrapper Method 1: Random Forest Feature Importance.
     - Wrapper Method 2: Gradient Boosting Machine Feature Importance.
     - Embedded Method: L1-based feature selection using Lasso.
-    - Embedded Method 2: Support Vector Regressor (RBF Kernel).
+    - Embedded Method 2: Support Vector Regressor.
     - PCA: Principal Component Analysis.
-    - Stability Selection: Lasso-based method for feature selection.
     - RFECV: Recursive Feature Elimination with Cross-Validation.
     
     Parameters:
     -----------
     df : pandas DataFrame
-        Input data to be preprocessed and trained on.
+        Input data.
     df_last : pandas DataFrame
         Dataframe for the last iteration, used for preprocessing consistency.
     labels : array-like
@@ -62,8 +61,6 @@ def preprocess_and_train(df, df_last, labels):
             Selected features using Embedded Method (L1-based feature selection with Lasso).
         - features_pca : list
             Selected features using PCA.
-        - features_stability_selection : list
-            Selected features using Stability Selection with Lasso.
         - feature_names : list
             Names of selected features based on the method with the highest performance (Wrapper Method for now).
         - features_rfecv : list
@@ -87,7 +84,7 @@ def preprocess_and_train(df, df_last, labels):
     # Split the data into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(df, 
                                                         labels, 
-                                                        test_size=0.2, 
+                                                        test_size=0.1, 
                                                         shuffle=True, 
                                                         random_state=28)
 
@@ -109,83 +106,188 @@ def preprocess_and_train(df, df_last, labels):
     X_test_preprocessed = preprocessor.transform(X_test)
     df_last_preprocessed = preprocessor.transform(df_last)
 
-    # Extract feature names without prepending "num__" or "cat__"
+    # Extract feature names
     header_names = [col.split("__")[1] if "__" in col else col for col in preprocessor.get_feature_names_out()]
 
-    # Feature selection
-
-    # Filter Method - SelectKBest using ANOVA F-value
+####################################################################################################
+                                        #########################
+                                        ### Feature selection ###
+                                        #########################
+####################################################################################################
+    
+    #######################################
+    ### SelectKBest using ANOVA F-value ###
+    #######################################
     selector_filter = SelectKBest(score_func=f_regression, k=10)
     selector_filter.fit(X_train_preprocessed, y_train)
     selected_indices_filter = selector_filter.get_support(indices=True)
     features_filter = [header_names[i] for i in selected_indices_filter]
 
-    # Wrapper Method - Random Forest Feature Importance
-    rf = RandomForestRegressor(n_estimators=100, random_state=28)
-    rf.fit(X_train_preprocessed, y_train)
-    importances = rf.feature_importances_
-    indices = np.argsort(importances)[::-1]
-    features_wrapper_indices = indices[:10]
-    features_wrapper = [header_names[i] for i in features_wrapper_indices]
+####################################################################################################
 
-    # Embedded Method - L1-based feature selection using Lasso
-    lasso = LassoCV(cv=5, random_state=28, max_iter=10000, alphas=[0.01, 0.1, 1.0, 10.0])
+    ########################################
+    ### Random Forest Feature Importance ###
+    ########################################
+    
+    # Define the hyperparameter grid
+    param_grid_rf = {
+        'n_estimators': Integer(200, 300),  # Number of trees in the forest
+        'max_features': Categorical(['log2', 'sqrt']),  # Number of features to consider at every split
+        'max_depth': Categorical([None, 10, 20]),  # Maximum depth of the trees
+        'min_samples_split': Integer(2, 5),  # Minimum number of samples required to split an internal node
+        'min_samples_leaf': Integer(1, 5),  # Minimum number of samples required to be at a leaf node
+        'bootstrap': Categorical([True, False])  # Method of selecting samples for training each tree
+    }
+    # Initialize RandomForestRegressor
+    rf = RandomForestRegressor(random_state=28, n_jobs=-1)
+    # Initialize BayesSearchCV
+    bayes_search_rf = BayesSearchCV(estimator=rf, search_spaces=param_grid_rf, n_iter=50, 
+                                    scoring='r2', cv=5, random_state=28, n_jobs=-1)
+    
+    # Perform BayesSearchCV
+    bayes_search_rf.fit(X_train_preprocessed, y_train)
+    # Get the best hyperparameters
+    best_params_rf = bayes_search_rf.best_params_
+    # Get the best model
+    best_rf_model = bayes_search_rf.best_estimator_
+    # Calculate feature importances
+    importances = best_rf_model.feature_importances_
+    # Get the indices of top features based on feature importances
+    indices = np.argsort(importances)[::-1][:10]
+    # Get the names of top features based on feature importances
+    features_wrapper = [header_names[i] for i in indices]
+####################################################################################################
+
+    ##############################################
+    ### L1-based feature selection using Lasso ###
+    ##############################################
+    lasso = LassoCV(cv=5, random_state=28, max_iter=1000, alphas=[0.01, 0.1], n_jobs=-1)
     lasso.fit(X_train_preprocessed, y_train)
     mask = lasso.coef_ != 0
     features_embedded_indices = [i for i, m in enumerate(mask) if m]
     features_embedded = [header_names[i] for i in features_embedded_indices]
 
-    # PCA
+####################################################################################################
+
+    ###########
+    ### PCA ###
+    ###########
     pca = PCA(n_components=10)
     pca.fit(X_train_preprocessed)
     X_train_pca = pca.transform(X_train_preprocessed)
-    features_pca_indices = np.argsort(np.abs(pca.components_), axis=1)[:, -10:]
+    features_pca_indices = np.argsort(np.abs(pca.components_), axis=1)[:, -6:]
     features_pca = []
-    
     # Get the original feature names corresponding to selected principal components
     for i, component_indices in enumerate(features_pca_indices):
         original_features = [header_names[idx] for idx in component_indices]
         features_pca.append(original_features)
 
-    # Stability Selection with Lasso
-    stable_lasso = LassoCV(cv=5, random_state=28, max_iter=10000, alphas=[0.01, 0.1, 1.0, 10.0])
-    sfm = SelectFromModel(estimator=stable_lasso)
-    sfm.fit(X_train_preprocessed, y_train)
-    features_stability_selection_indices = sfm.get_support(indices=True)
-    features_stability_selection = [header_names[i] for i in features_stability_selection_indices]
+####################################################################################################
 
-    # RFECV
-    estimator_rfecv = GradientBoostingRegressor(n_estimators=100, random_state=28)
-    selector_rfecv = RFECV(estimator_rfecv, step=1, cv=10)
+    #############
+    ### RFECV ###
+    #############
+
+    # Define the hyperparameter grid
+    param_grid_gb = {
+        'n_estimators': Integer(100, 300),  # Number of boosting stages
+        'learning_rate': Real(0.05, 0.1, prior='uniform'),  # Learning rate
+        'max_depth': Integer(3, 5),  # Maximum depth of the individual trees
+        'min_samples_split': Integer(2, 5),  # Minimum number of samples required to split an internal node
+        'min_samples_leaf': Integer(1, 2),  # Minimum number of samples required to be at a leaf node
+        'subsample': Real(0.6, 0.8, prior='uniform'),  # Fraction of samples used for fitting the individual base learners
+        'max_features': Categorical(['log2', 'sqrt'])  # Number of features to consider when looking for the best split
+    }
+    # Create the GradientBoostingRegressor estimator
+    estimator_gb = GradientBoostingRegressor(random_state=28)
+    # Create the BayesSearchCV object for GradientBoostingRegressor
+    bayes_search_gb = BayesSearchCV(estimator=estimator_gb, search_spaces=param_grid_gb, n_iter=1, n_jobs=-1)
+    # Fit the BayesSearchCV to the preprocessed training data
+    bayes_search_gb.fit(X_train_preprocessed, y_train)
+    # Get the best GradientBoostingRegressor estimator from the BayesSearchCV
+    best_gb_estimator = bayes_search_gb.best_estimator_
+    # Create the RFECV estimator using the best GradientBoostingRegressor estimator
+    selector_rfecv = RFECV(best_gb_estimator, step=5, cv=5, n_jobs=-1)
+    # Fit the RFECV estimator to the preprocessed training data
     selector_rfecv.fit(X_train_preprocessed, y_train)
+    # Get the selected indices from RFECV
     selected_indices_rfecv = selector_rfecv.get_support(indices=True)
+    # Get the indices of top features based on mean test score
     features_rfecv_indices = np.argsort(selector_rfecv.cv_results_['mean_test_score'])[::-1][:10]
+    # Get the names of top features based on mean test score
     features_rfecv = [header_names[i] for i in features_rfecv_indices]
 
-    # Wrapper Method - GBM Feature Importance
-    gbm = GradientBoostingRegressor(n_estimators=100, random_state=28)
-    gbm.fit(X_train_preprocessed, y_train)
-    importances_gbm = gbm.feature_importances_
-    indices_gbm = np.argsort(importances_gbm)[::-1]
-    features_wrapper_indices_gbm = indices_gbm[:10]
-    features_wrapper_gbm = [header_names[i] for i in features_wrapper_indices_gbm]
+####################################################################################################
 
-    # Embedded Method - Support Vector Regressor
-    svr = SVR(kernel='rbf')
-    svr.fit(X_train_preprocessed, y_train)
-    perm_importance = permutation_importance(svr, X_train_preprocessed, y_train, n_repeats=10, random_state=28)
+    ##############################
+    ### GBM Feature Importance ###
+    ##############################
+
+    # Define the parameter grid for GradientBoostingRegressor
+    # Define the hyperparameter grid
+    param_grid_gb = {
+        'n_estimators': Integer(100, 300),  # Number of boosting stages
+        'learning_rate': Real(0.05, 0.1, prior='uniform'),  # Learning rate
+        'max_depth': Integer(3, 5),  # Maximum depth of the individual trees
+        'min_samples_split': Integer(2, 5),  # Minimum number of samples required to split an internal node
+        'min_samples_leaf': Integer(1, 2),  # Minimum number of samples required to be at a leaf node
+        'subsample': Real(0.6, 0.8, prior='uniform'),  # Fraction of samples used for fitting the individual base learners
+        'max_features': Categorical(['log2', 'sqrt'])  # Number of features to consider when looking for the best split
+    }
+    
+    # Create the GradientBoostingRegressor estimator
+    gbm = GradientBoostingRegressor()
+    # Create the BayesSearchCV object for GradientBoostingRegressor
+    bayes_search_gb = BayesSearchCV(estimator=gbm, search_spaces=param_grid_gb, 
+                                    n_iter=50, scoring='r2', cv=5, random_state=28)
+    # Fit the BayesSearchCV to the preprocessed training data
+    bayes_search_gb.fit(X_train_preprocessed, y_train)
+    # Get the best GradientBoostingRegressor estimator from the BayesSearchCV
+    best_gbm_estimator = bayes_search_gb.best_estimator_
+    # Get the feature importances from the best GradientBoostingRegressor estimator
+    importances_gbm = best_gbm_estimator.feature_importances_
+    # Get the indices of top features based on feature importances
+    indices_gbm = np.argsort(importances_gbm)[::-1][:10]
+    # Get the names of top features based on feature importances
+    features_wrapper_gbm = [header_names[i] for i in indices_gbm]
+
+####################################################################################################
+
+    ################################
+    ### Support Vector Regressor ###
+    ################################
+
+    # Define the parameter grid for SVR
+    param_grid_svr = {
+        'kernel': Categorical(['linear', 'rbf', 'poly']),  # Vary the kernel types
+        'C': Real(0.1, 1.0, prior='uniform'),  # Vary the regularization parameter
+        'gamma': Categorical(['scale', 'auto'])  # Vary the gamma parameter
+    }
+    # Create the SVR estimator
+    svr = SVR()
+    # Create the BayesSearchCV object for SVR
+    bayes_search_svr = BayesSearchCV(estimator=svr, search_spaces=param_grid_svr, cv=5, n_jobs=-1)
+    # Fit the BayesSearchCV to the preprocessed training data
+    bayes_search_svr.fit(X_train_preprocessed, y_train)
+    # Get the best SVR estimator from the BayesSearchCV
+    best_svr_estimator = bayes_search_svr.best_estimator_
+    # Calculate permutation importance using the best SVR estimator
+    perm_importance = permutation_importance(best_svr_estimator, X_train_preprocessed, y_train, n_repeats=3, random_state=28)
+    # Get the indices of top features based on permutation importance
     features_embedded_svr_indices = np.argsort(perm_importance.importances_mean)[::-1][:10]
+    # Get the names of top features based on permutation importance
     features_embedded_svr = [header_names[i] for i in features_embedded_svr_indices]
+
+####################################################################################################
 
     # Choose the selected features based on the method with the highest performance
     # For now, let's just return the selected features from the Wrapper Method
     feature_names = features_wrapper
-    X_train = X_train_preprocessed[:, features_wrapper_indices]
-    X_test = X_test_preprocessed[:, features_wrapper_indices]
+    X_train = X_train_preprocessed[:, indices]
+    X_test = X_test_preprocessed[:, indices]
 
     return (features_filter, features_wrapper, 
             features_embedded, features_pca,
-            features_stability_selection, feature_names,
-            features_rfecv, features_wrapper_gbm,
-            features_embedded_svr,
+            feature_names,features_rfecv, 
+            features_wrapper_gbm,features_embedded_svr,
             X_train, X_test, y_train, y_test)
