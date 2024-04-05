@@ -42,7 +42,8 @@ There are three files which manage the creation and destruction of the AWS S3 bu
 
 1. First configure your AWS CLI, including your AWS ID and REGION.
 2. Then run `bash setup_infra.sh <your_bucket_name>`. Ensure that this bucket name meets AWS's naming requirements, and matches what's referenced in the `lambda_function.py` file.
-3. Go into the AWS Lambda interface on the web portal and click Layers. Add the pandas layer. 
+3. Go into the AWS Lambda interface on the web portal and click Layers. Add the pandas layer.
+4. Teardown the Lambda function, S3 bucket, and CloudWatch triggers once no longer needed. 
 
 ### Setup Infrastructure Overview
 
