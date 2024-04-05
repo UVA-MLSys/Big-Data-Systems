@@ -56,7 +56,6 @@ def parse_dataframe(df):
             df_parse = df_param.merge(df_parse, on=['Latitude','Longitude','UTC'],how='outer')
         else:
             df_parse = df_param
-#    df_parse = df
     return df_parse
 
 def write_to_local(df, key):
