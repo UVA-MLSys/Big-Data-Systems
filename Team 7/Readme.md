@@ -23,6 +23,10 @@ Data Scientists and analysts have developed several metrics for determining a pl
 - ### [Models.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Models.ipynb):
 
   Modeling notebook where we use the selected features (from `df_selected.csv`) to train and evaluate a range of models and extract their feature importance. These results will inform how we weight features in the index.
+
+- ### Test.ipynb:
+
+  This notebook contains the code where we test our best model (from `Models.ipynb`) against the last five seasons. We include some visualizations showing the model prediction versus the actual values.
 </details>
 <br>
 <details>
