@@ -12,19 +12,19 @@ Data Scientists and analysts have developed several metrics for determining a pl
 <details>
 <summary><img src="images/ipynb.png" align="left" width="40" height="40" /> Jupyter Notebooks</summary>
   
-- ### [FeatureSelection.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/FeatureSelection.ipynb):
+- ### [FeatureSelection.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/FeatureSelection.ipynb):
 
   Feature Selection notebook where we use the `preprocess_and_train` function from `preptrain.py` and ensemble the methods to generate the best 10 features.
   
-- ### [DataCleaning_EDA.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/DataCleaning_EDA.ipynb):
+- ### [DataCleaning_EDA.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/DataCleaning_EDA.ipynb):
   
   Exploratory notebook where the data is cleaned; includes some basic EDA.
 
-- ### [Models.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Models.ipynb):
+- ### [Models.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Models.ipynb):
 
   Modeling notebook where we use the selected features (from `df_selected.csv`) to train and evaluate a range of models and extract their feature importance. These results will inform how we weight features in the index.
 
-- ### [Test.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Test.ipynb):
+- ### [Test.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Test.ipynb):
 
   This notebook contains the code where we test our best model (from `Models.ipynb`) against the last five seasons. We include some visualizations showing the model prediction versus the actual values.
 </details>
@@ -51,11 +51,11 @@ Data Scientists and analysts have developed several metrics for determining a pl
 <details>
 <summary><img src="images/py.png" align="left" width="40" height="40" /> Python Module Files (helper functions, classes)</summary>
   
-- ### [pltcorrheatmap.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/pltcorrheatmap.py):
+- ### [pltcorrheatmap.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/pltcorrheatmap.py):
   
   Custom function for generating correlation heat maps as we determine feature importance.
 
-- ### [preptrain.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/preptrain.py):
+- ### [preptrain.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/preptrain.py):
   
   Custom function/pipeline for preprocessing and feature selection, described below:
 
