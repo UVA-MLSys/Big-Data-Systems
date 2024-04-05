@@ -32,19 +32,19 @@ Data Scientists and analysts have developed several metrics for determining a pl
 <details>
 <summary><img src="images/csv.png" align="left" width="40" height="40" /> Data Files</summary>
   
-- ### [df_clean.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/df_clean.csv):
+- ### [df_clean.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_clean.csv):
   
   Main .csv file used for training and validation.
 
-- ### [df_last.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/df_last.csv):
+- ### [df_last.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_last.csv):
   
   Testing .csv file for examining model performance on last 5 seasons (2018-22).
 
-- ### [df_selected.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/df_selected.csv):
+- ### [df_selected.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_selected.csv):
 
   Selected features .csv containing the subset of predictor variables.
 
-- ### [mvp_data.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/mvp_data.csv):
+- ### [mvp_data.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/mvp_data.csv):
   Initial NBA mvp data set. Reduced in `DataCleaning_EDA.ipynb` to only include essential rows and columns of study.
 </details>
 <br>
