@@ -37,10 +37,268 @@ According to the EPA, air quality has [worsened as a result of climate change](h
 
 Easy access to this data is essential and the air quality data stream can benefit from big data solutions to provide efficient data streaming services at scale. On a technical level, the AQS API provides hard limits through its queries. Consider that the AQS API only provides around 10,000 observations per query with a wall time of approximately 11.7s for around 5,100 observations. Since the API is updated approximately hourly with around 3,200 new observations, this means that each individual API query only provides around three hours' worth of data. Querying too often quickly results in harsh throttling from the API. With data going back to 2008, this becomes a clunky experience when trying fetch and wrangle any substantial amount of data. Our approach facilitates accessing that data in the long-term, making it more readily available than the AQS API by streaming/batching it into cloud storage (in our case, an S3 bucket). In other words, our process provides a useful alternative to the current air quality data stream. 
 
-## Process
-1. Must first configure your AWS CLI.
-2. Then run bash setup_infra.sh <your_bucket_name>. Ensure that this bucket name meets AWS's naming requirements, and matches what's referenced in the lambda_function.py file.
-3. Go into the AWS Lambda interface on the web portal and click Layers. Add the pandas layer.
+## Process Overview
+There are three files which manage the creation and destruction of the AWS S3 bucket, Lambda function, and CloudWatch trigger via an AWS ec2 instance. `setup_infra.sh`  creates the S3 bucket, the Lambda function, and the CloudWatch trigger. `teardown_infra.sh` destroys the S3 bucket, Lambda function, and CloudWatch trigger. The Lambda function that executes the AirNow API query can be found in `dataPull > lambda_function.py`. The following steps should be used to create the S3 bucket, Lambda function, and CloudWatch trigger. 
 
+1. First configure your AWS CLI, including your AWS ID and REGION.
+2. Then run `bash setup_infra.sh <your_bucket_name>`. Ensure that this bucket name meets AWS's naming requirements, and matches what's referenced in the `lambda_function.py` file.
+3. Go into the AWS Lambda interface on the web portal and click Layers. Add the pandas layer. 
+
+### Setup Infrastructure Overview
+
+Execute
+
+```bash
+bash setup_infra.sh <your_bucket_name>
+```
+
+First, AWS_ID and AWS_REGION are retrieved. 
+```bash
+AWS_ID=$(aws sts get-caller-identity --query Account --output text | cat)
+AWS_REGION=$(aws configure get region)
+```
+
+Policies are provisioned for logs, S3, and Lambda. 
+
+```bash
+echo '{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:PutLogEvents",
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream"
+            ],
+            "Resource": "arn:aws:logs:*:*:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject"
+            ],
+            "Resource": "arn:aws:s3:::'$1'/*"
+        }
+    ]
+}' > ./policy
+
+echo '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "lambda.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}' > ./trust-policy.json
+```
+Targets are established for the function `dataPull`. 
+
+```bash
+echo '[
+  {
+    "Id": "1",
+    "Arn": "arn:aws:lambda:'$AWS_REGION':'$AWS_ID':function:dataPull"
+  }
+]' > ./targets.json
+```
+
+The files within the `dataPull` directory are zipped together as required by Lambda. 
+
+```bash
+echo "Packaging local lambda_function.py"
+cd dataPull
+zip -r ../myDeploymentPackage.zip .
+cd ..
+```
+S3 bucket is created with <your_bucket_name>, provided at the call of `setup_infra.sh`. 
+
+```bash
+echo "Creating bucket "$1""
+aws s3api create-bucket \
+    --bucket $1 \
+    --region us-east-1 \
+    --output text > setup.log
+```
+
+Create policies and roles. 
+```bash
+echo "Creating Policy"
+aws iam create-policy --policy-name AWSLambdaS3Policy --policy-document file://policy --output text >> setup.log
+
+echo "Creating Role"
+aws iam create-role --role-name lambda-s3-role --assume-role-policy-document file://trust-policy.json --output text >> setup.log
+
+echo "Attaching Policy to Role"
+aws iam attach-role-policy --role-name lambda-s3-role --policy-arn arn:aws:iam::$AWS_ID:policy/AWSLambdaS3Policy --output text >> setup.log
+```
+Create the lambda function and CloudWatch rule to execute every 20 minutes. 
+
+```bash
+echo "Creating Lambda function"
+aws lambda create-function --function-name dataPull --runtime python3.10 --role  arn:aws:iam::$AWS_ID":"role/lambda-s3-role --handler lambda_function.lambda_handler --zip-file fileb://myDeploymentPackage.zip  --timeout 60 --output text >> setup.log
+
+echo "Creating cloudwatch rule to schedule lambda every 20 minutes"
+aws events put-rule --name my-scheduled-rule --schedule-expression 'rate(20 minutes)' --output text >> setup.log
+```
+
+Attach the lambda function the CloudWatch event and rule. 
+```bash
+echo "Attaching lambda function to event and then to the rule"
+aws lambda add-permission --function-name dataPull --statement-id my-scheduled-event --action 'lambda:InvokeFunction' --principal events.amazonaws.com --source-arn arn:aws:events:$AWS_REGION:$AWS_ID:rule/my-scheduled-rule --output text >> setup.log
+aws events put-targets --rule my-scheduled-rule --targets file://targets.json --output text >> setup.log
+```
+
+### Add Pandas Layer to Lambda function through AWS Web Interface
+
+In order to use Pandas within the Lambda function, it must be added as a layer within AWS. 
+
+Navigate to the dataPull Lambda function page within AWS. Select the "Layers" located beneath the Lambda function icon. This will bring you to the bottom of the page. 
+
+<img width="350" alt="Screen Shot 2024-04-05 at 2 10 26 PM" src="https://github.com/UVA-MLSys/Big-Data-Systems/assets/105132245/11ab3f4d-f3cd-459a-8634-096bcc545101">
+
+Select "Add a Layer"
+
+<img width="750" alt="Screen Shot 2024-04-05 at 2 16 09 PM" src="https://github.com/UVA-MLSys/Big-Data-Systems/assets/105132245/2c0f441a-02e4-4852-be8b-8c626bc54950">
+
+Click the dropdown under "AWS Layers" and select "AWSSDKPandas-Python310" and Version 13. Click "Add". 
+
+<img width="450" alt="Screen Shot 2024-04-05 at 2 18 59 PM" src="https://github.com/UVA-MLSys/Big-Data-Systems/assets/105132245/0e1e195a-ae7d-47cd-9251-555911a84f42">
+
+### Teardown Infrastructure Overview
+
+Execute
+
+```bash
+bash teardown_infra.sh <your_bucket_name>
+```
+
+Retrieve AWS ID.
+```bash
+AWS_ID=$(aws sts get-caller-identity --query Account --output text | cat)
+```
+Remove CloudWatch rule
+
+```bash
+echo "Removing Cloudwatch schedule rule"
+aws events remove-targets --rule my-scheduled-rule --ids "1" --output text > tear_down.log
+aws events delete-rule --name my-scheduled-rule --output text >> tear_down.log
+aws lambda delete-function --function-name dataPull --output text >> tear_down.log
+```
+
+Delete roles and policies for the Lambda-S3 connection. 
+```bash
+echo "Deleting role and policy for lambda - s3 connection"
+aws iam detach-role-policy --role-name lambda-s3-role --policy-arn arn:aws:iam::$AWS_ID:policy/AWSLambdaS3Policy --output text >> tear_down.log
+aws iam delete-role --role-name lambda-s3-role --output text >> tear_down.log
+aws iam delete-policy --policy-arn arn:aws:iam::$AWS_ID:policy/AWSLambdaS3Policy --output text >> tear_down.log
+```
+Delete the S3 bucket.
+
+```bash
+echo "Deleting bucket "$1""
+aws s3 rm s3://$1 --recursive --output text >> tear_down.log
+aws s3api delete-bucket --bucket $1 --output text >> tear_down.log
+```
+Remove config files. 
+
+```bash
+echo "Removing local config files"
+rm policy
+rm targets.json
+rm myDeploymentPackage.zip
+rm trust-policy.json
+rm setup.log
+rm tear_down.log
+```
+
+### Lambda Function File Overview
+
+`lambda_function.py` is found in `dataPull`. The file leverages 4 functions: `make_key()`,`get_recent_data()`, `parse_dataframe()`, and `write_to_local()`. 
+
+`make_key()` simply retrieves the current datetime in UTC and converts it to a string. This is used to assign the name to the object placed in the S3 bucket.  
+
+```python
+def make_key():
+    return datetime.utcnow().strftime("%Y-%m-%dT%H-%M")
+```
+
+`get_recent_data()` retrieves data from the AirNow API for the previous 30 minutes. New setups must provide the API key provided by Air Now. The `.json` file returned is converted to a dataframe. 
+
+```python
+def get_recent_data():
+    endtime = datetime.utcnow()
+    starttime = endtime - timedelta(hours = 0.5)
+    
+    options = {}
+    options["url"] = "https://www.airnowapi.org/aq/data/"
+    options["parameters"] = "OZONE,PM25,PM10,CO,NO2,SO2"
+    options["bbox"] = "-180,-90, 180,90"
+    options["data_type"] = "B"
+    options["format"] = "application/json"
+    options["ext"] = "json"
+    options["API_KEY"] = "<YOUR_API_KEY>"
+    options['includerawconcentrations'] = "0"
+    options["start_date"] = starttime.strftime("%Y-%m-%dT%H")
+    options["end_date"] = endtime.strftime("%Y-%m-%dT%H")
+    options['monitorType'] = "2"
+    options['verbose'] = "0"
+    # API request URL
+    REQUEST_URL = options["url"] \
+                  + "?startDate=" + options["start_date"] \
+                  + "&endDate=" + options["end_date"] \
+                  + "&parameters=" + options["parameters"] \
+                  + "&BBOX=" + options["bbox"] \
+                  + "&dataType=" + options["data_type"] \
+                  + "&format=" + options["format"] \
+                  + "&verbose=" + options['verbose'] \
+                + "&monitorType=" + options['monitorType'] \
+                  + "&includerawconcentrations=" + options["includerawconcentrations"]\
+                  + "&API_KEY=" + options["API_KEY"] 
+    
+    r = requests.get(REQUEST_URL)
+    data = json.loads(r.text)
+    df = pd.DataFrame(data)
+    return df
+```
+
+`parse_dataframe()` converts the dataframe returned by AirNow from a long dataframe to a wide one, such that each row in the resulting dataframe contains all available measurements for a unique combination of time and location. 
+
+```python
+def parse_dataframe(df):
+    df_parse = pd.DataFrame()
+    for parameter in df['Parameter'].unique():
+        df_param = df.loc[df['Parameter'] == parameter]
+        df_param = df_param.rename({'Unit':f'Unit_{parameter}','Value':f'Value_{parameter}','AQI':f'AQI_{parameter}','Category':f'Category_{parameter}'},axis=1)
+        df_param = df_param.drop(labels = 'Parameter',axis=1)
+        if len(df_parse) > 0:
+            df_parse = df_param.merge(df_parse, on=['Latitude','Longitude','UTC'],how='outer')
+        else:
+            df_parse = df_param
+    return df_parse
+```
+
+`write_to_local()` converts the dataframe back to `.json` and places it in a `tmp/key` location in the local directory. 
+
+```python
+def write_to_local(df, key):
+    filename = LOCAL_FILE_SYS + "/" + key
+    df.to_json(filename)
+    return filename
+```
+
+The final function, `lambda_handler()` calls the 4 previously discussed functions and uploads the processed `.json` file into the S3 bucket. 
+
+```python
+def lambda_handler(event, context):
+    key = make_key()
+    file_name = write_to_local(parse_dataframe(get_recent_data()), key)
+    s3_client.upload_file(file_name, S3_BUCKET, key)
+```
 ## Outcomes
 Once the data is stored in the AWS S3 bucket, it is available for immediate access.​ From here, it can be used to develop models, create visualizations, etc. ​For our project, we created several visualizations just to illustrate what can be done with the data in the S3 buckets. In reality, the end use of a batch & stream process like this one could be much larger—including weather or health advisories, supporting AI/ML development, or comparing measured and forecasted air quality estimates to help improve forecasting models. ​
