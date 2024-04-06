@@ -51,9 +51,13 @@ Data Scientists and analysts have developed several metrics for determining a pl
 <details>
 <summary><img src="images/py.png" align="left" width="40" height="40" /> Python Module Files (helper functions, classes)</summary>
   
-- ### [pltcorrheatmap.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/pltcorrheatmap.py):
+- ### [pltcorrheatmap.py](https://github.com/WD-Scott/DS5110_Project/blob/main/Python%20Modules/pltcorrheatmap.py):
   
-  Custom function for generating correlation heat maps as we determine feature importance.
+  Custom function to generate correlation heat maps to help determine multicollnearity as we examine feature importance.
+
+- ### [print_imps.py](https://github.com/WD-Scott/DS5110_Project/blob/main/Python%20Modules/print_imps.py):
+
+  Custom function to print model feature importance scores for the selected features.
 
 - ### [preptrain.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/preptrain.py):
   
