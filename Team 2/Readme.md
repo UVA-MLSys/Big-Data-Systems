@@ -3,7 +3,7 @@
 
 ## Project Goals
  
-Our aim is to demonstrate a process for data ingestion that is near real time (streaming) or as new data is available at some frequency interval (batch)​. In this project, we'll use AWS tools to batch and stream data from an API. As API's limit data through queries, our methods show a way to alternately store that data by streaming and batching from an API into cloud storage, making that data more freely accessible and available whenever needed. 
+We aim to demonstrate a process for data ingestion that is near real time (streaming) or as new data is available at some frequency interval (batch)​. In this project, we'll use AWS tools to batch and stream data from an API. As API's limit data through queries, our methods show a way to alternately store that data by streaming and batching from an API into cloud storage, making that data more freely accessible and available whenever needed. 
 
 ## Dataset
 
@@ -322,6 +322,16 @@ Finally, with the global data, we created an interactive html map of the AQI dat
 
 <img width="450" alt="Box Plot of California Data" src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/ad98f44253b3745d2954d2c867ef9c88d6038a6b/Team%202/Demonstration%2C%20Visualization%2C%20and%20Testing/aqui_html.png">
 
-Clearly, these are just a few relatively simple examples of what can be done with data that is successfully stored in an S3 bucket after retrieving it from the API. ​
+These are just a few clear and relatively simple examples of what can be done with data that is successfully stored in an S3 bucket after retrieving it from the API. ​
 
 This same data could be used to create real-time apps for both historical and forecasting purposes, or to model changes in AQI over time by geographic region—all fascinating use cases, but applications that were outside the scope of this particular project. ​
+
+## Performance Results
+In order to create a viable alternative to the current air quality data stream, we looked to improve the slow query speeds and limited data transfer when working with the AQS API. By streaming and batching the data into an S3 bucket, we were able to greatly improve performance.
+
+<img width="450" alt="Benchmark 2" src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/be0740cb6a60f8cf9f7f971d3e7ce8d308a8b0de/Team%202/Demonstration%2C%20Visualization%2C%20and%20Testing/benchmark_2.png">
+
+<img width="450" alt="Benchmark 1" src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/be0740cb6a60f8cf9f7f971d3e7ce8d308a8b0de/Team%202/Demonstration%2C%20Visualization%2C%20and%20Testing/benchmark_1.png">
+
+Although our initial tests showed the AQS API allowed around 10,000 observations per query with a wall time of about 11.7s for 5,100 observations, our later tests showed some variance from those early queries. Our first plot above shows that the AQS API took around 9 seconds to fetch around 10,000 observations. But our S3 bucket showed a massive improvement, taking less than a second to fetch around 10,000 observations when queried. This performance held up at scale too. Our second plot shows how harshly the AQS API throttles users when they try to query often; attempting to query less then 20,000 observations results in a wall time of over 12 seconds and any larger queries become impractical. We were able to query well over 200,000 observations from our S3 bucket with a wall time of around 7 seconds. Wall times also appear to scale linearly with query size. Considering that 200,000 observations contains over 60 days of data while 20,000 observations contains only about 6 days of data, our process can query much more data at much faster speeds than the current air quality data stream. 
+
