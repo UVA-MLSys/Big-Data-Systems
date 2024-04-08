@@ -303,3 +303,25 @@ def lambda_handler(event, context):
 ```
 ## Outcomes
 Once the data is stored in the AWS S3 bucket, it is available for immediate access.​ From here, it can be used to develop models, create visualizations, etc. ​For our project, we created several visualizations just to illustrate what can be done with the data in the S3 buckets. In reality, the end use of a batch & stream process like this one could be much larger—including weather or health advisories, supporting AI/ML development, or comparing measured and forecasted air quality estimates to help improve forecasting models. ​
+
+To demonstrate this, we created several visualizations from data pulled from the project S3 bucket.​
+
+We selected two dataframes:​
+- One containing global data from 3-26-2024​
+- One containing data from California for the past 30 days (2-26-2024 through 3-26-2024)​
+
+The first plot we created was a box plot of the California Data from 2-26-24 through 3-26-24​, limiting the plot to the 10 locations with the highest number of observations. 
+
+<img width="450" alt="Box Plot of California Data" src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/e51646ea6e4e6f58ae7b00cfdda9a89c45361da9/Team%202/Demonstration%2C%20Visualization%2C%20and%20Testing/aqi_box_plot.png">
+
+With the same data, we also plotted the data as a time series line chart, allowing users to see how AQI levels had changed over time for a given location. 
+
+<img width="450" alt="Box Plot of California Data" src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/e51646ea6e4e6f58ae7b00cfdda9a89c45361da9/Team%202/Demonstration%2C%20Visualization%2C%20and%20Testing/aqi_time_series.png">
+
+Finally, with the global data, we created an interactive html map of the AQI data from 3-26-2024. 
+
+<img width="450" alt="Box Plot of California Data" src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/ad98f44253b3745d2954d2c867ef9c88d6038a6b/Team%202/Demonstration%2C%20Visualization%2C%20and%20Testing/aqui_html.png">
+
+Clearly, these are just a few relatively simple examples of what can be done with data that is successfully stored in an S3 bucket after retrieving it from the API. ​
+
+This same data could be used to create real-time apps for both historical and forecasting purposes, or to model changes in AQI over time by geographic region—all fascinating use cases, but applications that were outside the scope of this particular project. ​
