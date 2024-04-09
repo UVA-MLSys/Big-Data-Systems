@@ -1,4 +1,5 @@
 from tabulate import tabulate
+import pandas as pd
 
 def print_importances(features, model):
     """
@@ -105,3 +106,36 @@ def avg_imps(feature_importances):
     print("Top 10 Features:", top_features)
 
     return average_importances
+
+
+def create_imp_df(model_names, models, feature_names):
+    """
+    Create a DataFrame of feature importances for each model.
+
+    Args:
+    - model_names (list): List of model names.
+    - models (list): List of model objects.
+    - feature_names (list): List of feature names.
+
+    Returns:
+    - df_imps (DataFrame): DataFrame of feature importances.
+    """
+    # Create an empty dictionary to store feature importances
+    feature_importances_dict = {}
+
+    # Iterate over each model
+    for model_name, model in zip(model_names, models):
+        # Get feature importances for the current model
+        importances = model.feature_importances_
+
+        # Create a dictionary for the current model
+        model_dict = {
+            feature: importance for feature, importance in zip(feature_names, importances)
+        }
+
+        # Add the model dictionary to the feature importances dictionary
+        feature_importances_dict[model_name] = model_dict
+
+    # Create DataFrame from dictionary and transpose it
+    df_imps = pd.DataFrame(feature_importances_dict).T
+    return df_imps

@@ -8,7 +8,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
-from sklearn.feature_selection import f_regression, SelectFromModel, RFE, RFECV, mutual_info_regression
+from sklearn.feature_selection import SelectFromModel, RFE, mutual_info_regression
 from sklearn.cluster import FeatureAgglomeration
 from sklearn.metrics import mean_absolute_error, r2_score, mean_squared_error, mutual_info_score
 from sklearn.model_selection import train_test_split, GridSearchCV, RandomizedSearchCV
@@ -41,7 +41,7 @@ def preprocess_and_train(df, df_last, labels):
     tuple
         A tuple containing:
         - List of top features selected by each model (features_rf, features_Dtree, features_pca,
-          features_rfecv, features_gbm, features_svr, features_Xtrees, features_Ada, features_XGB).
+          features_gbm, features_svr, features_Xtrees, features_Ada, features_XGB).
         - Preprocessed training and testing data (X_train, X_test, y_train, y_test).
         - Dictionary containing feature importances for each model (feature_importances).
     """
@@ -185,47 +185,6 @@ def preprocess_and_train(df, df_last, labels):
     selected_features = features_pca[0]
     selected_components = selected_components[0]
     feature_importances['PCA'] = dict(zip(selected_features, selected_components))
-
-####################################################################################################
-
-    ###########################################
-    ### Recursive Feature Elimination w/ CV ###
-    ###########################################
-
-    # Define the hyperparameter grid
-    param_grid_gb = {
-        'n_estimators': Integer(100, 300),                  # No. of boosting stages
-        'learning_rate': Real(0.05, 0.1, prior='uniform'),  # Learning rate
-        'max_depth': Categorical([3, 5]),                   # Max depth of individual trees
-        'min_samples_split': Integer(2, 5),                 # Min no. of samples required to split an internal node
-        'min_samples_leaf': Integer(1, 2),                  # Min no. of samples required to be at a leaf node
-        'subsample': Real(0.6, 0.8, prior='uniform'),       # Fraction of samples used to fit the individual base learners
-        'max_features': Categorical(['log2', 'sqrt'])       # No. of features to consider when looking for the best split
-    }
-    # Create the GradientBoostingRegressor estimator
-    estimator_gb = GradientBoostingRegressor(random_state=28)
-    # Create the BayesSearchCV object for GradientBoostingRegressor
-    bayes_search_gb = BayesSearchCV(estimator=estimator_gb, 
-                                    search_spaces=param_grid_gb, 
-                                    n_iter=50,
-                                    cv=5,
-                                    n_points=10,
-                                    random_state=28,
-                                    n_jobs=-1)
-    # Fit the BayesSearchCV to the preprocessed training data
-    bayes_search_gb.fit(X_train_preprocessed, y_train)
-    # Get the best GradientBoostingRegressor estimator from the BayesSearchCV
-    best_gb_estimator = bayes_search_gb.best_estimator_
-    # Create the RFECV estimator using the best GradientBoostingRegressor estimator
-    selector_rfecv = RFECV(best_gb_estimator, step=5, cv=5, n_jobs=-1)
-    # Fit the RFECV estimator to the preprocessed training data
-    selector_rfecv.fit(X_train_preprocessed, y_train)
-    # Get the selected indices from RFECV
-    selected_indices_rfecv = selector_rfecv.get_support(indices=True)
-    # Get the indices of top features based on mean test score
-    features_rfecv_indices = np.argsort(selector_rfecv.cv_results_['mean_test_score'])[::-1][:10]
-    # Get the names of top features based on mean test score
-    features_rfecv = [header_names[i] for i in features_rfecv_indices]
 
 ####################################################################################################
 
@@ -445,8 +404,7 @@ def preprocess_and_train(df, df_last, labels):
 
     return (features_rf,
             features_Dtree,
-            features_pca, 
-            features_rfecv, 
+            features_pca,  
             features_gbm,
             features_svr, 
             features_Xtrees,
