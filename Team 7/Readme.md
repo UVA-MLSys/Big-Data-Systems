@@ -2,49 +2,210 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-# **Introduction**
+<h1 align="center">
+    <img src="images/logo.png" alt="mftool-java">
+</h1>
+<p align="center">
 
-## **Project Goal**:
+# Sarah Elmasry, Ran Gao, Wyatt Scott, and Rish Sharma
+
+<details>
+<summary><h1 style="font-size: 22px;">Report</h1></summary>
+
+<details>
+<summary><h3 style="font-size: 16px;">Introduction</h3></summary>
+
 Data Scientists and analysts have developed several metrics for determining a player's value to their team's success. Prominent examples include Value Over Replacement Player (VORP), Box Plus/Minus (BPM), and FiveThirtyEight's Robust Algorithm (using) Player Tracking (and) On/Off Ratings (RAPTOR)​. We aim to develop a multivariate index that weighs these parameters based on how well they predict MVP rankings, then test it on unseen data for the most recent five seasons to see if our "MVP index" correctly predicts the MVP rankings.​ We will experiment with the index formula and compare it to other methods developed by reputable analyst sources.
 
-## **Manifest**:
+</details>
+
+<details>
+<summary><h3 style="font-size: 16px;">Data</h3></summary>
+
+We obtained the dataset from Kaggle, but the data was originally scraped from Basketball-Reference via automated HTML parsing. The dataset contains statistics for National Basketball Association (NBA) players relevant to determining the Most Valuable Player (MVP) in a season and has 7,329 entries with 53 columns. The dataset is significant in its breadth and depth of coverage.
+
+The dataset is stored in a comma-separated Excel sheet, `mvp_data.csv`, which we load into `DataCleaning_EDA.ipynb` and perform some cleaning and aggregation steps, including:
+
+* Fill missing values for the Rank, mvp_share, and Trp Dbl (Triple Double) columns
+* Normalize the Trp Dbl column by dividing it by G (the total number of games played in a given season)
+* Convert G (Games) and Season columns to integer data type
+* Filter the entire data frame (`df`) to include only players that meet the 40-game requirement necessary to be considered for the MVP award
+* Create the Rk_Conf (Conference Ranking) column – calculate conference rankings for each season based on W (the number of wins), then re-rank the conference rankings within each season and conference group.
+* Save the edited data frame thus far to `mvp_data_edit.csv` (we use this in `Test.ipynb` to merge predicted values with actual and compare results)
+* Drop the Conference and W (Wins) columns
+* Create a separate data frame (`df_last`) with the data for the most recent five seasons (2018–22), which we use to test our final model and index in `Test.ipynb`
+* Create last_names and last_seasons
+* Check for missing values: We found many missing values for seasons before 1980; for example, 3P (Three-pointers) were not introduced in the NBA until 1979–80, and there are a lot of missing values before then, so we drop any season before 1980.
+* Save `df` and `df_last` to comma-separated Excel files
+
+We discuss some additional preprocessing steps in the Experimental Design section below, as these steps relate to the project's feature selection and modeling phases.
+
+The values we seek to predict are in the `mvp_share` column, which represents the result of the MVP voting for each season.
+
+</details>
+
+
+<details>
+<summary><h3 style="font-size: 16px;">Experimental Design</h3></summary>
+
+<details>
+<summary><h4 style="font-size: 14px;">Hardware Details</h4></summary>
+
+We use Rivanna – the University of Virginia’s High-Performance Computing (HPC) system – with the following hardware details:
+
+* **System**: Linux
+* **Node Name**: udc-an34-1
+* **Release**: 4.18.0-425.10.1.el8_7.x86_64
+* **Version**: #1 SMP Thu Jan 12 16:32:13 UTC 2023
+* **Machine**: x86_64
+* **CPU Cores**: 28
+* **RAM**: 36GB
+* **CPU Vendor**: AuthenticAMD
+* **CPU Model**: AMD EPYC 7742 64-Core Processor
+</details>
+
+<details>
+<summary><h4 style="font-size: 14px;">Feature Selection Process</h4></summary>
+
+In `FeatureSelection.ipynb`, we load in the main data frame (`df`) that we created and saved in `DataCleaning_EDA.ipynb`.
+
+We perform robust feature selection to reduce model and index complexity. The main code we use for feature selection can be found in `preptrain.py`. This Python module file includes a function, `preprocess_and_train`, which we employ in `FeatureSelection.ipynb`. We wrote the function to perform the following:
+
+* Impute missing values with the median value for numeric features, scale the features using standardization (subtracting the mean and dividing by the standard deviation) and apply one-hot encoding for categorical features.
+
+* Apply the preprocessing separately to the training and testing datasets and extract the feature names, removing any prefixes.
+
+* Train and test eight different models on the preprocessed data and extract the feature importance scores of the top ten predictors. The models are:
+
+  - Random Forest (RF)
+  - Decision Tree (DTree)
+  - Principal Component Analysis (PCA)
+  - Gradient Boosting (GB)
+  - Support Vector (SVR)
+  - Extra Trees (XTrees)
+  - AdaBoost (Ada)
+  - Extreme Gradient Boosting (XGB)
+
+For hyperparameter tuning, we define a reasonably extensive parameter grid for each method and use Bayesian optimization with five-fold cross-validation to sample parameter settings from the specified distributions.
+
+In `FeatureSelection.ipynb`, we run the `preprocess_and_train function` from `preptrain.py` and use the `print_dict_imps` function from `print_imps.py` to print tables of the feature importances for each method, which we store in a Python dictionary via the `preprocess_and_train function`. We then use the `avg_imp` function from `print_imps.py` to display the average feature importance across the eight methods. 
+
+We then use the `avg_imp` function from `print_imps.py` to display the average feature importance across the eight methods. The results for the top 10 features included several features related to points (scoring) that are highly correlated, including FT (free throws), 2P (two-pointers), FG (field goals), FGA (field goal attempts), FTA (free throw attempts) and PTS (points).
+
+The results for the top 10 features include several highly correlated features related to scoring, including FT (free throws), 2P (two-pointers), FG (field goals), FGA (field goal attempts), FTA (free throw attempts), and PTS (points).
+
+We chose to drop all of these except PTS because the latter effectively captures the others. The resulting top ten features are:
+
+- OWS = Offensive Win Shares (see <a href="https://www.basketball-reference.com/about/ws.html">NBA Win Shares</a> for more information on how this is calculated)
+- MP = Minutes Played
+- PTS = Points
+- WS = Win Shares (see <a href="https://www.basketball-reference.com/about/ws.html">NBA Win Shares</a> for information about how this feature is calculated)
+- VORP = Value Over Replacement Player
+- PER = Player Efficiency Rating (see <a href="https://www.basketball-reference.com/about/per.html">Calculating PER</a> for the formula)
+- TOV = Turnovers
+- AST = Assists
+- TS% = True Shooting Percentage
+- Rk_Year = Team league ranking
+
+There are still some highly correlated features, but we proceed with these 10 and save them into a comma-separated Excel file (`df_separated.csv`) to use for modeling.
+
+</details>
+
+<details>
+<summary><h4 style="font-size: 14px;">Modeling</h4></summary>
+
+In `Models.ipynb`, we use `df_selected.csv` to train and test only the ensemble and tree-based methods, as these are best suited for our next task — finding the best model we can and using the feature importance scores to inform our index design.
+
+The image below displays the average feature importance score for each feature. 
+
+![](images/avg_importance.png)
+
+As the table shows, on average, Win Shares (WS) and Value Over Replacement Play (VORP) are the most important features. 
+
+The table below highlights the best-performing model (the ExtraTrees regressor), which barely outperforms the Extreme GradientBoosting Regressor (XGBoost). We save the best ExtraTrees model from `Models.ipynb` and import it into `Test.ipynb`, where we test it against the 2018–22 seasons.
+
+![](images/model_performance.png)
+
+</details>
+
+<details>
+<summary><h4 style="font-size: 14px;">Testing</h4></summary>
+
+In `Test.ipynb`, we load in the selected features as `df_selected`, the training dataset as `df`, the testing dataset containing the data for the 2018–22 seasons as `df_last`, and the best model as `XTrees`. We filter `df` and `df_last` to include only the predictors in `df_selected`. 
+
+We then perform an 80-20 train/test split of `df` and train and test `XTrees`. Next, we use `XTrees` to predict the mvp_share for the 2018–22 seasons and compare the predicted values to the actual values.
+
+The image below displays the top four (by actual MVP share) players for the 2018–22 seasons and compares the predictions to the actual values. 
+
+![](images/pred_actual.png)
+
+TO BE CONTINUED AFTER TESTING ...
+
+</details>
+</details>
+
+<details>
+<summary><h3 style="font-size: 16px;">Results</h3></summary>
+
+TBD...
+
+</details>
+
+<details>
+<summary><h3 style="font-size: 16px;">Testing</h3></summary>
+
+TBD ...
+
+</details>
+
+<details>
+<summary><h3 style="font-size: 16px;">Conclusions</h3></summary>
+
+TBD ...
+
+</details>
+</details>
+
+<details>
+<summary><h1 style="font-size: 16px;">Repo Manifest</h1></summary>
 
 <details>
 <summary><img src="images/ipynb.png" align="left" width="40" height="40" /> Jupyter Notebooks</summary>
   
-- ### [FeatureSelection.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/FeatureSelection.ipynb):
+- ### [FeatureSelection.ipynb](https://github.com/WD-Scott/DS5110_Project/blob/main/Jupyter%20Notebooks/FeatureSelection.ipynb):
 
   Feature Selection notebook where we use the `preprocess_and_train` function from `preptrain.py` and ensemble the methods to generate the best 10 features.
   
-- ### [DataCleaning_EDA.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/DataCleaning_EDA.ipynb):
+- ### [DataCleaning_EDA.ipynb](https://github.com/WD-Scott/DS5110_Project/blob/main/Jupyter%20Notebooks/DataCleaning_EDA.ipynb):
   
   Exploratory notebook where the data is cleaned; includes some basic EDA.
 
-- ### [Models.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Models.ipynb):
+- ### [Models.ipynb](https://github.com/WD-Scott/DS5110_Project/blob/main/Jupyter%20Notebooks/Models.ipynb):
 
   Modeling notebook where we use the selected features (from `df_selected.csv`) to train and evaluate a range of models and extract their feature importance. These results will inform how we weight features in the index.
 
-- ### [Test.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Test.ipynb):
+- ### [Test.ipynb](https://github.com/WD-Scott/DS5110_Project/blob/main/Jupyter%20Notebooks/Test.ipynb):
 
   This notebook contains the code where we test our best model (from `Models.ipynb`) against the last five seasons. We include some visualizations showing the model prediction versus the actual values.
+
 </details>
 <br>
 <details>
 <summary><img src="images/csv.png" align="left" width="40" height="40" /> Data Files</summary>
   
-- ### [df_clean.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_clean.csv):
+- ### [df_clean.csv](https://github.com/WD-Scott/DS5110_Project/blob/main/Data%20Files/df_clean.csv):
   
   Main .csv file used for training and validation.
 
-- ### [df_last.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_last.csv):
+- ### [df_last.csv](https://github.com/WD-Scott/DS5110_Project/blob/main/Data%20Files/df_last.csv):
   
   Testing .csv file for examining model performance on last 5 seasons (2018-22).
 
-- ### [df_selected.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_selected.csv):
+- ### [df_selected.csv](https://github.com/WD-Scott/DS5110_Project/blob/main/Data%20Files/df_selected.csv):
 
   Selected features .csv containing the subset of predictor variables.
 
-- ### [mvp_data.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/mvp_data.csv):
+- ### [mvp_data.csv](https://github.com/WD-Scott/DS5110_Project/blob/main/Data%20Files/mvp_data.csv):
   Initial NBA mvp data set. Reduced in `DataCleaning_EDA.ipynb` to only include essential rows and columns of study.
 </details>
 <br>
@@ -59,67 +220,9 @@ Data Scientists and analysts have developed several metrics for determining a pl
 
   Custom function to print model feature importance scores for the selected features.
 
-- ### [preptrain.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/preptrain.py):
+- ### [preptrain.py](https://github.com/WD-Scott/DS5110_Project/blob/main/Python%20Modules/preptrain.py):
   
-  Custom function/pipeline for preprocessing and feature selection, described below:
-
-  - Defining Numeric Columns (Excluding "Pos"):
-
-    This step identifies the numeric columns in the input DataFrame `df`, excluding the column labeled "Pos" for player position.
-
-  - Splitting Data into Training and Testing Sets:
-
-    Splits the input data into training and testing sets using the `train_test_split` function from `scikit-learn`.
-
-  - Defining Preprocessing Steps:
-
-    Defines the preprocessing steps using pipelines. For numeric features, we impute missing values with the median value and then scale the features using standardization (subtracting the mean and dividing by the standard deviation). For categorical features (specifically "Pos"), we apply one-hot encoding while ignoring unknown categories.
-
-  - Preprocessing Training and Testing Data:
-
-    Applies the preprocessing separately to the training and testing datasets using the `fit_transform` and `transform` methods of the `ColumnTransformer`.
-
-  - Extracting Feature Names:
-
-    Extracts the feature names from the `ColumnTransformer` object. This step removes any prefixes such as "num__" or "cat__".
-
-  - Filter Method - SelectKBest:
-
-    Uses SelectKBest with ANOVA F-value to select the top 10 features based on their scores. These scores represent the strength of the relationship between each feature and the target variable.
-
-  - Wrapper Method 1 - Random Forest Feature Importance:
-
-    Trains a Random Forest Regressor on the preprocessed training data to determine feature importance and selects the top 10 features with the highest feature importance scores.
-
-  - Embedded Method - L1-based feature selection using Lasso:
-
-    LassoCV (Lasso Cross-validation) is employed to perform L1-based feature selection. It iteratively fits Lasso models with different regularization strengths (alphas) and selects features based on non-zero coefficients.
-
-  - Performs Principal Component Analysis (PCA):
-
-    Performs PCA to reduce the dimensionality of the data and select the top 10 principal components as features.
-
-  - Stability Selection with Lasso:
-
-    Uses Stability Selection with Lasso to select features. We apply LassoCV within SelectFromModel to select features based on stability across multiple Lasso models.
-
-  - Recursive Feature Elimination with Cross-Validation (RFECV):
-
-    Applies RFECV, a wrapper method that recursively selects features by recursively training the model and selecting the best-performing subset of features through cross-validation.
-
-  - Wrapper Method 2 - Gradient Boosting Machine Feature Importance
-
-    Trains a Gradient Boosting Machine model on the preprocessed training data to determine feature importance and selects the top 10 features with the highest feature importance scores.
-
-  - Embedded Method 2 - Support Vector Regressor
-
-    Uses Support Vector Regressor (SVR) within SelectFromModel to perform embedded feature selection. Features are selected based on the coefficients obtained from the SVR model.
-
-  - Preparing Final Data for Training:
-
-    Extracts the selected features from the preprocessed training and testing data and prepares the final datasets (X_train, X_test, y_train, y_test) for model training and evaluation.
-
-  - Returning Results:
-
-    The function returns various components: the selected features from each method (features_filter, features_wrapper, features_embedded), the names of the selected features (feature_names), and the preprocessed training and testing data along with their corresponding labels.
+  Custom function/pipeline for preprocessing and feature selection.
+  
+</details>
 </details>
