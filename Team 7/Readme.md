@@ -96,12 +96,12 @@ The results for the top 10 features include several highly correlated features r
 
 We chose to drop all of these except PTS because the latter effectively captures the others. The resulting top ten features are:
 
-- OWS = Offensive Win Shares (see <a href="https://www.basketball-reference.com/about/ws.html">NBA Win Shares</a> for more information on how this is calculated)
+- OWS = Offensive Win Shares (see <a href="https://www.basketball-reference.com/about/ws.html">NBA Win Shares</a>)
 - MP = Minutes Played
 - PTS = Points
-- WS = Win Shares (see <a href="https://www.basketball-reference.com/about/ws.html">NBA Win Shares</a> for information about how this feature is calculated)
+- WS = Win Shares (see <a href="https://www.basketball-reference.com/about/ws.html">NBA Win Shares</a>)
 - VORP = Value Over Replacement Player
-- PER = Player Efficiency Rating (see <a href="https://www.basketball-reference.com/about/per.html">Calculating PER</a> for the formula)
+- PER = Player Efficiency Rating (see <a href="https://www.basketball-reference.com/about/per.html">Calculating PER</a>)
 - TOV = Turnovers
 - AST = Assists
 - TS% = True Shooting Percentage
