@@ -35,7 +35,7 @@ The dataset is stored in a comma-separated Excel sheet, `mvp_data.csv`, which we
 * Drop the Conference and W (Wins) columns
 * Create a separate data frame (`df_last`) with the data for the most recent five seasons (2018–22), which we use to test our final model and index in `Test.ipynb`
 * Create last_names and last_seasons
-* Check for missing values: We found many missing values for seasons before 1980; for example, 3P (Three-pointers) were not introduced in the NBA until 1979–80, and there are a lot of missing values before then, so we drop any season before 1980.
+* Check for missing values: We found many missing values for seasons before 1980; for example, 3P (Three-pointers) were not introduced in the NBA until 1979–80, and there are a lot of missing values before then, so we drop any season before 1980
 * Save `df` and `df_last` to comma-separated Excel files
 
 We discuss some additional preprocessing steps in the Experimental Design section below, as these steps relate to the project's feature selection and modeling phases.
