@@ -7,7 +7,7 @@ We aim to demonstrate a process for data ingestion that is near real time (strea
 
 ## Dataset
 
-The United States Environmental Protection Agency (EPA) provides access to the [AirNow Air Quality System (AQS) API](https://www.airnow.gov/aqi/) that contains “ambient air sample data collected by state, local, tribal, and federal air pollution control agencies from thousands of monitors across the nation.”​ The AQS API contains data on current and forecasted air quality from a number of observation points around the U.S. as well as globally. The AQS API contains historical data dating back to 2008 and is updated approximately hourly with around 3,200 new observations. Initial testing showed that each query to the AQS API is limited to about 10,000 observations with a wall time of about 11.7s for 5,100 observations. 
+The United States Environmental Protection Agency (EPA) provides access to the [AirNow Air Quality System (AQS) API](https://www.epa.gov/aqs) that contains “ambient air sample data collected by state, local, tribal, and federal air pollution control agencies from thousands of monitors across the nation.”​ The AQS API contains data on current and forecasted air quality from a number of observation points around the U.S. as well as globally. The AQS API contains historical data dating back to 2008 and is updated approximately hourly with around 3,200 new observations. Initial testing showed that each query to the AQS API is limited to about 10,000 observations with a wall time of about 11.7s for 5,100 observations. 
 
 The data contains metrics for six key pollutants: PM2.5, PM10, Ozone, CO, NOx, and SOx.
 
@@ -312,7 +312,7 @@ Although our initial tests showed the AQS API allowed around 10,000 observations
 
 <img width="450" alt="Benchmark 1" src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/be0740cb6a60f8cf9f7f971d3e7ce8d308a8b0de/Team%202/Demonstration%2C%20Visualization%2C%20and%20Testing/benchmark_1.png">
 
-This performance held up at scale too. Our second plot above shows how harshly the AQS API throttles users when they try to query often; attempting to query less then 20,000 observations results in a wall time of over 12 seconds and any larger queries become impractical. We were able to query well over 200,000 observations from our S3 bucket with a wall time of around 7 seconds. Wall times also appear to scale linearly with query size. Considering that 200,000 observations contains over 60 days of data while 20,000 observations contains only about 6 days of data, our process can query much more data at much faster speeds than the current air quality data stream. 
+This performance held up at scale too. Our second plot above shows how harshly the AQS API throttles users when they try to query often; attempting to query less then 20,000 observations results in a wall time of over 12 seconds and any larger queries become impractical. We were able to query well over 200,000 observations from our S3 bucket with a wall time of around 7 seconds. Wall times also appear to scale linearly with query size. Considering that 200,000 observations contains over 60 days' worth of data while 20,000 observations contains only about 6 days' worth of data, our process can query much more data at much faster speeds than the current air quality data stream. 
 
 ### Use Cases
 
@@ -336,6 +336,6 @@ Finally, with the global data, we created an interactive html map of the AQI dat
 
 <img width="450" alt="Box Plot of California Data" src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/ad98f44253b3745d2954d2c867ef9c88d6038a6b/Team%202/Demonstration%2C%20Visualization%2C%20and%20Testing/aqui_html.png">
 
-These are just a few clear and relatively simple examples of what can be done with data that is successfully stored in an S3 bucket after retrieving it from the API. ​
+These are just a few clear and relatively simple examples of what can be done with data that is successfully stored in an S3 bucket after retrieving it from the AQS API. ​
 
 This same data could be used to create real-time apps for both historical and forecasting purposes, or to model changes in AQI over time by geographic region — all fascinating use cases, but applications that were outside the scope of this particular project. ​
