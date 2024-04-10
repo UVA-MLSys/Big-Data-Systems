@@ -176,7 +176,7 @@ TBD ...
 
   Feature Selection notebook where we use the `preprocess_and_train` function from `preptrain.py` and ensemble the methods to generate the best 10 features.
   
-- ### [DataCleaning_EDA.ipynb](https://github.com/WD-Scott/DS5110_Project/blob/main/Jupyter%20Notebooks/DataCleaning_EDA.ipynb):
+- ### [DataCleaning_EDA.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/DataCleaning_EDA.ipynb):
   
   Exploratory notebook where the data is cleaned; includes some basic EDA.
 
