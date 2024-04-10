@@ -7,9 +7,9 @@ We aim to demonstrate a process for data ingestion that is near real time (strea
 
 ## Dataset
 
-The United States Environmental Protection Agency (EPA) provides access to the [AirNow Air Quality System (AQS) API](https://www.airnow.gov/aqi/) that contains “ambient air sample data collected by state, local, tribal, and federal air pollution control agencies from thousands of monitors across the nation.”​ The AQS API contains data on current and forecasted air quality from a number of observation points around the U.S. as well as globally. The AQS API contains historical data dating back to 2008 and is updated approximately hourly with around 3,200 new observations. Each query to the AQS API is limited to about 10,000 observations with a wall time of about 11.7s for 5,100 observations. 
+The United States Environmental Protection Agency (EPA) provides access to the [AirNow Air Quality System (AQS) API](https://www.airnow.gov/aqi/) that contains “ambient air sample data collected by state, local, tribal, and federal air pollution control agencies from thousands of monitors across the nation.”​ The AQS API contains data on current and forecasted air quality from a number of observation points around the U.S. as well as globally. The AQS API contains historical data dating back to 2008 and is updated approximately hourly with around 3,200 new observations. Initial testing showed that each query to the AQS API is limited to about 10,000 observations with a wall time of about 11.7s for 5,100 observations. 
 
-The data contains metrics for six key pollutants: PM2.5, PM10, Ozone, CO, NOx, and SOx. 
+The data contains metrics for six key pollutants: PM2.5, PM10, Ozone, CO, NOx, and SOx.
 
 - PM2.5 measures the levels of particulate matter less than 2.5 microns in diameter.
 - PM10 measures the levels of particulate matter less than 10 microns in diameter.
@@ -18,7 +18,7 @@ The data contains metrics for six key pollutants: PM2.5, PM10, Ozone, CO, NOx, a
 - NOx measures nitrogen dioxide levels.
 - SOx measures sulfur dioxide levels.
 
-Particulate matter and ozone metrics are the most commonly reported as they are two of the most widespread pollutants in the U.S. while CO and NOx are less commonly reported. These metrics of these pollutants are used to calculate the [Air Quality Index (AQI)](https://www.airnow.gov/aqi/aqi-basics/), which measures the current pollution levels or forecasts future pollution levels. AQI indicates to the public how potentially damaging the air quality is or could be to their health. Although the AQI provides a more complete picture, individual pollutants can also be used to indicate the potential health damages, especially particulate matter and ozone since they are so common in the U.S. 
+Particulate matter and ozone metrics are the most commonly reported as they are two of the most widespread pollutants in the U.S. while CO and NOx are less commonly reported. These metrics of these pollutants are used to calculate the [Air Quality Index (AQI)](https://www.airnow.gov/aqi/aqi-basics/), which measures the current pollution levels or forecasts future pollution levels. AQI indicates to the public how potentially damaging the air quality is or could be to their health. Although the AQI provides a more complete picture, individual pollutants can also be used to indicate the potential health damages, especially particulate matter and ozone since they are so common in the U.S. The AQS API provides concentration levels and as well as AQI values for each individual pollutant. 
 
 Each country sets their own thresholds of the AQI index for their particular "levels of concern". For example, the U.S. lists these six categories divided by color, level of concern and AQI index values:
 
@@ -308,15 +308,17 @@ In order to create a viable alternative to the current air quality data stream, 
 
 <img width="450" alt="Benchmark 2" src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/be0740cb6a60f8cf9f7f971d3e7ce8d308a8b0de/Team%202/Demonstration%2C%20Visualization%2C%20and%20Testing/benchmark_2.png">
 
+Although our initial tests showed the AQS API allowed around 10,000 observations per query with a wall time of about 11.7s for 5,100 observations, our later tests showed some variance from those early queries. Our first plot above shows that the AQS API took around 9 seconds to fetch around 10,000 observations. But our S3 bucket showed a massive improvement, taking less than a second to fetch around 10,000 observations when queried.
+
 <img width="450" alt="Benchmark 1" src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/be0740cb6a60f8cf9f7f971d3e7ce8d308a8b0de/Team%202/Demonstration%2C%20Visualization%2C%20and%20Testing/benchmark_1.png">
 
-Although our initial tests showed the AQS API allowed around 10,000 observations per query with a wall time of about 11.7s for 5,100 observations, our later tests showed some variance from those early queries. Our first plot above shows that the AQS API took around 9 seconds to fetch around 10,000 observations. But our S3 bucket showed a massive improvement, taking less than a second to fetch around 10,000 observations when queried. This performance held up at scale too. Our second plot shows how harshly the AQS API throttles users when they try to query often; attempting to query less then 20,000 observations results in a wall time of over 12 seconds and any larger queries become impractical. We were able to query well over 200,000 observations from our S3 bucket with a wall time of around 7 seconds. Wall times also appear to scale linearly with query size. Considering that 200,000 observations contains over 60 days of data while 20,000 observations contains only about 6 days of data, our process can query much more data at much faster speeds than the current air quality data stream. 
+This performance held up at scale too. Our second plot above shows how harshly the AQS API throttles users when they try to query often; attempting to query less then 20,000 observations results in a wall time of over 12 seconds and any larger queries become impractical. We were able to query well over 200,000 observations from our S3 bucket with a wall time of around 7 seconds. Wall times also appear to scale linearly with query size. Considering that 200,000 observations contains over 60 days of data while 20,000 observations contains only about 6 days of data, our process can query much more data at much faster speeds than the current air quality data stream. 
 
 ### Use Cases
 
 Once the data is stored in the AWS S3 bucket, it is available for immediate access.​ From here, it can be used to develop models, create visualizations, etc. ​For our project, we created several visualizations just to illustrate what can be done with the data in the S3 buckets. In reality, the end use of a batch & stream process like this one could be much larger — including weather or health advisories, supporting AI/ML development, or comparing measured and forecasted air quality estimates to help improve forecasting models. ​
 
-To demonstrate this, we created several visualizations from data pulled from the project S3 bucket.​
+To demonstrate this, we created several visualizations from data pulled from the project S3 bucket.​ Each visualization shows PM2.5 AQI values for simpilicity. 
 
 We selected two dataframes:​
 - One containing global data from 3-26-2024​
