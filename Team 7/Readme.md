@@ -172,7 +172,7 @@ TBD ...
 <details>
 <summary><img src="images/ipynb.png" align="left" width="40" height="40" /> Jupyter Notebooks</summary>
   
-- ### [FeatureSelection.ipynb](https://github.com/WD-Scott/DS5110_Project/blob/main/Jupyter%20Notebooks/FeatureSelection.ipynb):
+- ### [FeatureSelection.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/FeatureSelection.ipynb):
 
   Feature Selection notebook where we use the `preprocess_and_train` function from `preptrain.py` and ensemble the methods to generate the best 10 features.
   
@@ -180,11 +180,11 @@ TBD ...
   
   Exploratory notebook where the data is cleaned; includes some basic EDA.
 
-- ### [Models.ipynb](https://github.com/WD-Scott/DS5110_Project/blob/main/Jupyter%20Notebooks/Models.ipynb):
+- ### [Models.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Models.ipynb):
 
   Modeling notebook where we use the selected features (from `df_selected.csv`) to train and evaluate a range of models and extract their feature importance. These results will inform how we weight features in the index.
 
-- ### [Test.ipynb](https://github.com/WD-Scott/DS5110_Project/blob/main/Jupyter%20Notebooks/Test.ipynb):
+- ### [Test.ipynb]([https://github.com/WD-Scott/DS5110_Project/blob/main/Jupyter%20Notebooks/Test.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Test.ipynb)):
 
   This notebook contains the code where we test our best model (from `Models.ipynb`) against the last five seasons. We include some visualizations showing the model prediction versus the actual values.
 
@@ -193,34 +193,34 @@ TBD ...
 <details>
 <summary><img src="images/csv.png" align="left" width="40" height="40" /> Data Files</summary>
   
-- ### [df_clean.csv](https://github.com/WD-Scott/DS5110_Project/blob/main/Data%20Files/df_clean.csv):
+- ### [df_clean.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_clean.csv):
   
   Main .csv file used for training and validation.
 
-- ### [df_last.csv](https://github.com/WD-Scott/DS5110_Project/blob/main/Data%20Files/df_last.csv):
+- ### [df_last.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_last.csv):
   
   Testing .csv file for examining model performance on last 5 seasons (2018-22).
 
-- ### [df_selected.csv](https://github.com/WD-Scott/DS5110_Project/blob/main/Data%20Files/df_selected.csv):
+- ### [df_selected.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_selected.csv):
 
   Selected features .csv containing the subset of predictor variables.
 
-- ### [mvp_data.csv](https://github.com/WD-Scott/DS5110_Project/blob/main/Data%20Files/mvp_data.csv):
+- ### [mvp_data.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/mvp_data.csv):
   Initial NBA mvp data set. Reduced in `DataCleaning_EDA.ipynb` to only include essential rows and columns of study.
 </details>
 <br>
 <details>
 <summary><img src="images/py.png" align="left" width="40" height="40" /> Python Module Files (helper functions, classes)</summary>
   
-- ### [pltcorrheatmap.py](https://github.com/WD-Scott/DS5110_Project/blob/main/Python%20Modules/pltcorrheatmap.py):
+- ### [pltcorrheatmap.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/pltcorrheatmap.py):
   
   Custom function to generate correlation heat maps to help determine multicollnearity as we examine feature importance.
 
-- ### [print_imps.py](https://github.com/WD-Scott/DS5110_Project/blob/main/Python%20Modules/print_imps.py):
+- ### [print_imps.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/print_imps.py):
 
   Custom function to print model feature importance scores for the selected features.
 
-- ### [preptrain.py](https://github.com/WD-Scott/DS5110_Project/blob/main/Python%20Modules/preptrain.py):
+- ### [preptrain.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/preptrain.py):
   
   Custom function/pipeline for preprocessing and feature selection.
   
