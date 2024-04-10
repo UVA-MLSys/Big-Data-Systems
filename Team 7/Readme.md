@@ -12,7 +12,7 @@ Data Scientists and analysts have developed several metrics for determining a pl
 <details>
 <summary><img src="images/ipynb.png" align="left" width="40" height="40" /> Jupyter Notebooks</summary>
   
-- ### [FeatureSelection.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/FeatureSelection.ipynb):
+- ### [FeatureSelection.ipynb](FeatureSelection.ipynb):
 
   Feature Selection notebook where we use the `preprocess_and_train` function from `preptrain.py` and ensemble the methods to generate the best 10 features.
   
