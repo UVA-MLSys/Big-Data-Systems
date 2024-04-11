@@ -359,17 +359,17 @@ def parse_args():
     parser.add_argument(
         "--train-split-percentage",
         type=float,
-        default=0.90,
+        default=0.70,
     )
     parser.add_argument(
         "--validation-split-percentage",
         type=float,
-        default=0.05,
+        default=0.15,
     )
     parser.add_argument(
         "--test-split-percentage",
         type=float,
-        default=0.05,
+        default=0.15,
     )
     parser.add_argument("--balance-dataset", type=eval, default=True)
     parser.add_argument(
@@ -403,7 +403,7 @@ def _transform_tsv_to_tfrecord(file, max_seq_length, balance_dataset, prefix, fe
 
     filename_without_extension = Path(Path(file).stem).stem
 
-    df = pd.read_csv(file, delimiter="\,", quoting=csv.QUOTE_NONE, compression="gzip")
+    df = pd.read_csv(file, delimiter=",")
 
     df.isna().values.any()
     df = df.dropna()
