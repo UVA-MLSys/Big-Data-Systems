@@ -12,15 +12,28 @@
 <details>
 <summary><h1 style="font-size: 22px;">Report</h1></summary>
 
-<details>
-<summary><h3 style="font-size: 16px;">Introduction</h3></summary>
+
+## Table of Contents
+
+<!--ts-->
+   * [Introduction](#introduction)
+   * [Data](#data)
+   * [Experimental Design](#experimental-design)
+      * [Hardware Details](#hardware-details)
+      * [Design Overview](#design-overview)
+      * [Feature Selection Process](#feature-selection-process)
+      * [Modeling](#modeling)
+      * [Index Building](#index-building)
+   * [Results](#results)
+   * [Testing](#testing)
+   * [Conclusions](#conclusions)
+<!--te-->
+
+## Introduction
 
 Data Scientists and analysts have developed several metrics for determining a player's value to their team's success. Prominent examples include Value Over Replacement Player (VORP), Box Plus/Minus (BPM), and FiveThirtyEight's Robust Algorithm (using) Player Tracking (and) On/Off Ratings (RAPTOR)​. We aim to develop a multivariate index that weighs these parameters based on how well they predict MVP rankings, then test it on unseen data for the most recent five seasons to see if our "MVP index" correctly predicts the MVP rankings.​ We will experiment with the index formula and compare it to other methods developed by reputable analyst sources.
 
-</details>
-
-<details>
-<summary><h3 style="font-size: 16px;">Data</h3></summary>
+## Data
 
 We obtained the dataset from [JK-Future](https://github.com/JK-Future-GitHub/NBA_MVP), who originally scraped the data from Basketball-Reference via automated HTML parsing. The dataset contains statistics for National Basketball Association (NBA) players relevant to determining the Most Valuable Player (MVP) in a season and has 7,329 entries with 53 columns. The dataset is significant in its breadth and depth of coverage.
 
@@ -41,14 +54,9 @@ We discuss some additional preprocessing steps in the Experimental Design sectio
 
 The values we seek to predict are in the `mvp_share` column, which represents the result of the MVP voting for each season.
 
-</details>
+## Experimental Design
 
-
-<details>
-<summary><h3 style="font-size: 16px;">Experimental Design</h3></summary>
-
-<details>
-<summary><h4 style="font-size: 14px;">Hardware Details</h4></summary>
+### Hardware Details
 
 We use Rivanna – the University of Virginia’s High-Performance Computing (HPC) system – with the following hardware details:
 
@@ -59,23 +67,17 @@ We use Rivanna – the University of Virginia’s High-Performance Computing (HP
 * **RAM**: 36GB
 * **CPU Vendor**: AuthenticAMD
 * **CPU Model**: AMD EPYC 7742 64-Core Processor
-</details>
 
-<details>
-<summary><h4 style="font-size: 14px;">Design Overview</h4></summary>
+#### Design Overview
 
-Below is a brief overview of the steps taken to gather the index values and model results. We detail these steps further in the Feature Selection Process, Modeling, Results, and Testing sections that follow. Note that we measured the estimated runtimes listed beside each step using the previously specified compute resources:
+Below is a brief overview of the steps taken to gather the index values and model results. We detail these steps further in the Feature Selection Process, Modeling, Results, and Testing sections that follow.
 
-**Step 1**: Run `FeatureSelection.ipynb` to select the top 10 predictor variables and save them to `df_selected.csv` → runtime: ~10 minutes
+<h1 align="center">
+    <img src="images/pipeline.png">
+</h1>
+<p align="center">
 
-**Step 2**: Run `Models.ipynb` to fit models on the selected features, compare model results, and save the best-performing model → runtime: ~4.72 minutes
-
-**Step 3**: Run `Test.ipynb` to test the best model against the unseen data → runtime: ~2.42 minutes
-
-</details>
-
-<details>
-<summary><h4 style="font-size: 14px;">Feature Selection Process</h4></summary>
+#### Feature Selection Process
 
 In `FeatureSelection.ipynb`, we load in the main data frame (`df`) that we created and saved in `DataCleaning_EDA.ipynb`.
 
@@ -98,11 +100,9 @@ We perform robust feature selection to reduce model and index complexity. The ma
 
 For hyperparameter tuning, we define a reasonably extensive parameter grid for each method and use Bayesian optimization with five-fold cross-validation to sample parameter settings from the specified distributions.
 
-In `FeatureSelection.ipynb`, we run the `preprocess_and_train function` from `preptrain.py` and use the `print_dict_imps` function from `print_imps.py` to print tables of the feature importances for each method, which we store in a Python dictionary via the `preprocess_and_train function`. We then use the `avg_imp` function from `print_imps.py` to display the average feature importance across the eight methods. 
+In `FeatureSelection.ipynb`, we run the `preprocess_and_train function` from `preptrain.py` and use the `print_dict_imps` function from `helper_functions.py` to print tables of the feature importances for each method, which we store in a Python dictionary via the `preprocess_and_train function`. We then use the `avg_imp` function from `helper_functions.py` to display the average feature importance across the eight methods. 
 
-We then use the `avg_imp` function from `print_imps.py` to display the average feature importance across the eight methods. The results for the top 10 features included several features related to points (scoring) that are highly correlated, including FT (free throws), 2P (two-pointers), FG (field goals), FGA (field goal attempts), FTA (free throw attempts) and PTS (points).
-
-The results for the top 10 features include several highly correlated features related to scoring, including FT (free throws), 2P (two-pointers), FG (field goals), FGA (field goal attempts), FTA (free throw attempts), and PTS (points).
+The results for the top 10 features included several features related to points (scoring) that are highly correlated, including FT (free throws), 2P (two-pointers), FG (field goals), FGA (field goal attempts), FTA (free throw attempts) and PTS (points).
 
 We chose to drop all of these except PTS because the latter effectively captures the others. The resulting top ten features are:
 
@@ -119,10 +119,7 @@ We chose to drop all of these except PTS because the latter effectively captures
 
 There are still some highly correlated features, but we proceed with these 10 and save them to a `df_selected.csv` to use for modeling.
 
-</details>
-
-<details>
-<summary><h4 style="font-size: 14px;">Modeling</h4></summary>
+#### Modeling
 
 In `Models.ipynb`, we use `modeling.py` to train and test only the ensemble and tree-based methods, as these are best suited for our next task — finding the best model we can and using the feature importance scores to inform our index design.
 
@@ -132,113 +129,131 @@ We then perform an 80-20 train/test split of the training data and test the best
 
 The Results and Testing sections below discuss the modeling results.
 
-</details>
-
-<details>
-<summary><h4 style="font-size: 14px;">Index Building</h4></summary>
+#### Index Building
 
 TBD...
 
-</details>
-</details>
-
-<details>
-<summary><h3 style="font-size: 16px;">Results</h3></summary>
+### Results
 
 TBD...
 
-</details>
-
-<details>
-<summary><h3 style="font-size: 16px;">Testing</h3></summary>
+### Testing
 
 TBD ...
 
-</details>
 
-<details>
-<summary><h3 style="font-size: 16px;">Conclusions</h3></summary>
+### Conclusions
 
 TBD ...
 
-</details>
 </details>
 
 <details>
 <summary><h1 style="font-size: 16px;">Repo Manifest</h1></summary>
 
 <details>
-<summary><img src="images/ipynb.png" align="left" width="40" height="40" /> Jupyter Notebooks</summary>
+<summary><h3 style="font-size: 14px;">Jupyter Notebooks</h3></summary>
   
-- ### [FeatureSelection.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/FeatureSelection.ipynb):
+- #### [FeatureSelection.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/FeatureSelection.ipynb):
 
   Feature Selection notebook where we use the `preprocess_and_train` function from `preptrain.py` and ensemble the methods to generate the best 10 features.
   
-- ### [DataCleaning_EDA.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/DataCleaning_EDA.ipynb):
+- #### [DataCleaning_EDA.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/DataCleaning_EDA.ipynb):
   
   Exploratory notebook where the data is cleaned; includes some basic EDA.
 
-- ### [Models.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Models.ipynb):
+- #### [Models.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Models.ipynb):
 
   Modeling notebook where we use the selected features (from `df_selected.csv`) to train and evaluate a range of models and extract their feature importance. These results will inform how we weight features in the index.
 
-- ### [Test.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Test.ipynb):
+- #### [Test.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Test.ipynb):
 
   This notebook contains the code where we test our best model (from `Models.ipynb`) against the last five seasons. We include some visualizations showing the model prediction versus the actual values.
 
 </details>
-<br>
+
 <details>
-<summary><img src="images/csv.png" align="left" width="40" height="40" /> Data Files</summary>
+<summary><h3 style="font-size: 14px;">Data Files</h3></summary>
   
-- ### [df_clean.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_clean.csv):
+- #### [df_clean.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_clean.csv):
   
   Main file used for training and validation.
 
-- ### [df_last.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_last.csv):
+- #### [df_last.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_last.csv):
   
   Testing file for examining model performance on last 5 seasons (2018-22).
 
-- ### [df_selected.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_selected.csv):
+- #### [df_selected.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_selected.csv):
 
   Selected features containing the subset of predictor variables.
 
-- ### [mvp_data.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/mvp_data.csv):
+- #### [mvp_data.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/mvp_data.csv):
 
   Initial NBA mvp data set. Reduced in `DataCleaning_EDA.ipynb` to only include essential rows and columns of study.
 
-- ### [mvp_data_edit.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/mvp_data_edit.csv)
+- #### [mvp_data_edit.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/mvp_data_edit.csv)
 
   The cleaned data from `DataCleaning_EDA.ipynb`, used in `Test.ipynb` to merge and compare predicted and actual values.
   
 </details>
-<br>
+
 <details>
-<summary><img src="images/py.png" align="left" width="40" height="40" /> Python Module Files (helper functions, classes)</summary>
+<summary><h3 style="font-size: 14px;">Python Modules (helper functions, classes)</h3></summary>
   
-- ### [pltcorrheatmap.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/pltcorrheatmap.py):
-  
-  Custom function to generate correlation heat maps to help determine multicollnearity as we examine feature importance.
-
-- ### [print_imps.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/print_imps.py):
-
-  Custom function to print model feature importance scores for the selected features.
-
-- ### [preptrain.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/preptrain.py):
+- #### [preptrain.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/preptrain.py):
   
   Custom function/pipeline for preprocessing and feature selection.
 
-- ### [modeling.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/modeling.py):
+- #### [modeling.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/modeling.py):
 
   Custom function/pipeline to train the ensemble and tree-based models and extract the best model.
 
-- ### [model_comp.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/model_comp.py):
+- #### [helper_functions.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/helper_functions.py):
 
-  Custom function to plot and compare model performance.
-
-- ### [get_info.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/get_info.py)
-
-  Custom function to get hardware and compute details.
+This module contains various helper functions for system information retrieval, model evaluation, and visualization.
+    
+- `get_hardware_details()`:
   
+  Retrieve basic hardware details of the system.
+
+- `print_importances(features, model)`:
+  
+  Print the feature importances of a model.
+
+- `print_dict_imps(feature_importances)`:
+  
+  Print the feature importances in a visually appealing table format side-by-side.
+
+- `avg_imps(feature_importances)`:
+  
+  Calculate the average feature importances across different methods.
+
+- `create_imp_df(model_names, models, feature_names)`:
+  
+  Create a DataFrame of feature importances for each model.
+
+- `plot_corr_heatmap(corr_matrix, selected_feature_names, threshold=0.65, width=7, height=4)`:
+  
+  Plot a correlation heatmap for selected features.
+
+- `plot_model_performance(model_names, r_sqs, MSE_s)`:
+  
+  Plot the R-squared and MSE values of different regression models.
+</details>
+
+<details>
+<summary><h3 style="font-size: 14px;">Other Files</h3></summary>
+
+- #### [images](https://github.com/UVA-MLSys/Big-Data-Systems/tree/main/Team%207/images):
+
+The images folder contains various visualizations and images used in the README.md
+
+- #### [README.md](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Readme.md):
+
+The README.md file includes the repository description and the report.
+
+- #### [requirements.txt](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/requirements.txt):
+
+This file includes all of the necessary libraries and versions for running our code.
 </details>
 </details>
