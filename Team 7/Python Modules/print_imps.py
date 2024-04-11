@@ -20,7 +20,7 @@ def print_importances(features, model):
     sorted_dict = sorted(feature_dict.items(), key=lambda x: x[1], reverse=True)
     print("Feature Importances:")
     for i, (feature, imp) in enumerate(sorted_dict, 1):
-        print(f"{i}: {feature} : {imp:.3f}")
+        print(f"{i}: {feature} : {imp:.5f}")
         
 def print_dict_imps(feature_importances):
     """

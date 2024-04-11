@@ -15,11 +15,26 @@ from sklearn.model_selection import train_test_split, GridSearchCV, RandomizedSe
 from sklearn import metrics, linear_model
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, ExtraTreesRegressor, AdaBoostRegressor
 from sklearn.svm import SVR
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.compose import make_column_selector
 from sklearn.inspection import permutation_importance
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.exceptions import ConvergenceWarning
 from xgboost import XGBRegressor
 from scipy.stats import randint
+
+class IgnoreTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self, columns_to_ignore):
+        self.columns_to_ignore = columns_to_ignore
+    
+    def fit(self, X, y=None):
+        return self
+    
+    def transform(self, X):
+        if self.columns_to_ignore:
+            return X.drop(columns=self.columns_to_ignore, errors='ignore')
+        else:
+            return X
 
 def preprocess_and_train(df, df_last, labels):
     """
@@ -55,7 +70,7 @@ def preprocess_and_train(df, df_last, labels):
                                                         shuffle=True, 
                                                         random_state=28)
 
-    # Define preprocessing steps
+    # Define preprocessing steps for df
     numeric_transformer = Pipeline(steps=[
         ('imputer', SimpleImputer(strategy='median')),
         ('scaler', StandardScaler())])
@@ -63,18 +78,33 @@ def preprocess_and_train(df, df_last, labels):
     categorical_transformer = Pipeline(steps=[
         ('onehot', OneHotEncoder(handle_unknown='ignore'))])
 
-    preprocessor = ColumnTransformer(
+    preprocessor_df = ColumnTransformer(
         transformers=[
             ('num', numeric_transformer, numeric_cols),
-            ('cat', categorical_transformer, ['Pos'])])
+            ('cat', categorical_transformer, ['Pos'])
+        ])
 
-    # Preprocess training and testing data
-    X_train_preprocessed = preprocessor.fit_transform(X_train)
-    X_test_preprocessed = preprocessor.transform(X_test)
-    df_last_preprocessed = preprocessor.transform(df_last)
+    # Define columns to ignore in df_last
+    columns_not_to_transform_df_last = ['mvp_share', 'name', 'Season', 'Rank']
+
+
+    # Define preprocessing steps for df_last
+    preprocessor_df_last = ColumnTransformer(
+        transformers=[
+            ('num', numeric_transformer, numeric_cols),  # Reuse transformer from df
+            ('cat', categorical_transformer, ['Pos']),
+            ('ignore', IgnoreTransformer(columns_not_to_transform_df_last), make_column_selector(dtype_include='object'))
+        ])
+
+    # Preprocess training and testing data for df
+    X_train_preprocessed = preprocessor_df.fit_transform(X_train)
+    X_test_preprocessed = preprocessor_df.transform(X_test)
+
+    # Preprocess df_last, ignoring specified columns
+    df_last_preprocessed = preprocessor_df_last.fit_transform(df_last)
 
     # Extract feature names
-    header_names = [col.split("__")[1] if "__" in col else col for col in preprocessor.get_feature_names_out()]
+    header_names = [col.split("__")[1] if "__" in col else col for col in preprocessor_df.get_feature_names_out()]
 
     # Dictionaries to store feature importances
     feature_importances = {}
@@ -143,7 +173,7 @@ def preprocess_and_train(df, df_last, labels):
     # Initialize BayesSearchCV
     bayes_search_Dtree = BayesSearchCV(estimator=Dtree,
                                       search_spaces=param_grid_Dtree,
-                                      n_iter=100,
+                                      n_iter=50,
                                       scoring='r2',
                                       cv=5,
                                       n_points=10,
@@ -202,7 +232,6 @@ def preprocess_and_train(df, df_last, labels):
         'subsample': Real(0.6, 0.8, prior='uniform'),       # Fraction of samples used to fit individual base learners
         'max_features': Categorical(['log2', 'sqrt'])       # No. of features to consider when looking for the best split
     }
-    
     # Create the GradientBoostingRegressor estimator
     gbm = GradientBoostingRegressor(random_state=28)
     # Create the BayesSearchCV object for GradientBoostingRegressor
