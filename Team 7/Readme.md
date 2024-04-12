@@ -19,7 +19,6 @@
    * [Introduction](#introduction)
    * [Data](#data)
    * [Experimental Design](#experimental-design)
-      * [Hardware Details](#hardware-details)
       * [Design Overview](#design-overview)
       * [Feature Selection Process](#feature-selection-process)
       * [Modeling](#modeling)
@@ -56,17 +55,19 @@ The values we seek to predict are in the `mvp_share` column, which represents th
 
 ## Experimental Design
 
-### Hardware Details
+<details>
+<summary><strong>Click here to see hardware and compute details</strong></summary>
 
 We use Rivanna – the University of Virginia’s High-Performance Computing (HPC) system – with the following hardware details:
 
-* **System**: Linux
-* **Release**: 4.18.0-425.10.1.el8_7.x86_64
-* **Machine**: x86_64
-* **CPU Cores**: 28
-* **RAM**: 36GB
-* **CPU Vendor**: AuthenticAMD
-* **CPU Model**: AMD EPYC 7742 64-Core Processor
+- **System**: Linux
+- **Release**: 4.18.0-425.10.1.el8_7.x86_64
+- **Machine**: x86_64
+- **CPU Cores**: 28
+- **RAM**: 36GB
+- **CPU Vendor**: AuthenticAMD
+- **CPU Model**: AMD EPYC 7742 64-Core Processor
+</details>
 
 #### Design Overview
 
@@ -194,6 +195,10 @@ TBD ...
 - #### [mvp_data_edit.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/mvp_data_edit.csv)
 
   The cleaned data from `DataCleaning_EDA.ipynb`, used in `Test.ipynb` to merge and compare predicted and actual values.
+
+- #### [results.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/results.csv)
+
+  The full dataset with the index values calculated and stored as an additional column.
   
 </details>
 
