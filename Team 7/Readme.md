@@ -244,6 +244,10 @@ This module contains various helper functions for system information retrieval, 
 - `plot_model_performance(model_names, r_sqs, MSE_s)`:
   
   Plot the R-squared and MSE values of different regression models.
+
+- `plot_comparison_for_season(df, season)`
+
+  Plot the actual vs. predicted mvp_share values.
 </details>
 
 <details>
