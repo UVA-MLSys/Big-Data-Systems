@@ -36,7 +36,10 @@ Data Scientists and analysts have developed several metrics for determining a pl
 
 We obtained the dataset from [JK-Future](https://github.com/JK-Future-GitHub/NBA_MVP), who originally scraped the data from Basketball-Reference via automated HTML parsing. The dataset contains statistics for National Basketball Association (NBA) players relevant to determining the Most Valuable Player (MVP) in a season and has 7,329 entries with 53 columns. The dataset is significant in its breadth and depth of coverage.
 
-The dataset is stored in `mvp_data.csv`, which we load into `DataCleaning_EDA.ipynb` and perform some cleaning and aggregation steps, including:
+The dataset is stored in `mvp_data.csv`, which we load into `DataCleaning_EDA.ipynb` and perform data cleaning and aggregation.
+
+<details>
+<summary><strong>Click here to view how we cleaned the data</strong></summary>
 
 * Fill missing values for the Rank, mvp_share, and Trp Dbl (Triple Double) columns
 * Normalize the Trp Dbl column by dividing it by G (the total number of games played in a given season)
@@ -48,6 +51,7 @@ The dataset is stored in `mvp_data.csv`, which we load into `DataCleaning_EDA.ip
 * Create a separate data frame (df_last) with the data for the most recent five seasons (2018–22), which we use to test our final model and index in `Test.ipynb`
 * Check for missing values: We found many missing values for seasons before 1980; for example, 3P (Three-pointers) were not introduced in the NBA until 1979–80, and there are a lot of missing values before then, so we drop any season before 1980
 * Save df and df_last to comma-separated Excel files
+</details>
 
 We discuss some additional preprocessing steps in the Experimental Design section below, as these steps relate to the project's feature selection and modeling phases.
 
@@ -56,7 +60,7 @@ The values we seek to predict are in the `mvp_share` column, which represents th
 ## Experimental Design
 
 <details>
-<summary><strong>Click here to see hardware and compute details</strong></summary>
+<summary><strong>Click here to view our hardware and compute details</strong></summary>
 
 We use Rivanna – the University of Virginia’s High-Performance Computing (HPC) system – with the following hardware details:
 
