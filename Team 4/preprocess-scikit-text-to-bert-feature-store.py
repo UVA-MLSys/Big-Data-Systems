@@ -180,7 +180,7 @@ class InputFeatures(object):
     """BERT feature vectors."""
 
     def __init__(self, input_ids, input_mask, segment_ids, label_id, review_id, date, label):
-        #               review_body):
+        #  review_body):
         self.input_ids = input_ids
         self.input_mask = input_mask
         self.segment_ids = segment_ids
@@ -188,8 +188,6 @@ class InputFeatures(object):
         self.review_id = review_id
         self.date = date
         self.label = label
-
-
 #        self.review_body = review_body
 
 
@@ -405,9 +403,9 @@ def _transform_tsv_to_tfrecord(file, max_seq_length, balance_dataset, prefix, fe
 
     df = pd.read_csv(file, delimiter=",")
 
-    df.isna().values.any()
-    df = df.dropna()
-    df = df.reset_index(drop=True)
+    #df.isna().values.any()
+    #df = df.dropna()
+    #df = df.reset_index(drop=True)
 
     print("Shape of dataframe {}".format(df.shape))
 
