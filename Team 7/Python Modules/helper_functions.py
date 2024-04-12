@@ -34,7 +34,76 @@ Functions:
 
 7. plot_model_performance(model_names, r_sqs, MSE_s):
    Plot the R-squared and MSE values of different regression models.
+   
+8. percent_formatter(x, pos):
+   Format the tick labels without decimal places
+   
+9. plot_comparison_for_season(df, season):
+   Plots difference btw. predicted and actual and the values.
 """
+
+def plot_comparison_for_season(df, season):
+    """
+    Plot a comparison of predicted and actual MVP share for the top 7 players in a given season.
+
+    Parameters:
+    - df (pd.DataFrame): DataFrame containing the data.
+    - season (int): The season for which to plot the comparison.
+
+    Returns:
+    - None
+
+    This function filters the DataFrame to include only the top 7 players based on their actual MVP share for the given season.
+    It then calculates the error between the predicted and actual MVP share, ensuring the error bars extend from the greater value to the lesser value.
+    The function plots the predicted and actual MVP share for each player, along with the error bars representing the difference between them.
+    """
+    # Filter data for the current season
+    season_data = df[df['Season'] == season]
+    
+    # Filter the data to include only the top 7 values of 'actual' for the current season
+    top_7_actual = season_data.nlargest(7, 'actual')
+    
+    # Group the filtered data by 'name' and calculate mean of 'actual' and 'predicted' columns
+    grouped_df = top_7_actual.groupby('name')[['actual', 'predicted']].mean().reset_index()
+    
+    # Sort the grouped dataframe by 'actual' values
+    grouped_df.sort_values(by='actual', ascending=False, inplace=True)
+
+    # Calculate the error based on the conditions specified
+    grouped_df['Error'] = grouped_df.apply(lambda row: row['predicted'] - row['actual'] if row['predicted'] <= row['actual'] else row['actual'] - row['predicted'], axis=1)
+
+    # Take absolute values of errors to handle negative values
+    grouped_df['Absolute_Error'] = grouped_df['Error'].abs()
+
+    # Calculate the width of the error bars
+    error_bar_width = grouped_df['Absolute_Error']
+
+    # Calculate the x positions of the error bars for actual and predicted values
+    actual_x_positions = grouped_df['actual']
+    predicted_x_positions = grouped_df['predicted']
+
+    # Calculate start and end points for error bars
+    start_points = grouped_df[['actual', 'predicted']].min(axis=1)  # Take the minimum value
+    end_points = grouped_df[['actual', 'predicted']].max(axis=1)  # Take the maximum value
+
+    # Plot the error bars
+    plt.figure(figsize=(7, 3))
+    for name, start, end in zip(grouped_df['name'], start_points, end_points):
+        plt.plot([start, end], [name, name], color='#EF3F6B')
+    plt.errorbar(predicted_x_positions, grouped_df['name'], fmt='o', label='Predicted', color='#E57200')  # Plot predicted values
+    plt.errorbar(grouped_df['actual'], grouped_df['name'], fmt='o', label='Actual', color='#232D4B')  # Plot actual values
+    plt.xlabel('MVP Share', weight='bold', size=12)
+    plt.ylabel('Player Name', weight='bold', size=12)
+    plt.title(f'Predicted vs. Actual MVP Share for {season}', weight='bold', size=13)
+    plt.legend(loc='upper right')
+    plt.tight_layout()
+    plt.show()
+
+
+
+def percent_formatter(x, pos):
+    return f"{int(x)}%"
+
 
 def get_hardware_details():
     """
