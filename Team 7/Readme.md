@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <h1 align="center">
-    <img src="images/logo.png">
+    <img src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/images/logo.png">
 </h1>
 <p align="center">
 
@@ -78,7 +78,7 @@ We use Rivanna – the University of Virginia's High-Performance Computing (HPC)
 Below is an overview of the steps to gather the index values and model results. We detail these steps further in the Feature Selection Process, Modeling, Results, and Testing sections that follow.
 
 <h1 align="center">
-    <img src="images/pipeline.png">
+    <img src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/images/pipeline.png">
 </h1>
 <p align="center">
 
@@ -140,7 +140,23 @@ TBD...
 
 ### Results
 
-TBD...
+The feature selection process originally produced a set of ten highly correlated features, the most correlated of which are related to scoring, as displayed below in the correlation heatmap:
+
+<h1 align="center">
+    <img src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/images/corr_scoring.png">
+</h1>
+<p align="center">
+
+As previously mentioned, we dropped FT (free throws), 2P (two-pointers), FG (field goals), FGA (field goal attempts), FTA (free throw attempts), and retained PTS (points).
+
+Now, the top ten features include those displayed in the correlation heatmap below:
+
+<h1 align="center">
+    <img src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/images/corr_final.png">
+</h1>
+<p align="center">
+
+TO BE CONTINUED AFTER FURTHER VISUALIZATION
 
 ### Testing
 
