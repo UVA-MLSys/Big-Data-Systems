@@ -36,33 +36,33 @@ Data Scientists and analysts have developed several metrics for determining a pl
 
 We obtained the dataset from [JK-Future](https://github.com/JK-Future-GitHub/NBA_MVP), who originally scraped the data from Basketball-Reference via automated HTML parsing. The dataset contains statistics for National Basketball Association (NBA) players relevant to determining the Most Valuable Player (MVP) in a season and has 7,329 entries with 53 columns. The dataset is significant in its breadth and depth of coverage.
 
-The dataset is stored in `mvp_data.csv`, which we load into `DataCleaning_EDA.ipynb` and perform data cleaning and aggregation.
+We store the dataset in [mvp_data.csv](https://github.com/WD-Scott/DS5110_Project/blob/main/Data%20Files/mvp_data.csv) and load it into [DataCleaning_EDA.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/DataCleaning_EDA.ipynb), where we perform data cleaning and aggregation.
 
 <details>
-<summary><strong>Click here to view how we cleaned the data</strong></summary>
+<summary><strong>Click here for details about how we cleaned the data</strong></summary>
 
 * Fill missing values for the Rank, mvp_share, and Trp Dbl (Triple Double) columns
 * Normalize the Trp Dbl column by dividing it by G (the total number of games played in a given season)
 * Convert G (Games) and Season columns to integer data type
-* Filter the entire data frame (df) to include only players that meet the 40-game requirement necessary to be considered for the MVP award
+* Filter the entire data frame `(df)` to include only players that meet the 40-game requirement necessary to be considered for the MVP award
 * Create the Rk_Conf (Conference Ranking) column – calculate conference rankings for each season based on W (the number of wins), then re-rank the conference rankings within each season and conference group
-* Save the edited data frame thus far to `mvp_data_edit.csv` (we use this in `Test.ipynb` to merge predicted values with actual and compare results)
+* Save the edited data frame thus far to [mvp_data_edit.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/mvp_data_edit.csv) (we use this in [Test.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Test.ipynb) to merge predicted values with actual and compare results)
 * Drop the Conference and W (Wins) columns
-* Create a separate data frame (df_last) with the data for the most recent five seasons (2018–22), which we use to test our final model and index in `Test.ipynb`
+* Create a separate data frame `(df_last)` with the data for the most recent five seasons (2018–22), which we use to test our final model and index
 * Check for missing values: We found many missing values for seasons before 1980; for example, 3P (Three-pointers) were not introduced in the NBA until 1979–80, and there are a lot of missing values before then, so we drop any season before 1980
-* Save df and df_last to comma-separated Excel files
+* Save `df` and `df_last` to comma-separated Excel files
 </details>
 
-We discuss some additional preprocessing steps in the Experimental Design section below, as these steps relate to the project's feature selection and modeling phases.
+We discuss additional preprocessing steps in the Experimental Design section below, as these steps relate to the project's feature selection and modeling phases.
 
-The values we seek to predict are in the `mvp_share` column, which represents the result of the MVP voting for each season.
+The values we seek to predict are in the mvp_share column, which represents the MVP voting result for each season.
 
 ## Experimental Design
 
 <details>
-<summary><strong>Click here to view our hardware and compute details</strong></summary>
+<summary><strong>Click here for details about our hardware and compute resources</strong></summary>
 
-We use Rivanna – the University of Virginia’s High-Performance Computing (HPC) system – with the following hardware details:
+We use Rivanna – the University of Virginia's High-Performance Computing (HPC) system – with the following hardware details:
 
 - **System**: Linux
 - **Release**: 4.18.0-425.10.1.el8_7.x86_64
@@ -75,7 +75,7 @@ We use Rivanna – the University of Virginia’s High-Performance Computing (HP
 
 #### Design Overview
 
-Below is a brief overview of the steps taken to gather the index values and model results. We detail these steps further in the Feature Selection Process, Modeling, Results, and Testing sections that follow.
+Below is an overview of the steps to gather the index values and model results. We detail these steps further in the Feature Selection Process, Modeling, Results, and Testing sections that follow.
 
 <h1 align="center">
     <img src="images/pipeline.png">
@@ -84,9 +84,7 @@ Below is a brief overview of the steps taken to gather the index values and mode
 
 #### Feature Selection Process
 
-In `FeatureSelection.ipynb`, we load in the main data frame (`df`) that we created and saved in `DataCleaning_EDA.ipynb`.
-
-We perform robust feature selection to reduce model and index complexity. The main code we use for feature selection can be found in `preptrain.py`. This Python module file includes a function, `preprocess_and_train`, which we employ in `FeatureSelection.ipynb`. We wrote the function to perform the following:
+In [FeatureSelection.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/FeatureSelection.ipynb), we load in [df_clean.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_clean.csv) as a Pandas DataFrame `(df)` and perform robust feature selection using the `preprocess_and_train` function from [preptrain.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/preptrain.py). The `preprocess_and_train` function serves to:
 
 * Impute missing values with the median value for numeric features, scale the features using standardization (subtracting the mean and dividing by the standard deviation) and apply one-hot encoding for categorical features.
 
@@ -105,9 +103,9 @@ We perform robust feature selection to reduce model and index complexity. The ma
 
 For hyperparameter tuning, we define a reasonably extensive parameter grid for each method and use Bayesian optimization with five-fold cross-validation to sample parameter settings from the specified distributions.
 
-In `FeatureSelection.ipynb`, we run the `preprocess_and_train function` from `preptrain.py` and use the `print_dict_imps` function from `helper_functions.py` to print tables of the feature importances for each method, which we store in a Python dictionary via the `preprocess_and_train function`. We then use the `avg_imp` function from `helper_functions.py` to display the average feature importance across the eight methods. 
+After running the `preprocess_and_train` function, we use the `print_dict_imps` function from [helper_functions.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/helper_functions.py) to print tables of the feature importances for each method, which the `preprocess_and_train` function stores in a Python dictionary. We then use the `avg_imp` function from [helper_functions.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/helper_functions.py) to display the average feature importance across the eight methods. 
 
-The results for the top 10 features included several features related to points (scoring) that are highly correlated, including FT (free throws), 2P (two-pointers), FG (field goals), FGA (field goal attempts), FTA (free throw attempts) and PTS (points).
+The results for the top 10 features included several highly correlated features related to points (scoring), including FT (free throws), 2P (two-pointers), FG (field goals), FGA (field goal attempts), FTA (free throw attempts), and PTS (points).
 
 We chose to drop all of these except PTS because the latter effectively captures the others. The resulting top ten features are:
 
@@ -122,15 +120,15 @@ We chose to drop all of these except PTS because the latter effectively captures
 - Rk_Year = Team Ranking
 - DBPM = Defensive Box Plus-Minus
 
-There are still some highly correlated features, but we proceed with these 10 and save them to a `df_selected.csv` to use for modeling.
+There are still some highly correlated features, but we proceed with these ten and save them to [df_selected.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_selected.csv) to use for modeling.
 
 #### Modeling
 
-In `Models.ipynb`, we use `modeling.py` to train and test only the ensemble and tree-based methods, as these are best suited for our next task — finding the best model we can and using the feature importance scores to inform our index design.
+In [Models.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Models.ipynb), we use the `train_models` function from [modeling.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/modeling.py) to train and test only the ensemble and tree-based methods, as these are best suited for our next task — finding the best model we can and using the feature importance scores to inform our index design.
 
-In `Test.ipynb`, we load in the selected features, the training dataset, the testing dataset containing the data for the 2018–22 seasons, and the best model from `Models.ipynb`. We filter the training and testing data to include only the selected features.
+In [Test.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Test.ipynb), we load in the selected features, the training dataset, the testing dataset containing the data for the 2018–22 seasons, and the best model from [Models.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Models.ipynb). We filter the training and testing data to include only the selected features.
 
-We then perform an 80-20 train/test split of the training data and test the best model from `Models.ipynb`. Next, we use the best model to predict the mvp_share for the 2018–22 seasons and compare the predicted values to the actual values.
+We then perform an 80-20 train/test split of the training data and test the best model. Next, we use the best model to predict the mvp_share for the 2018–22 seasons and compare the predicted values to the actual values.
 
 The Results and Testing sections below discuss the modeling results.
 
