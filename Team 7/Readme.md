@@ -103,6 +103,8 @@ In [FeatureSelection.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/m
 
 For hyperparameter tuning, we define a reasonably extensive parameter grid for each method and use Bayesian optimization with five-fold cross-validation to sample parameter settings from the specified distributions.
 
+We set the `n_jobs` parameter to $-1$ in the `BayesSearchCV` initialization, instructing `scikit-learn` to use all available CPU cores during cross-validation. Thus, each fold's training and evaluation are executed concurrently on different CPU cores, reducing the overall time taken for cross-validation. This parallelization strategy helps to decrease the overall time required for cross-validation, which is particularly beneficial for speeding up the hyperparameter search process.
+
 After running the `preprocess_and_train` function, we use the `print_dict_imps` function from [helper_functions.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/helper_functions.py) to print tables of the feature importances for each method, which the `preprocess_and_train` function stores in a Python dictionary. We then use the `avg_imp` function from [helper_functions.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/helper_functions.py) to display the average feature importance across the eight methods. 
 
 The results for the top 10 features included several highly correlated features related to points (scoring), including FT (free throws), 2P (two-pointers), FG (field goals), FGA (field goal attempts), FTA (free throw attempts), and PTS (points).
