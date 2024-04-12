@@ -150,7 +150,7 @@ TBD ...
 </details>
 
 <details>
-<summary><h1 style="font-size: 16px;">Repo Manifest</h1></summary>
+<summary><h1 style="font-size: 16px;">Manifest</h1></summary>
 
 <details>
 <summary><h3 style="font-size: 14px;">Jupyter Notebooks</h3></summary>
