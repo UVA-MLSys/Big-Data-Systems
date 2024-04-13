@@ -147,12 +147,17 @@ The feature selection process originally produced a set of ten highly correlated
 </h1>
 <p align="center">
 
-As previously mentioned, we dropped FT (free throws), 2P (two-pointers), FG (field goals), FGA (field goal attempts), FTA (free throw attempts), and retained PTS (points).
-
-Now, the top ten features include those displayed in the correlation heatmap below:
+As mentioned, we dropped FT, 2P, FG, FGA, and FTA but retained PTS. Now, the top ten features include those displayed in the correlation heatmap below:
 
 <h1 align="center">
     <img src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/images/corr_final.png">
+</h1>
+<p align="center">
+
+We feed these ten features into the `train_models` function, which returns several key pieces of information, including the best model. The `train_models` function also displays neat tables of the feature importance values from each model and a model performance bar chart, as displayed below:
+
+<h1 align="center">
+    <img src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/images/model_comp.png">
 </h1>
 <p align="center">
 
