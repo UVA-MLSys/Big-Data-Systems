@@ -205,10 +205,10 @@ def print_dict_imps(feature_importances):
         table = tabulate(rounded_importances, headers=["Feature", "Importance"], tablefmt="fancy_grid", showindex=False)
         tables.append((method, table))
 
-    # Split tables into groups of four
-    grouped_tables = [tables[i:i+4] for i in range(0, len(tables), 4)]
+    # Split tables into groups of three
+    grouped_tables = [tables[i:i+3] for i in range(0, len(tables), 3)]
 
-    # Print tables in rows of four
+    # Print tables in rows of three
     for group in grouped_tables:
         max_rows = max(len(table.split('\n')) for _, table in group)
         table_strings = []

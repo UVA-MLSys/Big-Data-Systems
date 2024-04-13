@@ -1,16 +1,20 @@
 import numpy as np
+import joblib
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import ExtraTreesRegressor, AdaBoostRegressor, RandomForestRegressor, GradientBoostingRegressor
+from sklearn.inspection import permutation_importance
 from xgboost import XGBRegressor
 from skopt import BayesSearchCV
 from skopt.space import Real, Integer, Categorical
+from helper_functions import plot_model_performance, print_dict_imps
 
 def train_models(df_selected, df, labels, feature_names, label_col_name="mvp_share"):
     """
-    Train multiple regression models using Bayesian optimization and evaluate their performance.
+    Train multiple regression models using Bayesian optimization, evaluate their performance,
+    and save the best model.
 
     Parameters:
     -----------
@@ -37,6 +41,13 @@ def train_models(df_selected, df, labels, feature_names, label_col_name="mvp_sha
     results : dict
         A dictionary containing the evaluation results (MSE and R-squared) of the trained models,
         with the model names as keys.
+        
+    best_model_name : str
+        The name of the best performing model.
+        
+    best_model : object
+        The best performing model saved as a pickle file ('best_model.pkl').
+
     """
     # Split the data into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(df_selected, 
@@ -122,7 +133,7 @@ def train_models(df_selected, df, labels, feature_names, label_col_name="mvp_sha
                                      n_iter=50, 
                                      scoring='r2', 
                                      cv=5,
-                                     n_points=10,
+                                     n_points=15,
                                      random_state=28, 
                                      n_jobs=-1)
         bayes_search.fit(X_train, y_train)
@@ -139,5 +150,25 @@ def train_models(df_selected, df, labels, feature_names, label_col_name="mvp_sha
     # Find the best model based on R-squared
     best_model_name = max(results, key=lambda x: results[x]['R-squared'])
     best_model = trained_models[best_model_name]
+    # Save the best model
+    joblib.dump(best_model, 'best_model.pkl')
+    
+    # Calculate feature importances
+    feature_importances = {}
+    for model_name, model in trained_models.items():
+        importances = model.feature_importances_ if hasattr(model, 'feature_importances_') else None
+        feature_importances[model_name] = {feature_names[i]: importances[i] for i in range(len(feature_names))}
+    
+    # Extract the model names, R-squared values, and MSE values from the results
+    model_names = list(results.keys())
+    r_sqs = [result["R-squared"] for result in results.values()]
+    MSE_s = [result["MSE"] for result in results.values()]
+    
+    # Call the plotting function
+    plot_model_performance(model_names, r_sqs, MSE_s)
+    
+    # Call the print_dict_imps function
+    print_dict_imps(feature_importances)
+
 
     return trained_models, results, best_model_name, best_model
