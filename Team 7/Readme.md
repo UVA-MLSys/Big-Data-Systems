@@ -223,11 +223,11 @@ TBD ...
 
 - #### [mvp_data.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/mvp_data.csv):
 
-  Initial NBA mvp data set. Reduced in `DataCleaning_EDA.ipynb` to only include essential rows and columns of study.
+  Initial NBA mvp data set. Reduced in [DataCleaning_EDA.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/DataCleaning_EDA.ipynb) to only include essential rows and columns of study.
 
 - #### [mvp_data_edit.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/mvp_data_edit.csv)
 
-  The cleaned data from `DataCleaning_EDA.ipynb`, used in `Test.ipynb` to merge and compare predicted and actual values.
+  The cleaned data from [DataCleaning_EDA.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/DataCleaning_EDA.ipynb), used in [Test.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Test.ipynb) to merge and compare predicted and actual values.
 
 - #### [results.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/results.csv)
 
