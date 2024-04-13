@@ -29,10 +29,12 @@
 <!--te-->
 
 ## Introduction
+<a name="introduction"></a>
 
 Data Scientists and analysts have developed several metrics for determining a player's value to their team's success. Prominent examples include Value Over Replacement Player (VORP), Box Plus/Minus (BPM), and FiveThirtyEight's Robust Algorithm (using) Player Tracking (and) On/Off Ratings (RAPTOR)​. We aim to develop a multivariate index that weighs these parameters based on how well they predict MVP rankings, then test it on unseen data for the most recent five seasons to see if our "MVP index" correctly predicts the MVP rankings.​ We will experiment with the index formula and compare it to other methods developed by reputable analyst sources.
 
 ## Data
+<a name="data"></a>
 
 We obtained the dataset from [JK-Future](https://github.com/JK-Future-GitHub/NBA_MVP), who originally scraped the data from Basketball-Reference via automated HTML parsing. The dataset contains statistics for National Basketball Association (NBA) players relevant to determining the Most Valuable Player (MVP) in a season and has 7,329 entries with 53 columns. The dataset is significant in its breadth and depth of coverage.
 
@@ -58,6 +60,7 @@ We discuss additional preprocessing steps in the Experimental Design section bel
 The values we seek to predict are in the mvp_share column, which represents the MVP voting result for each season.
 
 ## Experimental Design
+<a name="experimental-design"></a>
 
 <details>
 <summary><strong>Click here for details about our hardware and compute resources</strong></summary>
@@ -74,6 +77,7 @@ We use Rivanna – the University of Virginia's High-Performance Computing (HPC)
 </details>
 
 #### Design Overview
+<a name="design-overview"></a>
 
 Below is an overview of the steps to gather the index values and model results. We detail these steps further in the Feature Selection Process, Modeling, Results, and Testing sections that follow.
 
@@ -83,6 +87,7 @@ Below is an overview of the steps to gather the index values and model results. 
 <p align="center">
 
 #### Feature Selection Process
+<a name="feature-selection-process"></a>
 
 In [FeatureSelection.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/FeatureSelection.ipynb), we load in [df_clean.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_clean.csv) as a Pandas DataFrame `(df)` and perform robust feature selection using the `preprocess_and_train` function from [preptrain.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/preptrain.py). The `preprocess_and_train` function serves to:
 
@@ -125,6 +130,7 @@ We chose to drop all of these except PTS because the latter effectively captures
 There are still some highly correlated features, but we proceed with these ten and save them to [df_selected.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_selected.csv) to use for modeling.
 
 #### Modeling
+<a name="modeling"></a>
 
 In [Models.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Models.ipynb), we use the `train_models` function from [modeling.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/modeling.py) to train and test only the ensemble and tree-based methods, as these are best suited for our next task — finding the best model we can and using the feature importance scores to inform our index design.
 
@@ -135,10 +141,12 @@ We then perform an 80-20 train/test split of the training data and test the best
 The Results and Testing sections below discuss the modeling results.
 
 #### Index Building
+<a name="index-building"></a>
 
 TBD...
 
 ### Results
+<a name="results"></a>
 
 The feature selection process originally produced a set of ten highly correlated features, the most correlated of which are related to scoring, as displayed below in the correlation heatmap:
 
@@ -164,13 +172,13 @@ We feed these ten features into the `train_models` function, which returns sever
 TO BE CONTINUED AFTER FURTHER VISUALIZATION
 
 ### Testing
+<a name="testing"></a>
 
 TBD ...
 
 
 ### Conclusions
-
-TBD ...
+<a name="conclusions"></a>
 
 </details>
 
