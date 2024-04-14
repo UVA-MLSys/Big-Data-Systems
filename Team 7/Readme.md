@@ -192,9 +192,6 @@ The predictions for the 2018 season were perfect in terms of ranking, but the mo
 ### Testing
 <a name="testing"></a>
 
-### Testing
-<a name="testing"></a>
-
 TBD ...
 
 
