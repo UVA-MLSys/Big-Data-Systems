@@ -201,6 +201,252 @@ TBD ...
 </details>
 
 <details>
+<summary><h1 style="font-size: 16px;">Minimal Reproducible Code</h1></summary>
+
+Each dropdown menu below contains the minimal reproducible code for reach of the Jupyter Notebooks:
+
+<details>
+<summary><h2 style="font-size: 14px;">DataCleaning_EDA</h2></summary>
+    
+```python
+import pandas as pd
+import numpy as np
+import os
+os.chdir('...')
+
+df = pd.read_csv('mvp_data.csv')
+
+# Fill missing values
+df['Rank'].fillna(0, inplace=True)
+df['mvp_share'].fillna(0.0, inplace=True)
+df['Trp Dbl'].fillna(0, inplace=True)
+
+# Normalize Triple Double
+df['Trp Dbl'] = df['Trp Dbl'] / df['G']
+
+# Convert 'G' and 'Season' to integer type
+df['G'] = df['G'].astype(int)
+df['Season'] = df['Season'].astype(int)
+
+# Filter out data based on conditions
+df = df[(df['G'] > 40) & (df['Season'] <= 2022)]
+
+# Ranking Conference
+df['Rk_Conf'] = df.groupby(['Season', 'conference'])['W'].rank("dense", ascending=False) + df['Rk_Year']
+df['Rk_Conf'] = df.groupby(['Season', 'conference'])['Rk_Conf'].rank("dense", ascending=True)
+
+# Create df_full
+df.to_csv("mvp_data_edit.csv", index=False, encoding="utf-8-sig")
+
+# Drop Wins and Conference
+df.drop(columns=['conference', 'W'], inplace=True)
+
+# Sort out seasons we'll use for testing/predictions
+df.sort_values(by=['Season'], ascending=False, inplace=True)
+df_last = df[df['Season'] > (2022 - 5)] 
+
+# Filter for seasons older than 5 years
+df = df[df['Season'] <= (2022 - 5)]
+df.drop(columns=['name'], inplace=True)
+
+df = df[df['Season'] >= 1980]
+df.drop(['Season'], axis="columns", inplace=True)
+
+df.to_csv('df_clean.csv', index=False)
+df_last.to_csv('df_last.csv', index=False)
+```
+
+</details>
+
+<details>
+<summary><h2 style="font-size: 14px;">FeatureSelection</h2></summary>
+
+```python
+import pandas as pd
+import numpy as np
+import time
+
+import os
+os.chdir('...')
+from preptrain import preprocess_and_train
+from helper_functions import print_importances, print_dict_imps4x2, avg_imps, plot_corr_heatmap
+
+# Load the data
+df = pd.read_csv('df_clean.csv')
+df_last = pd.read_csv('df_last.csv')
+labels = df.pop("mvp_share")
+stratify = df.pop("Rank")
+
+start_time = time.time()
+
+# Call the function to preprocess the data and perform feature selection
+(features_rf,
+ features_Dtree,
+ features_pca, 
+ features_gbm,
+ features_svr, 
+ features_Xtrees,
+ features_Ada,
+ features_XGB,
+ feature_importances) = preprocess_and_train(df, df_last, labels)
+
+end_time = time.time()
+execution_time = end_time - start_time
+print(f"Feature Selection execution time: {round(execution_time/60, 2)} minutes")
+
+selected_features = ['WS/48', 'MP', 'PTS', 'WS', 'VORP', 'PER', 'eFG%', 'AST', 'Rk_Year', 'DBPM']
+
+df_selected = df[selected_features]
+df_selected.to_csv('df_selected.csv', index=False)
+```
+</details>
+
+<details>
+<summary><h2 style="font-size: 14px;">Models</h2></summary>
+
+```python
+import time
+import os
+os.chdir('...')
+from modeling import train_models
+from helper_functions import get_hardware_details
+
+df = pd.read_csv('df_clean.csv')
+labels = df.pop("mvp_share")
+df_selected = pd.read_csv('df_selected.csv')
+feature_names = list(df_selected.columns)
+
+start_time = time.time()
+
+trained_models, results, best_model_name, best_model = train_models(df_selected,
+                                                                    df,
+                                                                    labels,
+                                                                    feature_names,
+                                                                    label_col_name="mvp_share")
+
+end_time = time.time()
+execution_time = end_time - start_time
+print(f"Model building execution time: {round(execution_time/60, 2)} minutes")
+```
+</details>
+
+<details>
+<summary><h2 style="font-size: 14px;">Test</h2></summary>
+
+```python
+import os
+os.chdir('/sfs/qumulo/qhome/bdr6qz/Documents/MSDS/DS6050')
+from helper_functions import print_importances, print_dict_imps, avg_imps, percent_formatter, plot_comparison_for_season
+
+import joblib
+# Load the best model from Models.ipynb
+best_model = joblib.load('best_model.pkl')
+
+# Load the data
+df_selected = pd.read_csv('df_selected.csv')
+features = list(df_selected.columns)
+features.append('mvp_share')
+features.append('Rank')
+df_train = pd.read_csv('df_clean.csv', usecols=features)
+labels = df_train.pop("mvp_share")
+stratify = df_train.pop("Rank")
+del features[10]
+del features[10]
+features.append('Season')
+features.append('name')
+df_test = pd.read_csv('df_last.csv', usecols=features)
+df_test.rename(columns={'name': 'Name'}, inplace=True)
+del features[10]
+del features[10]
+
+(X_train, X_test, y_train, y_test) = train_test_split(df_train, 
+                                                      labels, 
+                                                      test_size=0.2, 
+                                                      shuffle=True, 
+                                                      random_state=28, 
+                                                      stratify=stratify)
+
+# Convert each dataset to array
+y_train = y_train.values
+y_test = y_test.values
+X_train = X_train.values
+X_test = X_test.values
+
+best_model.fit(X_train, y_train)
+
+# Make predictions on the test data using the best model
+y_pred = best_model.predict(X_test)
+
+# Evaluate the best model using mean squared error and R-squared
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print("Test MSE:", mse)
+print("Test R-squared:", r2)
+
+dfs_n_last = []
+for season_n in df_test['Season'].unique():
+        df_n = df_test[df_test['Season'] == season_n].copy()
+        names_n = df_n["Name"].values
+        df_n.drop(['Season', 'Name'], axis="columns", inplace=True)
+        feature_n = df_n.to_numpy()
+
+        prediction = best_model.predict(feature_n)
+        df_curr = pd.DataFrame(data=feature_n, index=None, columns=features)
+        df_curr['Season'] = season_n
+        df_curr['name'] = names_n
+        df_curr['predicted'] = prediction * 100
+        dfs_n_last.append(df_curr)
+        df_curr = df_curr.sort_values(by=['predicted'], ascending=False, ignore_index=True)
+        
+df_pred = pd.concat(dfs_n_last, ignore_index=True)
+
+#df_pred = pd.read_csv('predictions.csv')
+keep = list(df_pred.columns)
+del keep[12]
+keep.append('mvp_share')
+df_full = pd.read_csv('mvp_data_edit.csv', usecols=keep)
+# Merge df_pred with df_full on "name" and "Season" columns
+merged_df = pd.merge(df_pred, df_full[['name', 'Season', 'mvp_share']], 
+                     on=['name', 'Season'], how='left')
+# Rename the 'mvp_share' column to 'actual' in the merged dataframe
+merged_df.rename(columns={'mvp_share': 'actual'}, inplace=True)
+merged_df['actual'] *= 100
+
+# Define custom colors for 'predicted' and 'actual'
+custom_palette = {'predicted': '#E57200', 'actual': '#232D4B'}
+
+# Iterate over unique values in the 'Season' column and create separate plots for each
+unique_seasons = merged_df['Season'].unique()
+
+plot_comparison_for_season(merged_df, 2022)
+plot_comparison_for_season(merged_df, 2021)
+plot_comparison_for_season(merged_df, 2020)
+plot_comparison_for_season(merged_df, 2019)
+plot_comparison_for_season(merged_df, 2018)
+
+df_results = pd.read_csv('mvp_data_edit.csv')
+# Drop Wins and Conference because we combined in cleaning notebook
+df_results.drop(columns=['conference', 'W'], inplace=True)
+# Filter to seasons after 1980 as we do in training
+df_results = df_results[df_results['Season'] >= 1980]
+# Pull out the feature importances
+feature_importances = best_model.feature_importances_
+# Normalize feature importances
+normalized_importances = feature_importances / np.sum(feature_importances)
+# Construct index
+index_values = np.dot(df_results[features].values, normalized_importances)
+# Add index values as a new column to the DataFrame
+df_results['index'] = index_values
+# Rank the 'Index' column within each season group and store the result in a new column 'Ranked_Index'
+df_results['Ranked_Index'] = df_results.groupby('Season')['index'].rank(ascending=False)
+
+df_results.to_csv('results.csv', index=False)
+```
+</details>
+</details>
+
+<details>
 <summary><h1 style="font-size: 16px;">Manifest</h1></summary>
 
 <details>
