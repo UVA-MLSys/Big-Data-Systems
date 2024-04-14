@@ -7,7 +7,7 @@
 </h1>
 <p align="center">
 
-# Sarah Elmasry, Ran Gao, Wyatt Scott, and Rish Sharma
+# Sarah Elmasry, Ran Gao, Wyatt Scott, and Rishi Sharma
 
 <details>
 <summary><h1 style="font-size: 22px;">Report</h1></summary>
