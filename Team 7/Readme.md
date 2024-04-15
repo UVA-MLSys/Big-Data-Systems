@@ -203,7 +203,7 @@ TBD ...
 <details>
 <summary><h1 style="font-size: 16px;">Minimal Reproducible Code</h1></summary>
 
-Each dropdown menu below contains the minimal reproducible code for reach of the Jupyter Notebooks:
+The dropdown menus below contain minimal reproducible code for reach of the Jupyter Notebooks:
 
 <details>
 <summary><h2 style="font-size: 14px;">DataCleaning_EDA</h2></summary>
@@ -309,7 +309,6 @@ import time
 import os
 os.chdir('...')
 from modeling import train_models
-from helper_functions import get_hardware_details
 
 df = pd.read_csv('df_clean.csv')
 labels = df.pop("mvp_share")
@@ -318,11 +317,14 @@ feature_names = list(df_selected.columns)
 
 start_time = time.time()
 
-trained_models, results, best_model_name, best_model = train_models(df_selected,
-                                                                    df,
-                                                                    labels,
-                                                                    feature_names,
-                                                                    label_col_name="mvp_share")
+(trained_models,
+results,
+best_model_name,
+best_model) = train_models(df_selected,
+                           df,
+                           labels,
+                           feature_names,
+                           label_col_name="mvp_share")
 
 end_time = time.time()
 execution_time = end_time - start_time
@@ -335,14 +337,14 @@ print(f"Model building execution time: {round(execution_time/60, 2)} minutes")
 
 ```python
 import os
-os.chdir('/sfs/qumulo/qhome/bdr6qz/Documents/MSDS/DS6050')
+os.chdir('...')
 from helper_functions import print_importances, print_dict_imps, avg_imps, percent_formatter, plot_comparison_for_season
 
 import joblib
 # Load the best model from Models.ipynb
 best_model = joblib.load('best_model.pkl')
 
-# Load the data
+# Load and set up the data
 df_selected = pd.read_csv('df_selected.csv')
 features = list(df_selected.columns)
 features.append('mvp_share')
@@ -372,6 +374,7 @@ y_test = y_test.values
 X_train = X_train.values
 X_test = X_test.values
 
+# Fit best model
 best_model.fit(X_train, y_train)
 
 # Make predictions on the test data using the best model
@@ -384,6 +387,7 @@ r2 = r2_score(y_test, y_pred)
 print("Test MSE:", mse)
 print("Test R-squared:", r2)
 
+# Compare predicted to actual
 dfs_n_last = []
 for season_n in df_test['Season'].unique():
         df_n = df_test[df_test['Season'] == season_n].copy()
@@ -401,7 +405,6 @@ for season_n in df_test['Season'].unique():
         
 df_pred = pd.concat(dfs_n_last, ignore_index=True)
 
-#df_pred = pd.read_csv('predictions.csv')
 keep = list(df_pred.columns)
 del keep[12]
 keep.append('mvp_share')
@@ -409,12 +412,10 @@ df_full = pd.read_csv('mvp_data_edit.csv', usecols=keep)
 # Merge df_pred with df_full on "name" and "Season" columns
 merged_df = pd.merge(df_pred, df_full[['name', 'Season', 'mvp_share']], 
                      on=['name', 'Season'], how='left')
+
 # Rename the 'mvp_share' column to 'actual' in the merged dataframe
 merged_df.rename(columns={'mvp_share': 'actual'}, inplace=True)
 merged_df['actual'] *= 100
-
-# Define custom colors for 'predicted' and 'actual'
-custom_palette = {'predicted': '#E57200', 'actual': '#232D4B'}
 
 # Iterate over unique values in the 'Season' column and create separate plots for each
 unique_seasons = merged_df['Season'].unique()
@@ -425,22 +426,31 @@ plot_comparison_for_season(merged_df, 2020)
 plot_comparison_for_season(merged_df, 2019)
 plot_comparison_for_season(merged_df, 2018)
 
+# Save the results to the original data
 df_results = pd.read_csv('mvp_data_edit.csv')
-# Drop Wins and Conference because we combined in cleaning notebook
+
+# Drop Wins and Conference because we combined in DataCleaning_EDA.ipynb
 df_results.drop(columns=['conference', 'W'], inplace=True)
+
 # Filter to seasons after 1980 as we do in training
 df_results = df_results[df_results['Season'] >= 1980]
+
 # Pull out the feature importances
 feature_importances = best_model.feature_importances_
+
 # Normalize feature importances
 normalized_importances = feature_importances / np.sum(feature_importances)
+
 # Construct index
 index_values = np.dot(df_results[features].values, normalized_importances)
+
 # Add index values as a new column to the DataFrame
 df_results['index'] = index_values
+
 # Rank the 'Index' column within each season group and store the result in a new column 'Ranked_Index'
 df_results['Ranked_Index'] = df_results.groupby('Season')['index'].rank(ascending=False)
 
+# Save the final results dataframe
 df_results.to_csv('results.csv', index=False)
 ```
 </details>
