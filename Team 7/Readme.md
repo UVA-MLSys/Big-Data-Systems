@@ -146,7 +146,7 @@ TBD...
 ### Results
 <a name="results"></a>
 
-The feature selection process originally produced a set of ten highly correlated features, the most correlated of which are related to scoring, as displayed below in the correlation heatmap:
+The feature selection process originally produced a set of ten highly correlated features, the most correlated of which relate to scoring, as displayed below in the correlation heatmap:
 
 <h1 align="center">
     <img src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/images/corr_scoring.png">
