@@ -11,7 +11,7 @@
 
 Data Scientists and analysts have developed several metrics for determining a player's value to their team's success. Prominent examples include Value Over Replacement Player (VORP), Box Plus/Minus (BPM), and FiveThirtyEight's Robust Algorithm (using) Player Tracking (and) On/Off Ratings (RAPTOR)​. We aim to develop a multivariate index that weighs these parameters based on how well they predict MVP rankings, then test it on unseen data for the most recent five seasons to see if our index correctly predicts the MVP rankings.​ We will experiment with the index formula and compare it to other methods developed by reputable analyst sources.
 
-Click on the Report dropdown menu below to read more about the data, experimental design, results, testing, and conclusions.
+Click on the Report dropdown menu below to learn about the data, experimental design, results, testing, and conclusions.
 
 <details>
 <summary><h1 style="font-size: 22px;">Report</h1></summary>
@@ -54,7 +54,7 @@ We store the dataset in [mvp_data.csv](https://github.com/WD-Scott/DS5110_Projec
 
 We discuss additional preprocessing steps in the Experimental Design section below, as these steps relate to the project's feature selection and modeling phases.
 
-The values we seek to predict are in the mvp_share column, which represents the MVP voting result for each season.
+The values we seek to predict are in the mvp_share column, representing each season's MVP voting result.
 
 ## Experimental Design
 <a name="experimental-design"></a>
@@ -118,9 +118,9 @@ In [Models.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%2
 
 In [Test.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Test.ipynb), we load in the selected features, the training dataset, the testing dataset containing the data for the 2018–22 seasons, and the best model from [Models.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Models.ipynb). We filter the training and testing data to include only the selected features.
 
-We then perform an 80-20 train/test split of the training data and test the best model. Next, we use the best model to predict the mvp_share for the 2018–22 seasons and compare the predicted values to the actual values.
+We then call the `evaluate_model` function from [helper_functions.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/helper_functions.py) to retrain the best model and predict the mvp_share for the 2018–22 seasons. We then compare the predicted values to the actual values.
 
-The Results and Testing sections below discuss the modeling results.
+The Results section below discusses the results from our feature selection and modeling processes, and the Testing section contains results from testing our best model and index.
 
 ### Results
 <a name="results"></a>
@@ -132,7 +132,7 @@ The feature selection process originally produced a set of ten highly correlated
 </h1>
 <p align="center">
 
-Points (PTS) captures all of these, for the most part, so we drop FTA, FGA, FG, 2P, and FT. We also drop weight as it only appeared once.
+Points (PTS) captures all of these, for the most part, so we drop FTA, FGA, FG, 2P, and FT. We also dropped weight, as it only appeared once.
 
 Moving to the next-highest features in terms of importance, we get:
 
@@ -147,7 +147,7 @@ Moving to the next-highest features in terms of importance, we get:
 9. BPM
 10. Rk_Conf
 
-FG% is also highly correlated with PTS, so we drop that as well. This brings in BPM, which is highly correlated with OBPM, so we drop the latter in favor of the former since it captures both OBPM and DBPM. In replacing FG%, we now look at the next candidate feature, DWS and OWS, which are correlated with WS, so we do not include those. The next option is Rk_Year, which is highly correlated with Rk_Conf and likely captures more than just conference ranking, so we include Rk_Year instead of Rk_Conf. Finally, we get AST%. So, our final set of ten features are:
+FG% is also highly correlated with PTS, so we also drop that. This brings in BPM, which is highly correlated with OBPM, so we drop the latter in favor of the former since it captures both OBPM and DBPM. In replacing FG%, we now look at the next candidate features, DWS and OWS, which are correlated with WS, so we do not include those. The next option is Rk_Year, which is highly correlated with Rk_Conf and likely captures more than just conference ranking, so we include Rk_Year instead of Rk_Conf. Finally, we get AST%. So, our final set of ten features are:
 
 1. MP = Minutes Played
 2. PTS = Points
@@ -160,7 +160,7 @@ FG% is also highly correlated with PTS, so we drop that as well. This brings in 
 9. Rk_Year = Team Ranking
 10. AST% = Assist percentage
 
-There are still some highly correlated features, but we proceed with these ten and save them to [df_selected.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_selected.csv) to use for modeling.
+There are still some highly correlated features, but we proceeded with these ten and saved them to [df_selected.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_selected.csv) to use for modeling.
 
 <h1 align="center">
     <img src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/images/corr_final.png">
@@ -188,7 +188,7 @@ The chart below displays the predicted values from the best model compared to th
 </h1>
 <p align="center">
 
-The range plot shows that the predicted values for mvp_share are, at least for these top four candidates for the 2018–22 seasons, not wildly off. There are some player-year combinations (Damian Lillard, 2018; Nikola Jokic, 2019; and James Harden, 2020) for which the predicted value is very close to the actual.
+The range plot shows that the predicted values for mvp_share are not wildly off for the top four candidates for the 2018–22 seasons. There are some player-year combinations (Damian Lillard, 2018; Nikola Jokic, 2019; and James Harden, 2020) for which the predicted value is very close to the actual.
 
 The table below shows whether the model correctly predicted the top four rankings for the 2018–22 seasons; the model accurately predicts which players are in the top four each season but doesn't always order them correctly. 
 
@@ -197,7 +197,7 @@ The table below shows whether the model correctly predicted the top four ranking
 </h1>
 <p align="center">
 
-The model accuratley predicts the MVP for each of the five seasons in the test set. The predictions for the 2018 season were perfect in terms of ranking, but the model's rankings for the next four seasons are slightly off. The rankings for 1st and 2nd for the 2019 season are correct, but the model swaps the 3rd and 4th place candidates. For the 2020 season, the model correctly ranks the 1st and 4th place candidates but swaps 2nd and 3rd place. The model correctly ranks the 1st and 2nd place candidates for the 2021 season but places 3rd and 4th out of order. For the 2022 season, the model incorrectly ranks the 2nd and 3rd place candidates but correctly ranks 1st and 4th.
+The model accurately predicts the MVP for each of the five seasons in the test set. The predictions for the 2018 season were perfect in terms of ranking, but the model's rankings for the next four seasons are slightly off. The rankings for 1st and 2nd for the 2019 season are correct, but the model swaps the 3rd and 4th place candidates. For the 2020 season, the model correctly ranks the 1st and 4th place candidates but swaps 2nd and 3rd place. The model correctly ranks the 1st and 2nd place candidates for the 2021 season but places 3rd and 4th out of order. For the 2022 season, the model incorrectly ranks the 2nd and 3rd place candidates but correctly ranks 1st and 4th.
 
 ### Conclusions
 <a name="conclusions"></a>
@@ -209,7 +209,7 @@ TBD...
 <details>
 <summary><h1 style="font-size: 16px;">Minimal Reproducible Code</h1></summary>
 
-The dropdown menus below contain minimal reproducible code for reach of the Jupyter Notebooks:
+The dropdown menus below contain minimal reproducible code for each of the Jupyter Notebooks:
 
 <details>
 <summary><h2 style="font-size: 14px;">DataCleaning_EDA</h2></summary>
