@@ -1,4 +1,5 @@
 ### This is the AWS Lambda Function Script uploaded and running to serve the data.
+
 import boto3
 import io
 import json 
@@ -164,7 +165,6 @@ def lambda_handler(event, context):
             }) 
         
         json_data = json.dumps(json_data)    
-        print(json_data)
     # Construct http response object
     responseObject = {}
     responseObject['statusCode'] = 200
