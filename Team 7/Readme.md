@@ -513,6 +513,9 @@ df_results.to_csv('results.csv', index=False)
 - #### [helper_functions.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/helper_functions.py):
 
 This module contains various helper functions for system information retrieval, model evaluation, and visualization.
+
+<details>
+<summary><strong>Click here to see the helper functions</strong></summary>
     
 - `get_hardware_details()`:
   
@@ -549,6 +552,7 @@ This module contains various helper functions for system information retrieval, 
 - `evaluate_model(best_model, df_train, labels, df_test, features, stratify)`
 
   Evaluate the best model and generate predictions.
+</details>
 </details>
 
 <details>
