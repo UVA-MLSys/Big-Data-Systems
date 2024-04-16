@@ -147,7 +147,7 @@ Moving to the next-highest features in terms of importance, we get:
 9. BPM
 10. Rk_Conf
 
-FG% is also highly correlated with PTS, so we also drop that. This brings in BPM, which is highly correlated with OBPM, so we drop the latter in favor of the former since it captures both OBPM and DBPM. In replacing FG%, we now look at the next candidate features, DWS and OWS, which are correlated with WS, so we do not include those. The next option is Rk_Year, which is highly correlated with Rk_Conf and likely captures more than just conference ranking, so we include Rk_Year instead of Rk_Conf. Finally, we get AST%. So, our final set of ten features are:
+FG% is also highly correlated with PTS, so we also drop that. This brings in BPM, which is highly correlated with OBPM, so we drop the latter in favor of the former since it captures both OBPM and DBPM. In replacing FG%, we now look at the next candidate features, DWS and OWS, which are correlated with WS, so we do not include those. The next option is Rk_Year, which is highly correlated with Rk_Conf and likely captures more than just conference ranking, so we include Rk_Year instead of Rk_Conf. Finally, we get AST%. So, our final set of ten features is:
 
 1. MP = Minutes Played
 2. PTS = Points
