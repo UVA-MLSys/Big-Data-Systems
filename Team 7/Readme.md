@@ -204,11 +204,11 @@ The model accurately predicts the MVP for each of the five seasons in the test s
 
 The initial feature selection and index calculating model performs well at predicting the 1st-place winner of the award but struggles to predict the runner-ups. This is likely because no distribution is associated with receiving a certain number of runner-up votes in the model. When 100 media members vote on who should win the award, they rank their top 5, with each player receiving points based on how many 1st, 2nd, 3rd, 4th, and 5th placed votes they receive. The following is how many points each place vote is worth:
 
-1st = 10
-2nd = 7
-3rd = 5
-4th = 3
-5th = 1
+- 1st = 10
+- 2nd = 7
+- 3rd = 5
+- 4th = 3
+- 5th = 1
 
 The player with the most aggregate points wins. This point distribution demonstrates why the model can predict 1st place but can't allocate a point total for the remaining four places. For future enhancements, the model should predict a complete voting distribution for at least the top 10 players in consideration for the award.
 
