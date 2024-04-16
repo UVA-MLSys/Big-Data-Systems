@@ -7,6 +7,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib.colors import ListedColormap
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, r2_score
 
 """
 helper_functions.py
@@ -36,11 +38,100 @@ Functions:
    Plot the R-squared and MSE values of different regression models.
    
 8. percent_formatter(x, pos):
-   Format the tick labels without decimal places
+   Format the tick labels without decimal places.
    
 9. plot_comparison_for_season(df, season):
    Plots difference btw. predicted and actual and the values.
+   
+10. evaluate_model(best_model, df_train, labels, df_test, features, stratify):
+    Used to evaluate the best model on the test data from 2018-22.
 """
+
+def evaluate_model(best_model, df_train, labels, df_test, features, stratify):
+    """
+    Evaluate the best model and generate predictions.
+
+    Parameters:
+    - best_model : scikit-learn estimator
+        The trained machine learning model to be evaluated.
+    - df_train : pandas DataFrame
+        The training dataset containing features.
+    - labels : pandas Series
+        The target variable for the training dataset.
+    - df_test : pandas DataFrame
+        The testing dataset containing features.
+    - features : list
+        A list of feature names used for modeling.
+    - stratify : array-like or None, default=None
+        If not None, data is split in a stratified fashion, using this as the class labels.
+
+    Returns:
+    - X_train : numpy array
+        The features of the training dataset.
+    - X_test : numpy array
+        The features of the testing dataset.
+    - y_train : numpy array
+        The target variable of the training dataset.
+    - y_test : numpy array
+        The target variable of the testing dataset.
+    - merged_df : pandas DataFrame
+        A DataFrame containing predictions and actual values merged with additional data.
+
+    Notes:
+    - This function fits the provided model to the training data, evaluates its performance on the testing data,
+      generates predictions for each season in the testing dataset, and merges the predictions with the actual data.
+    """
+    # Split data into train and test sets
+    X_train, X_test, y_train, y_test = train_test_split(df_train, 
+                                                        labels, 
+                                                        test_size=0.2, 
+                                                        shuffle=True, 
+                                                        random_state=28, 
+                                                        stratify=stratify)
+    
+    # Convert datasets to arrays
+    y_train = y_train.values
+    y_test = y_test.values
+    X_train = X_train.values
+    X_test = X_test.values
+    
+    # Fit the best model
+    best_model.fit(X_train, y_train)
+    
+    # Make predictions on the test data
+    y_pred = best_model.predict(X_test)
+    
+    # Evaluate the model
+    mse = mean_squared_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
+    print("Test MSE:", mse)
+    print("Test R-squared:", r2)
+    
+    # Generate predictions for each season in df_test
+    dfs_n_last = []
+    for season_n, df_n in df_test.groupby('Season'):
+        feature_n = df_n.drop(['Season', 'Name'], axis=1).values
+        prediction = best_model.predict(feature_n)
+        df_curr = pd.DataFrame(data=feature_n, columns=features)
+        df_curr['Season'] = season_n
+        df_curr['name'] = df_n['Name'].values
+        df_curr['predicted'] = prediction * 100
+        df_curr = df_curr.sort_values(by='predicted', ascending=False).reset_index(drop=True)
+        dfs_n_last.append(df_curr)
+
+    df_pred = pd.concat(dfs_n_last, ignore_index=True)
+    
+    # Merge predictions with actual data
+    keep = list(df_pred.columns)
+    del keep[12]
+    keep.append('mvp_share')
+    df_full = pd.read_csv('mvp_data_edit.csv', usecols=keep)
+    merged_df = pd.merge(df_pred, df_full[['name', 'Season', 'mvp_share']], on=['name', 'Season'], how='left')
+    merged_df.rename(columns={'mvp_share': 'actual'}, inplace=True)
+    merged_df['actual'] *= 100
+    
+    return X_train, X_test, y_train, y_test, merged_df
+
 
 def plot_comparison_for_season(df, season):
     """
@@ -222,6 +313,46 @@ def print_dict_imps(feature_importances):
         combined_table = '\n'.join('  '.join(lines) for lines in zip(*[table.split('\n') for table in table_strings]))
         print(combined_table)
         print()
+        
+def print_dict_imps4x2(feature_importances):
+    """
+    Print the feature importances in a visually appealing table format side-by-side.
+
+    Parameters
+    ----------
+    feature_importances : dict
+        Dictionary containing feature importances with method names as keys.
+
+    Returns
+    -------
+    None
+    """
+    tables = []
+    for method, importances in feature_importances.items():
+        sorted_importances = sorted(importances.items(), key=lambda x: x[1], reverse=True)
+        # Round the importances to 5 decimal places
+        rounded_importances = [(feature, round(imp, 5)) for feature, imp in sorted_importances]
+        # Construct the table with headers and rounded importances
+        table = tabulate(rounded_importances, headers=["Feature", "Importance"], tablefmt="fancy_grid", showindex=False)
+        tables.append((method, table))
+
+    # Split tables into groups of four
+    grouped_tables = [tables[i:i+4] for i in range(0, len(tables), 4)]
+
+    # Print tables in rows of four
+    for group in grouped_tables:
+        max_rows = max(len(table.split('\n')) for _, table in group)
+        table_strings = []
+        for method, table in group:
+            table_lines = table.split('\n')
+            # Pad with empty lines if necessary
+            table_lines += [''] * (max_rows - len(table_lines))
+            # Insert method name in the first row
+            table_lines[0] = f"{method:^{len(table_lines[0])}}"
+            table_strings.append('\n'.join(table_lines))
+        combined_table = '\n'.join('  '.join(lines) for lines in zip(*[table.split('\n') for table in table_strings]))
+        print(combined_table)
+        print()
     
 def avg_imps(feature_importances):
     """
@@ -302,7 +433,7 @@ def create_imp_df(model_names, models, feature_names):
     return df_imps
 
 
-def plot_corr_heatmap(corr_matrix, selected_feature_names, threshold=0.65, width=7, height=4):
+def plot_corr_heatmap(corr_matrix, selected_feature_names, threshold=0.65, width=7, height=4, show_vals=True):
     """
     Plot a correlation heatmap for selected features.
 
@@ -322,6 +453,9 @@ def plot_corr_heatmap(corr_matrix, selected_feature_names, threshold=0.65, width
 
     height : int, optional (default=4)
         Height of the heatmap figure.
+        
+    show_vals : bool, optional (default=True)
+        Whether to show the correlation values on the heatmap.
 
     Returns:
     --------
@@ -345,13 +479,14 @@ def plot_corr_heatmap(corr_matrix, selected_feature_names, threshold=0.65, width
     f, ax = plt.subplots(figsize=(width, height))
     
     # Plot heatmap
-    sns.heatmap(corr_matrix_selected, annot=False, mask=mask, cmap=custom_cmap, linewidths=0.3)
+    sns.heatmap(corr_matrix_selected, annot=show_vals, mask=mask, cmap=custom_cmap, linewidths=0.3)
     
     # Add labels for correlations greater than or equal to the threshold and below the diagonal
-    for i in range(len(corr_matrix_selected.columns)):
-        for j in range(i):
-            if abs(corr_matrix_selected.iloc[i, j]) >= threshold:
-                ax.text(j + 0.5, i + 0.5, f"{corr_matrix_selected.iloc[i, j]:.2f}", ha='center', va='center', color='black')
+    if show_vals:
+        for i in range(len(corr_matrix_selected.columns)):
+            for j in range(i):
+                if abs(corr_matrix_selected.iloc[i, j]) >= threshold:
+                    ax.text(j + 0.5, i + 0.5, f"{corr_matrix_selected.iloc[i, j]:.2f}", ha='center', va='center', color='black')
     
     plt.title('Correlation Heatmap')
     plt.show()
