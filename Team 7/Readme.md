@@ -544,7 +544,7 @@ This module contains various helper functions for system information retrieval, 
   
   Create a DataFrame of feature importances for each model.
 
-- `plot_corr_heatmap(corr_matrix, selected_feature_names, threshold=0.65, width=7, height=4)`:
+- `plot_corr_heatmap(corr_matrix, selected_feature_names, threshold=0.65, width=7, height=4, show_vals=True)`:
   
   Plot a correlation heatmap for selected features.
 
