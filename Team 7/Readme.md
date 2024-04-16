@@ -564,10 +564,11 @@ The README.md file includes the repository description and the report.
 
 - #### [requirements.txt](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/requirements.txt):
 
+This file includes all of the necessary libraries and versions for running our code.
+
 - #### [best_model.pkl](https://github.com/WD-Scott/DS5110_Project/blob/main/best_model.pkl):
 
 This file contains the best model from [Models.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Models.ipynb).
 
-This file includes all of the necessary libraries and versions for running our code.
 </details>
 </details>
