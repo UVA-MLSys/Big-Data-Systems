@@ -554,6 +554,7 @@ This module contains various helper functions for system information retrieval, 
   Plot the actual vs. predicted mvp_share values.
 
 - `evaluate_model(best_model, df_train, labels, df_test, features, stratify)`
+
   Evaluate the best model and generate predictions.
 </details>
 
