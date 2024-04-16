@@ -110,22 +110,7 @@ We set the `n_jobs` parameter to $-1$ in the [BayesSearchCV](https://scikit-opti
 
 After running the `preprocess_and_train` function, we use the `print_dict_imps` function from [helper_functions.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/helper_functions.py) to print tables of the feature importances for each method, which the `preprocess_and_train` function stores in a Python dictionary. We then use the `avg_imp` function from [helper_functions.py](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Python%20Modules/helper_functions.py) to display the average feature importance across the eight methods. 
 
-The results for the top 10 features included several highly correlated features related to points (scoring), including FT (free throws), 2P (two-pointers), FG (field goals), FGA (field goal attempts), FTA (free throw attempts), and PTS (points).
-
-We chose to drop all of these except PTS because the latter effectively captures the others. The resulting top ten features are:
-
-- WS/48 = Win Shares per 48
-- MP = Minutes Played
-- PTS = Points
-- WS = Win Shares (see <a href="https://www.basketball-reference.com/about/ws.html">NBA Win Shares</a>)
-- VORP = Value Over Replacement Player
-- PER = Player Efficiency Rating (see <a href="https://www.basketball-reference.com/about/per.html">Calculating PER</a>)
-- eFG% = Effective Field Goal Percentage
-- AST = Assists
-- Rk_Year = Team Ranking
-- DBPM = Defensive Box Plus-Minus
-
-There are still some highly correlated features, but we proceed with these ten and save them to [df_selected.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_selected.csv) to use for modeling.
+Please refer to the Results section below to see the results of the feature selection process.
 
 #### Modeling
 <a name="modeling"></a>
@@ -153,7 +138,35 @@ The feature selection process originally produced a set of ten highly correlated
 </h1>
 <p align="center">
 
-As mentioned, we dropped FT, 2P, FG, FGA, and FTA but retained PTS. Now, the top ten features include those displayed in the correlation heatmap below:
+Points (PTS) captures all of these, for the most part, so we drop FTA, FGA, FG, 2P, and FT. We also drop weight as it only appeared once.
+
+Moving to the next-highest features in terms of importance, we get:
+
+1. MP
+2. PTS
+3. PER
+4. VORP
+5. WS
+6. TOV
+7. FG%
+8. STL%
+9. BPM
+10. Rk_Conf
+
+FG% is also highly correlated with PTS, so we drop that as well. This brings in BPM, which is highly correlated with OBPM, so we drop the latter in favor of the former since it captures both OBPM and DBPM. In replacing FG%, we now look at the next candidate feature, DWS and OWS, which are correlated with WS, so we do not include those. The next option is Rk_Year, which is highly correlated with Rk_Conf and likely captures more than just conference ranking, so we include Rk_Year instead of Rk_Conf. Finally, we get AST%. So, our final set of ten features are:
+
+1. MP = Minutes Played
+2. PTS = Points
+3. PER = Player Efficiency Rating (see <a href="https://www.basketball-reference.com/about/per.html">Calculating PER</a> for the formula)
+4. VORP = Value Over Replacement Player
+5. WS = Win Shares (see <a href="https://www.basketball-reference.com/about/ws.html">NBA Win Shares)</a> for information about how this feature is calculated)
+6. TOV = Turnovers
+7. STL% = Steal percentage
+8. BPM = Box Plus-Minus
+9. Rk_Year = Team Ranking
+10. AST% = Assist percentage
+
+There are still some highly correlated features, but we proceed with these ten and save them to [df_selected.csv](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Data%20Files/df_selected.csv) to use for modeling.
 
 <h1 align="center">
     <img src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/images/corr_final.png">
@@ -167,18 +180,18 @@ We feed these ten features into the `train_models` function, which returns sever
 </h1>
 <p align="center">
 
-The chart shows clearly that the best model is the Extreme Gradient Boosting Regressor (XGB), and the `train_models` function saves the best model to `best_model.pkl` using the `joblib` library.
+The chart shows that the best model is the Extra Trees Regressor (XTrees), and the `train_models` function saves the best model to `best_model.pkl` using the `joblib` library.
 
 We import the best model into [Test.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Test.ipynb) to perform testing on the unseen data.
 
-The chart below displays the predicted values from the best model compared to the actual values; the model orange markers are the predicted value, and the dark blue markers are the actual value:
+The chart below displays the predicted values from the best model compared to the actual values; the orange markers represent the predicted value, and the dark blue markers represent the actual value:
 
 <h1 align="center">
     <img src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/images/pred_act.png">
 </h1>
 <p align="center">
 
-The range plot shows that the predicted values for mvp_share are, at least for these top four candidates for the 2018–22 seasons, pretty far off. There are some player-year combinations (Damian Lillard, 2018; Nikola Jokic, 2019; and James Harden, 2020) for which the predicted value is very close to the actual.
+The range plot shows that the predicted values for mvp_share are, at least for these top four candidates for the 2018–22 seasons, not wildly off. There are some player-year combinations (Damian Lillard, 2018; Nikola Jokic, 2019; and James Harden, 2020) for which the predicted value is very close to the actual.
 
 The table below shows whether the model correctly predicted the top four rankings for the 2018–22 seasons; the model accurately predicts which players are in the top four each season but doesn't always order them correctly. 
 
@@ -187,7 +200,7 @@ The table below shows whether the model correctly predicted the top four ranking
 </h1>
 <p align="center">
 
-The predictions for the 2018 season were perfect in terms of ranking, but the model's rankings for the next four seasons are slightly off. The rankings for 1st and 2nd for the 2019 season are correct, but the model swaps the 3rd and 4th place candidates. For the 2020 season, the model correctly ranks the 1st and 4th place candidates but swaps 2nd and 3rd place. The model correctly ranks the 1st and 3rd place candidates for the 2021 season but places 2nd and 4th out of order. For the 2022 season, the model incorrectly ranks the 1st and 3rd place candidates but correctly ranks 2nd and 4th.
+The model accuratley predicts the MVP for each of the five seasons in the test set. The predictions for the 2018 season were perfect in terms of ranking, but the model's rankings for the next four seasons are slightly off. The rankings for 1st and 2nd for the 2019 season are correct, but the model swaps the 3rd and 4th place candidates. For the 2020 season, the model correctly ranks the 1st and 4th place candidates but swaps 2nd and 3rd place. The model correctly ranks the 1st and 2nd place candidates for the 2021 season but places 3rd and 4th out of order. For the 2022 season, the model incorrectly ranks the 2nd and 3rd place candidates but correctly ranks 1st and 4th.
 
 ### Testing
 <a name="testing"></a>
