@@ -31,7 +31,7 @@ Six models were explored for benchmarking:
 | tiny_vit_5m | 5110284 | 20.44 MB |
 
 
-For the purpose of comparing apples to apples during benchmarking no image augmentation was employed and the same set of hyper-parameters were used for all models during training. All models had the inital weights set from IMAGENET1K_V2. All layers had their weights made trainable. The loss function used for training was cross entropy loss. Training was done on a ml.c5.9xlarge virtual machine instance. The hyper-parameters were set to the following:
+For the purpose of comparing apples to apples during benchmarking no image augmentation was employed and the same set of hyper-parameters were used for all models during training. All models had the inital weights set from IMAGENET1K_V2 (except tiny_vit_5m). All layers had their weights made trainable. The loss function used for training was cross entropy loss. Training was done on a ml.c5.9xlarge virtual machine instance. The hyper-parameters were set to the following:
 * Epochs - 10
 * Learning Rate - 0.0001
 * Optimizer - Adam
