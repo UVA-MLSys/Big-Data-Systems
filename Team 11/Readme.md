@@ -21,12 +21,15 @@ After loading the images they are cropped according to the bounding boxes specif
 
 ## Training
 Six models were explored for benchmarking:
-* Shufflenet_V2_X0_5
-* Shufflenet_V2_X1_0
-* MNASNET0_5
-* MobileNet_V3_Small_Weights
-* MobileNet_V3_Large_Weights
-* Tiny_Vit_5M
+| Model | # of Parameters | Size (MB)|
+| ----- | --------------- | -------- |
+| mobilenet_v3_large | 5483032 | 21.93 MB |
+| mobilenet_v3_small | 2542856 | 10.17 MB |
+| mnasnet0_5 | 2218512 | 8.87 MB |
+| shufflenet_v2_x0_5 | 1366792 | 5.47 MB |
+| shufflenet_v2_x1_0 | 2278604 | 9.11 MB |
+| tiny_vit_5m | 5110284 | 20.44 MB |
+
 
 For the purpose of comparing apples to apples during benchmarking no image augmentation was employed and the same set of hyper-parameters were used for all models during training. All models had the inital weights set from IMAGENET1K_V2. All layers had their weights made trainable. The loss function used for training was cross entropy loss. Training was done on a ml.c5.9xlarge virtual machine instance. The hyper-parameters were set to the following:
 * Epochs - 10
