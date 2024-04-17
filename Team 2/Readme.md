@@ -338,4 +338,9 @@ Finally, with the global data, we created an interactive html map of the AQI dat
 
 These are just a few clear and relatively simple examples of what can be done with data that is successfully stored in an S3 bucket after retrieving it from the AQS API. ​
 
-This same data could be used to create real-time apps for both historical and forecasting purposes, or to model changes in AQI over time by geographic region — all fascinating use cases, but applications that were outside the scope of this particular project. ​
+This same data could be used to create real-time apps for both historical and forecasting purposes, or to model changes in AQI over time by geographic region — all fascinating use cases, but applications that were outside the scope of this particular project.
+
+### Ways to Improve
+1. Ensure the time span of data pull aligns with the frequency of lambda executions set by CloudWatch. Disagreements in these two parameters will result in either missed data or redundant data.
+2. In order to aggregate the latitude/longitude data, each observation has to be parsed and placed within a shapefile of state boundaries. Either determine a way to parallelize or vectorize this process, or incorporate this assessment into the lambda function call so that users do not have to get the state name locally before analysis.
+3. Write a mirrored function of the current `dataPull` function to go back into time to get the data from the last 10 - 15 years. This can be done at a much faster frequency, provided one does not exceed the limit of hourly API calls permitted by AirNow. This would be able to be integrated with the other S3 bucket to produce an even larger dataset, stretching back to roughly 2008.   
