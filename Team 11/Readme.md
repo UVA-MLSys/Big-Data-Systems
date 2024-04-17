@@ -17,15 +17,16 @@ If you have not already set up the AWS CLI you may need to configure it on your 
 
 After storing the data in S3 a custom dataset was created to load the data from the S3 bucket into the sagemaker instance and get it ready for processing. Two different modes were configured for loading the data. The first assumes all data was copied from the S3 bucket into the local sagemaker instance ahead of time. It attempts to find the images locally. The second mode grabs the images from the S3 bucket ad hoc. The first method is quicker when grabbing images for the dataset but has an upfront cost of moving all the data into the sagemaker instance initially. The second option is slower during training but avoids the need for storing all the images locally at once.
 
-After loading the images they are cropped according to the bounding boxes specified in the annotations and have the dimensions normalized to 224x224. Additional images augmentations and transformations were forgone during this experiment to facilitate a common baseline for benchmarking.
+After loading the images they are cropped according to the bounding boxes specified in the annotations and have the dimensions normalized to 224x224. Additional images augmentations and transformations were omitted during this experiment to facilitate a common baseline for benchmarking.
 
 ## Training
-Five models were explored for benchmarking:
+Six models were explored for benchmarking:
 * Shufflenet_V2_X0_5
 * Shufflenet_V2_X1_0
 * MNASNET0_5
 * MobileNet_V3_Small_Weights
 * MobileNet_V3_Large_Weights
+* Tiny_Vit_5M
 
 For the purpose of comparing apples to apples during benchmarking no image augmentation was employed and the same set of hyper-parameters were used for all models during training. All models had the inital weights set from IMAGENET1K_V2. All layers had their weights made trainable. The loss function used for training was cross entropy loss. Training was done on a ml.c5.9xlarge virtual machine instance. The hyper-parameters were set to the following:
 * Epochs - 10
@@ -34,3 +35,5 @@ For the purpose of comparing apples to apples during benchmarking no image augme
 * Batch Size - 32
 
 ## Results
+
+### Future Experiments
