@@ -17,23 +17,22 @@ This project aims to explore the impact of fusion voting on third-party viabilit
 3. **Election Outcome Data:** Massachusetts Institute of Technology (MIT) Data covering election outcomes and total votes for U.S. House elections from 2008 to 2022.
 
 ## AWS Process
-Our team will be performing data wrangling, big data storage and retrieval from Athena using the Amazon Athena Query Engine, and Amazon Redshift Data Warehouse to produce custom visualizations and Amazon QuickSight. Our end goal deliverable is three types of visualizations – time-series visualization, state-by-state visualization, third party comparison visualization.
+Our team has performed data wrangling, data storage on S3 and retrieval using a Lambda function written in python to produce custom visualizations and serve it to our client side web application using the AWS API Gateway. Our end goal deliverable is three types of visualizations – time-series visualization, state-by-state visualization, Fusion party Voting comparison visualization.
 
-![Data Visualization](images/Data%20Visualization.png)
+![Data Visualization](Images/Readme/Architecture.png)
 
 ## Repository Contents
 - **Data:** This folder contains the raw data obtained from FEC and MIT sources.
 - **Scripts:** Scripts used for data cleaning, preprocessing, analysis, and visualization.
-- **Notebooks:** Jupyter notebooks containing the analysis process, including visualization code and interpretations.
+- **Web application:** A repo containing the frontend development can be found in the following **[Electoral Visualization Repository](https://github.com/brooksideas/electoral-visualization)** and as a subdirectory in the following location.
 - **Visualizations:** Output visualizations generated from the analysis.
 - **README.md:** This file providing an overview of the project.
 
 ## Usage
 To replicate or extend the analysis:
 1. Clone the repository to your local machine.
-2. Ensure you have the necessary Python libraries installed, as listed in `requirements.txt`.
-3. Run the scripts and notebooks in the appropriate sequence, following the comments and instructions provided within them.
-4. Explore the visualizations generated to gain insights into the impact of fusion voting on third-party dynamics in American politics.
+2. Please follow the `Reproducibility.md`. 
+3. Explore the visualizations generated to gain insights into the impact of fusion voting on third-party dynamics in American politics.
 
 ## Contributors
 - Assefa, Brook
