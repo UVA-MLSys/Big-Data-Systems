@@ -24,7 +24,7 @@ Our team has performed data wrangling, data storage on S3 and retrieval using a 
 ## Repository Contents
 - **Data:** This folder contains the raw data obtained from FEC and MIT sources.
 - **Scripts:** Scripts used for data cleaning, preprocessing, analysis, and visualization.
-- **Web application:** A repo containing the frontend development can be found in the following **[Electoral Visualization Repository](https://github.com/brooksideas/electoral-visualization)** and as a subdirectory in the following location.
+- **Web application:** A repo containing the frontend development can be found in the following **[Electoral Visualization Repository](https://github.com/brooksideas/electoral-visualization)** and as a subdirectory in this  [location](Frontend/electoral-visualization).
 - **Visualizations:** Output visualizations generated from the analysis.
 - **README.md:** This file providing an overview of the project.
 
