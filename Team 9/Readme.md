@@ -18,6 +18,9 @@ Our model will be trained on 20,523 images, validated on 5% of the training set 
 - **Data:** Stored in an s3 bucket
 - **Notebooks:**  Notebooks created in SageMaker used for data preprocessing and analysis
 
+## Resources
+- **Deep Convolutional Networks for Large-Scale Image Recognition:**  https://keras.io/api/applications/vgg/
+
 ## Team Members
 - Sophia Williams
 - Wilmer Maldonado
