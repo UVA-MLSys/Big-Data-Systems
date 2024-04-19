@@ -6,8 +6,9 @@ With the help of visually impaired volunteers, a total of 32,842 pictures were t
 Our model will be trained on 20,523 images, validated on 5% of the training set and tested on 8,900 unseen images.
 ## Data Sources
 
-Dataset : https://vizwiz.org/tasks-and-datasets/image-classification/
-Image Categories : https://image-net.org/challenges/LSVRC/2017/browse-synsets.php
+- Dataset : https://vizwiz.org/tasks-and-datasets/image-classification/
+
+- Image Categories : https://image-net.org/challenges/LSVRC/2017/browse-synsets.php
 
 ## AWS Resources
 - S3 Bucket for storage
