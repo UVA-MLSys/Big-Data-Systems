@@ -7,11 +7,11 @@ Our model will be trained on 20,523 images, validated on 5% of the training set 
 ## Data Sources
 
 Dataset : https://vizwiz.org/tasks-and-datasets/image-classification/
+Image Categories : https://image-net.org/challenges/LSVRC/2017/browse-synsets.php
 
 ## AWS Resources
 - S3 Bucket for storage
 - Sagemaker for jupyter notebook
-- Rekognition
 
 ## Repository Contents
 - **Data:** Stored in an s3 bucket
