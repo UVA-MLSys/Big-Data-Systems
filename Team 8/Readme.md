@@ -62,10 +62,10 @@ Although the visualization does not provide information on direct causal relatio
 
 ![Chart4](Images/Readme/Chart4.png)
 
-*The % of Votes for Third Parties (House Data)*
+*The % of Votes for Third Parties (House Data)*\
 2. Third parties that work in both fusion and non-fusion states see significantly less vote share in non-fusion states (as seen in the plots above). The only exception to this is the Libertarian Party, but they are not a unified party across the country but rather many different actors using the libertarian brand. As a result, they are not a cohesive and longstanding institution but rather a label passed from group to group.
 
-*Small Dollar Support (Funding)*
+*Small Dollar Support (Funding)*\
 3. New York, the primary state where fusion voting is used, saw an increased level of small donor donations relative to its population compared to non-fusion states. For donations under $500, New York received half of the amount of small donor donations than California even though California was more than 4 times larger in population in 2020. New York had roughly the same total amount of small donor donations as Pennsylvania, a state with 4 million more people and more electorally competitive. Although these findings cannot be solely attributed to fusion voting (other conditions like campaign finance may be considered), it is an interesting lens into state level differences.
 
 ## Conclusions
