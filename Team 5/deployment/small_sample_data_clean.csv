@@ -1,0 +1,6 @@
+fraud_bool,income,name_email_similarity,prev_address_months_count,current_address_months_count,customer_age,days_since_request,intended_balcon_amount,payment_type,zip_count_4w,velocity_24h,bank_branch_count_8w,employment_status,credit_risk_score,email_is_free,housing_status,phone_home_valid,phone_mobile_valid,bank_months_count,has_other_cards,proposed_credit_limit,foreign_request,source,session_length_in_minutes,device_os,keep_alive_session,device_distinct_emails_8w,device_fraud_count
+0,0.1,0.771247811,-1,192,20,0.008448982,-1.050951038,AB,2570,2927.210043,11,CA,214,0,BE,0,1,11,0,1500,0,INTERNET,37.83188884,WINDOWS,0,1,0
+0,0.9,0.868608885,-1,8,30,0.00350306,-0.683337092,AB,1081,2697.749318,6,CA,152,1,BC,1,1,1,1,200,0,INTERNET,1.610226457,LINUX,1,1,0
+0,0.6,0.461974021,30,8,30,0.006326431,-0.916831946,AB,2162,4985.997277,1329,CA,130,0,BC,1,0,1,0,500,0,INTERNET,5.502750166,LINUX,0,1,0
+0,0.9,0.388111391,31,2,50,0.010480169,-0.817217755,AB,2676,4259.347494,7,CB,187,1,BA,0,1,19,1,1500,0,INTERNET,3.209487681,WINDOWS,1,1,0
+0,0.9,0.512189003,-1,249,50,0.013238763,-0.230889457,AB,621,3156.647048,5,CA,125,0,BA,0,0,26,1,500,0,INTERNET,8.416212128,OTHER,1,1,0
