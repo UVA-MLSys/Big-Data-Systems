@@ -1,0 +1,7 @@
+,Model,Num_Params,Size_MB
+0,mnasnet0_5,2218512,8.87 MB
+1,mobilenet_v3_large,5483032,21.93 MB
+2,mobilenet_v3_small,2542856,10.17 MB
+3,shufflenet_v2_x0_5,1366792,5.47 MB
+4,shufflenet_v2_x1_0,2278604,9.11 MB
+5,tiny_vit_5m,5110284,20.44 MB
