@@ -68,7 +68,7 @@ Although the visualization does not provide information on direct causal relatio
 *Small Dollar Support (Funding)*\
 3. New York, the primary state where fusion voting is used, saw an increased level of small donor donations relative to its population compared to non-fusion states. For donations under $500, New York received half of the amount of small donor donations than California even though California was more than 4 times larger in population in 2020. New York had roughly the same total amount of small donor donations as Pennsylvania, a state with 4 million more people and more electorally competitive. Although these findings cannot be solely attributed to fusion voting (other conditions like campaign finance may be considered), it is an interesting lens into state level differences.
 
-## Conclusions
+## Conclusion
 *Relevance & Significance*
 In this analysis, we were able to look at third parties in a new light between fusion and non-fusion states and parties. While we were able to extrapolate general trends from the visualization, ultimately, this is a tool for other stakeholders in the electoral reform space to use to explore their questions about third political parties. Based on the trends observed from the visualization, there is one additional piece of context to add to make a larger conclusion: fusion voting means that third parties do not need to win a majority of votes to have a political impact. As a result, third parties using fusion voting can create long-standing institutions that gain public support and last longer than a few election cycles. 
 
