@@ -1,11 +1,3 @@
----
-title: "DS5110 - Team 8"
-output: github_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 # DS5110 - Team 8
 ## Team Members: Assefa, Brook Tarekegn, Koizumi, Hannah, Ohashi, Naomi
@@ -35,9 +27,6 @@ The FEC data is public and allows for detailed queries, but the individual donat
 ## Cleaning and Preparing the Data
 The Harvard data did not require much cleaning because it’s a very standardized data set. The FEC data had to be filtered to get the type of information we were interested in analyzing. Ultimately, we only needed the candidate name, transaction date, transaction amount, address of contributor, and transaction type that reflected a monetary individual donation to a candidate. Below is the data description data provided by the FEC, and the last column specifies if we removed the column or what values we used to filter the data. 
 
-|**Column name** | **Field name** | **Position** | **Null** | **Data type** | **Description** | **Filter By**|
-
-
 ## Visualization
 There are three types of visualizations we chose to use: geographic, time-series, and comparison between fusion and non-fusion states. Below are the listed goals and questions to answers through each type of visualization:
 
@@ -54,9 +43,9 @@ There are three types of visualizations we chose to use: geographic, time-series
 For a political audience, visualizations are the best presentation of data because many people lack technical backgrounds to be able to interpret data in tables or statistical results. The goal of this analysis is to analyze trends in the data, not draw specific cause and effect conclusions.
 
 ## Testing
-Our analysis did not include traditional testing or unit tests because it was focused on visualization. However, mock data was used to test the connection between where the data was being hosted and processed and the front end visualization. We began with using an Athena query but quickly realized that the querying was too slow for a user interface. As a result, we pivoted to using lambda functions in place of the Athena queries. The full pipeline is shown below. 
+Our analysis did not include traditional testing or unit tests because it was focused on visualization. However, mock data was used to test the connection between where the data was being hosted and processed and the front-end visualization. We began with using an Athena query but quickly realized that the querying was too slow for a user interface. As a result, we pivoted to using lambda functions in place of the Athena queries. The full pipeline is shown below. 
 
-knitr::include_graphics("Images\Chart4.png")
+![Data Visualization](Images/Readme/Architecture.png)
 
 ## Results
 Although the visualization does not provide information on direct causal relationships, conclusions about the impact of fusion voting can be drawn from the trends observed. First, there are a few general trends to notice: 1. There are a large number of third political parties and a majority of them do not have a lifespan more than one or two election cycles (2-4 years); 2. Just because there is a third party with a great amount of activity, it does not mean they are all unified effort (for example, one libertarian party in a state is not necessarily connected to a party with the same name in another state); 3. Many parties are created around one issue or candidate and then quickly die out, these parties can serve a specific political purpose but are not long standing institutions, which is the interest of this research. 
@@ -65,14 +54,13 @@ Although the visualization does not provide information on direct causal relatio
 *The Lifespan of Third Parties (Electoral Visualization)*
 1. Third parties that use fusion voting in NY have a longer lifespan than most other third parties in non-fusion states. A good comparison is the Working Families Party and Conservative Party, both third parties that use fusion in NY, and the Tea Party. The Tea Party was wildly popular around the 2012 presidential cycle, but we see that they quickly 
 
-knitr::include_graphics("Images\Chart1.png")
+![Chart1](Images/Readme/Chart1.png)
 
-knitr::include_graphics("Images\Chart2.png")
+![Chart2](Images/Readme/Chart2.png)
 
-knitr::include_graphics("Images\Chart3.png")
+![Chart3](Images/Readme/Chart3.png)
 
-knitr::include_graphics("Images\Chart4.png")
-
+![Chart4](Images/Readme/Chart4.png)
 
 *The % of Votes for Third Parties (House Data)*
 2. Third parties that work in both fusion and non-fusion states see significantly less vote share in non-fusion states (as seen in the plots above). The only exception to this is the Libertarian Party, but they are not a unified party across the country but rather many different actors using the libertarian brand. As a result, they are not a cohesive and longstanding institution but rather a label passed from group to group.
@@ -82,7 +70,7 @@ knitr::include_graphics("Images\Chart4.png")
 
 ## conclusions
 *Relevance & Significance*
-In this analysis, we were able to look at third parties in a new light between fusion and non-fusion states and parties. While we were able to extrapolate general trends from the visualization, ultimately this is a tool for other stakeholders in the electoral reform space to use to explore their questions about third political parties. Based on the trends observed from the visualization, there is one additional piece of context to add to make a larger conclusion: fusion voting means that third parties do not need to win a majority of votes to have a political impact. As a result, third parties using fusion voting can create long standing institutions that gain public support and last longer than a few election cycles. 
+In this analysis, we were able to look at third parties in a new light between fusion and non-fusion states and parties. While we were able to extrapolate general trends from the visualization, ultimately, this is a tool for other stakeholders in the electoral reform space to use to explore their questions about third political parties. Based on the trends observed from the visualization, there is one additional piece of context to add to make a larger conclusion: fusion voting means that third parties do not need to win a majority of votes to have a political impact. As a result, third parties using fusion voting can create long-standing institutions that gain public support and last longer than a few election cycles. 
 
 Future Experiments*
 For future analysis, it would be advantageous to layer some of the features and filters to do a deeper analysis. For example, it would be interesting to see dollars donated by a specific party in a specific state or votes per party in each state. We could dive deeper into the trends we identified in this analysis to see if they are still true or if they change with more detail.
