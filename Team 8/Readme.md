@@ -49,7 +49,12 @@ Our analysis did not include traditional testing or unit tests because it was fo
 
 ## Demo
 The whole walk-through for the interactive website is available on YouTube.\
-![FEC Fusion Voting Visualization Project Demo](https://youtu.be/smb2V9DoHP0)
+### **FEC Fusion Voting Visualization Project Demo**
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=smb2V9DoHP0
+" target="_blank"><img src="http://img.youtube.com/vi/smb2V9DoHP0/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="560" height="315" border="10" /></a>
+
+*https://youtu.be/smb2V9DoHP0*
 
 ## Results
 Although the visualization does not provide information on direct causal relationships, conclusions about the impact of fusion voting can be drawn from the trends observed. First, there are a few general trends to notice: 1. There are a large number of third political parties and a majority of them do not have a lifespan more than one or two election cycles (2-4 years); 2. Just because there is a third party with a great amount of activity, it does not mean they are all unified effort (for example, one libertarian party in a state is not necessarily connected to a party with the same name in another state); 3. Many parties are created around one issue or candidate and then quickly die out, these parties can serve a specific political purpose but are not long standing institutions, which is the interest of this research. 
