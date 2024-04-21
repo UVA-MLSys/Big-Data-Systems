@@ -39,7 +39,7 @@ There weren’t any extreme outliers we needed to remove from our data. Also the
 
 Our models utilize the “fraud_bool” field as our response variable. It is an indicator variable, which is equal to 1 if the bank account opening application is fraudulent and equal to 0 if it is not fraudulent, thus a legitimate bank account application. The data is imbalanced: only 1.1% of transactions have fraud_bool equal to 1.
 
-# Model Training and Tuning Pre-AWS Experiments: 
+# Model Type and Tuning Selection Pre-AWS Experiments: 
 
 For the model training we ran eight different experiments. All our experiments used a 70% training and 30% testing split. The metric we are using to evaluate our models is the F1 score since both false positives and false negatives are costly. A false positive would deny a person from opening a bank account when there is no fraudulent intention, while a false negative would approve opening a bank account for a person with fraudulent intention, therefore to balance out both of these concerns we are using the F1 score. 
 
@@ -55,6 +55,7 @@ The Gradient Boosting Classifier model from Experiment 2 had the highest recall 
 
 Table: Experiment 1-3 Recall, Precision and F1 Scores based on the Fraud_Bool = 1 values not the weighted average across Fraud_Bool values. 
 
+![Images/Exp1to3 Summary Table.png](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%205/Images/Exp1to3%20Summary%20Table.png)
 
 
 For our fourth and fifth experiment we decided to utilize the Gradient Boosting Classifier Model since it had the highest recall value based on experiments 1-3. For these experiments we used a random sample of 10,000 observations instead of a 100,000 observation sample as used in experiments 1-3 due to computing constraints in google collab and in order to run through various different predictor variable combinations. We decided to limit the predictor variables we tried for the various predictor variable combinations in our models to the ones that appeared to best predict fraud_bool. For our feature selection we looked at box plots and calculated the percentile values and average when fraud_bool = 0 versus when fraud_bool = 1 for each of the predictor variables in the data. Consequently, based on this information we decided to then utilize only 11 of the predictor variables for further model experiments. The 11 predictor variables we choose were: 'income', 'name_email_similarity', 'prev_address_months_count', 'current_address_months_count', 'customer_age', 'intended_balcon_amount', 'zip_count_4w', 'bank_branch_count_8w', 'credit_risk_score', 'bank_months_count', and 'proposed_credit_limit'. We dropped the other predictor variables from consideration due to their similar percentile values across the fraud_bool values. In addition, we decided to drop observations where current_address_months_count or device_distinct_emails_8w had missing values since there were only a few observations impacted by this. 
@@ -68,10 +69,29 @@ For experiment 7 we continued to use the whole data to create the training and t
 Experiment 8 continued to use a Logistic Regression Model with 6 Predictor Variables using elastic net, solver saga, and a balanced class weight as in experiment 7. It also continued to test all possible predictor variable combinations using standardized values based on the 9 predictor variables used in experiment 7. This experiment continued to not use SMOTE.  Since the models from experiment 7 did not converge, the max iterations values run in experiment 8 were increased (500, 750, 1000) and 4 different regularization strengths (0.25, 0.5, 0.75, 1) were tried while continuing to try out the same L1 ratio values from experiment 7 (0, 0.25, 0.5, 0.75, 1). This experiment was run on a 100,000 observation random sample. However, despite using higher max iteration values the models in this experiment also did not converge. However, some of these models did perform better in regards to f1 score, precision, and recall relative to prior experiments. 
 
 
-
 Experiments 4-8 Summary Table
 
+![Images/Exp4 to 8 Summary Table.png](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%205/Images/Exp4%20to%208%20Summary%20Table.png)
+
+The model with 'current_address_months_count', 'customer_age', 'intended_balcon_amount', 'zip_count_4w', 'bank_branch_count_8w', and 'credit_risk_score' predictor variables from experiment 8 performed best with using a 0.75 regularization strength, 500 max iterations, and a L1 ratio of 0. Consequently, we then ran this model on the full data (70% training; 30% testing) using SMOTE to create the final top performing model that we saved to utilize in our model inference in AWS. 
+
+
+# Top Performing Model Metrics Pre-AWS Experiments 
+
+The table below shows the confusion matrix for our top performing model based on the test dataset. Our top performing model correctly classified 203,417 non-fraudulent bank account applications as non-fraudulent, but mislabeled 91,936 non-fraudulent bank account applications as fraudulent. Additionally, it correctly classified 2,182 fraudulent bank account applications as fraudulent, but mislabeled 1,082 fraudulent bank account applications as non-fraudulent. 
+
 The table below summarizes the precision, recall, and f1 score for experiments 4-8 plus the top performing model from our model tuning phase. We chose the model with the second highest f1 score from experiment 8 since it better identified fraudulent bank account applications than the model from experiment 8 with the highest f1 score as shown through the recall values when response equaled 1. 
+
+![Images/confusion matrix tuning.png](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%205/Images/confusion%20matrix%20tuning.png)
+
+
+The table below shows the classification report for our top performing model. The weighted average precision is 98%, recall is 69%, and f1-score is 81%. 
+
+![Images/classification report tuning.png](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%205/Images/classification%20report%20tuning.png)
+
+# Model Inference
+
+
 
 
 The following shows the results from a data analysis results obtained from Sagemaker AutoML.
