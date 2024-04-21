@@ -92,11 +92,7 @@ The table below shows the classification report for our top performing model. Th
 # Model Inference using Top Performing Model from Pre-AWS Experiments
 
 
-# AWS Sagemaker AutoML Experiment Results:  
 
-The following shows the results from a data analysis results obtained from Sagemaker AutoML.
-
-![analysis](Images/analysis.png)
 
 # AWS AutoML Experiment Design: 
 
@@ -131,7 +127,12 @@ AWS services used for analysis and exploration beyond the original specification
 
 - AWS Glue – We indirectly used the AWS Glue service when using the Athena service as we had to define the schema on demand for the fraud_tbl  before we were able to query the data. 
 
-# Results 
+# AWS Sagemaker AutoML Experiment Results:  
+
+The following shows the results from a data analysis results obtained from Sagemaker AutoML.
+
+![analysis](Images/analysis.png)# 
+Results 
 
 We will first review the results from the AutoML process run under the Studio Classic, and then share the results produced under the Sagemaker Canvas service. 
 
@@ -182,7 +183,12 @@ The following shows the detailed metrics within the confusion matrix.
 
 We ran a manual batch test within Canvas using our test data set of 75,000 rows.  This was performed from within the Canvas interface. It demonstrated that the model was working and ready for deployment.  We did not deploy the model; however, this can be done from within the Canvas console.
 
+# Costs
+
+
 # Conclusions
+
+#### Overall
 
 The results using the two different AutoML processes produced different model results. The Sagemaker studio classic provided all the model results and reports back to the S3 bucket, providing full model building transparency.
 
