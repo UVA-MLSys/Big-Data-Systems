@@ -48,7 +48,7 @@ Our analysis did not include traditional testing or unit tests because it was fo
 ![Data Visualization](Images/Readme/Architecture.png)
 
 ## Demo
-The whole walk-through for the interactive website is available on YouTube.\
+The walk-through demo on our interactive website is available on YouTube.
 ### **FEC Fusion Voting Visualization Project Demo**
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=smb2V9DoHP0
 " target="_blank"><img src="http://img.youtube.com/vi/smb2V9DoHP0/0.jpg" 
