@@ -462,10 +462,10 @@ if __name__ == "__main__":
         print("tensorflow_saved_model_path {}".format(tensorflow_saved_model_path))
         model.save(tensorflow_saved_model_path, include_optimizer=False, overwrite=True, save_format="tf")
 
-        # Copy inference.py and requirements.txt to the code/ directory
+        # Copy inference.py and requirements.txt to the src/ directory
         #   Note: This is required for the SageMaker Endpoint to pick them up.
         #         This appears to be hard-coded and must be called code/
-        inference_path = os.path.join(local_model_dir, "code/")
+        inference_path = os.path.join(local_model_dir, "src/")
         print("Copying inference source files to {}".format(inference_path))
         os.makedirs(inference_path, exist_ok=True)
         os.system("cp inference.py {}".format(inference_path))
