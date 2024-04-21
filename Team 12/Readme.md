@@ -4,9 +4,10 @@ This project aims to explore how different data formats impact load speed. We wi
 
 # Dataset
 The US Census data we are using was obtained from the U.S. Department of Commerce website using the Data Extraction System. The data contains 1% of the entire population in the 1990 census sample. The dataset contains over 2 million unique data points and has information from all 50 states and the District of Columbia. This is useful in our study because we wanted to make sure that if there was going to be a change in the time it takes to import, we don't want a small dataset to just quickly be imported. 
-
+https://archive.ics.uci.edu/dataset/116/us+census+data+1990
 The dataset originally has 68 attributes. These attributes had either an 'i' prefix to indicate that it was the original attribute, or a 'd' to indicate an original attribute value being mapped to a new value.
 We also changed the dataset to collapse some of the redundant columns into single columns to help reduce file size.
+https://us-east-1.console.aws.amazon.com/s3/buckets/team12?region=us-east-1&bucketType=general&tab=objects
 
 # Motivation
 We wanted to optimize the data load speed because it is a crucial step in the processing pipeline and can improve overall performance. When querying into a poorly optimized data frame or data format, it could increase the amount of time it takes for the data model to do its calculations. The different data formats can have varying efficiencies in terms of storage space and processing speed. So, we are able to identify the most efficient format for our use case. Also when it comes to cloud environments, storage and processing costs directly relate to the amount of data processed and stored. Therefore, we are able to reduce the amount of computational resources required, leading to cost savings. As the data gets bigger, its important to design a scalable system that can handle larger volumes of data without significant degradation in performance. It's also important when the end-user has to directly interact with the data, so having an efficient data format can lead to higher load speeds for the consumer. Also with having an efficient data format, we can adapt our pipelines to take advantage of any advancement in technology and future proof our work.
