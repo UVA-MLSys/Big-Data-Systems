@@ -21,7 +21,7 @@ We wanted to research multiple common different format styles. The 4 selected st
 With the same amount of information in each data format, we made a comparison between the base dataframes and the reduced dataframes. The file size for the data frames are as follows: CSV, Base:368MB, Small:309MB; JSON Base:1.92GB, Small: 1.65GB; ORC, Base:107GB, Small:82MB; Parquet, Base:40MB, Small:36MB. 
 The following shows the result of the data import based in seconds:  CSV, Base:26.58, Small:22.62; JSON Base:26.08, Small:27.22; ORC, Base:8.22, Small:7.11; Parquet, Base:4.68, Small:4.09.
 
-##To replicate results
+### To replicate results
 To replicate our results, you would need to run our Python file. What the file does is that it fetches our dataset from the UCIMLRepo. It creates a simple dataframe of the data. Then the file will collapse some columsn into a single column  instead of having multiple columns. Then it will take the dataframe and save them into the corresponding data format files that we are interested in (Parquet, JSON, ORC, and CSV). It will also give you how long it takes for the data to be read into those specific data file formats. Then the next part of the Pythojn file will tell you how large the new data files (of the original dataset and the collapse dataset). Finally the Python file will upload the data into our pre-determined S3 bucket.
 
 # Conclusion
