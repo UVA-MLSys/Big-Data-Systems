@@ -89,27 +89,28 @@ The table below shows the classification report for our top performing model. Th
 
 ![Images/classification report tuning.png](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%205/Images/classification%20report%20tuning.png)
 
-# Model Inference
+# Model Inference using Top Performing Model from Pre-AWS Experiments
 
 
-
+# AWS Sagemaker AutoML Experiment Results:  
 
 The following shows the results from a data analysis results obtained from Sagemaker AutoML.
 
 ![analysis](Images/analysis.png)
 
-
-# Experiment Design: 
+# AWS AutoML Experiment Design: 
 
 To reduce training costs, the original data set was subsetted using the SciKit learn library’s train_test_split function to reduce the data set to a smaller subset of records. We used a Python script to create two smaller subsets from the Base.csv dataset. 
 
-The python script used to sample the original data set can be found at 
+The python script used to sample the original data set can be found at: 
 
-- Train.csv - 425,000 Rows. - To be used as the training dataset. 
+The train and test datasets created are:
 
-- Test.csv - 75,000 Rows –To be used as the test data set. 
+- Train.csv - 425,000 Rows. - Used as the training dataset. 
 
-These two files were loaded into AWS S3 at the following location. 
+- Test.csv - 75,000 Rows – Used as the test dataset. 
+
+These two files were loaded into AWS S3 at the following location: 
 
 - https://us-east-1.console.aws.amazon.com/s3/object/msds-sem-project1022?region=us-east-1&bucketType=general&prefix=test.csv 
 
@@ -117,14 +118,14 @@ These two files were loaded into AWS S3 at the following location.
 
 
 
-Through the AWS console within the Sagemaker service, AutoML was used to automate the model building process.  AutoML simplified the process of splitting the data set, so all the was required was pointing the AutoML process to a data set.  The Train.CSV was used for the AutoML process.  Auto ML handled the preprocessing and split the data set into test and training sets internally.   
+Through the AWS console within the Sagemaker service, AutoML was used to automate the model building process.  AutoML simplified the process of splitting the dataset, so all that was required was pointing the AutoML process to a data set.  The Train.CSV was used for the AutoML process.  AutoML handled the preprocessing and split the Train.csv into a test and training dataset internally.   
 
 
 # Beyond the Original Specification 
 
 AWS services used for analysis and exploration beyond the original specification included the following: 
 
-- AWS Athena - We used AWS Athena to perform some initial interactive queries on the source data file Base.csv.  We loaded the Base.csv file into an S3 bucket.  We then issued a few AWS CLI commands to partition the data into the Parquet format along the dimesion of the employment_status field.  This was intended to understand how the AWS Athena service worked and its ability to enable us to query data directly from S3 and not requiring us to load data into a Red Shift data warehouse. 
+- AWS Athena - We used AWS Athena to perform some initial interactive queries on the source data file Base.csv.  We loaded the Base.csv file into an S3 bucket.  We then issued a few AWS CLI commands to partition the data into the Parquet format along the dimension of the employment_status field.  This was intended to understand how the AWS Athena service worked and its ability to enable us to query data directly from S3 thus not requiring us to load data into a Red Shift data warehouse. 
 
 - AWS Lake Formation: In addition, we experimented with the AWS Lakehouse Formation.  We created an AWS Lakehouse and created a database for the semester project that housed a fraud_tbl and fraud_tbl_parquet, providing centralized access to our data sources. 
 
@@ -134,12 +135,13 @@ AWS services used for analysis and exploration beyond the original specification
 
 We will first review the results from the AutoML process run under the Studio Classic, and then share the results produced under the Sagemaker Canvas service. 
 
-## Sagemaker Studio Classic 
 
-Auto-pilot ML ran 100+ training jobs to optimize the selected model. The best model selected by AutoMl include an F1 score of 0.189 and an Accuracy of 0.975.
+## Sagemaker Studio Classic Results
+
+Auto-pilot ML ran 100+ training jobs to optimize the selected model. The best model selected by AutoML produced a model with an F1 score of 0.189 and an accuracy of 0.975.
  
 ## Model Building Results
-The following shows the results from 100 differnt model builds performed by Sagemaker AutoML
+The following shows the results from 100 different model builds performed by Sagemaker AutoML
 
 ![best_model](Images/bestmodel.png)
 
@@ -166,7 +168,7 @@ The model leaderboard shows the top performing models
 
 
 ## Model Results
-The following displays the overall model accuract, F1 score and impact each data element contributed to the score.
+The following displays the overall model accuracy, F1 score and impact each data element contributed to the score.
 
 ![Model_results](Images/model_results.png)
 
@@ -182,7 +184,7 @@ We ran a manual batch test within Canvas using our test data set of 75,000 rows.
 
 # Conclusions
 
-The results using the two different AutoML processes produced different model results. The Sagemaker studio classic provided all the model results and reports back to S3 bucket, providing full model building transparancy.
+The results using the two different AutoML processes produced different model results. The Sagemaker studio classic provided all the model results and reports back to the S3 bucket, providing full model building transparency.
 
 #### Advantages
 - Simple, intuitive interface that requires no coding to get a model up a running quickly
