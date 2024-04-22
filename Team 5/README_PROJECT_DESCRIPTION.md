@@ -94,7 +94,17 @@ The table below shows the classification report for our top performing model. Th
 
 # Model Inference using Top Performing Model from Pre-AWS Experiments
 
+All of the different models were trained on google colab or a local machine, and once a top performing model was identified, we were able to create an Amazon SageMaker model with an endpoint so that it could be invoked for inference. To do so, we followed Amazon’s steps for deploying a model for real-time inference. Real-time inference was chosen because it can be used for a persistent and fully managed endpoint that can handle sustained traffic.
 
+To be able to create an endpoint, the model artifacts needed to first be uploaded to an Amazon S3 bucket. The model artifacts included the saved model file and an inference script. The inference script was written with four required functions, model_fn, input_fn, predict_fn, and output_fn. This entire directory is saved in a tar.gz format and uploaded to an S3 bucket. 
+
+Afterwards, we created a deployable model in SageMaker by providing the model artifacts with specifications for what the container and framework would be. We created and deployed the model using the Python SDK with boto3 components to be able to connect it to the AWS account. The framework we used was Scikit-Learn since the model was trained using a Scikit-Learn logistic regression model. After the model was created, it could then also be deployed using SageMaker Studio to create an endpoint, where we defined the different configurations. The configurations that were decided was to use a one instance of ml.c5.large with a maximum of 8. Additionally, we are using 1 CPU core with a minimum of 128 CPU memory. Once the model endpoint is deployed, it can then be evoked to test real-time inference.
+
+To invoke the endpoint, we used the Python SDK with boto3 components to connect to the endpoint and send an inference request in order to evaluate the model. The script defined the endpoint name and loaded in a sample dataset for inference. The sample dataset is only a small portion of the full test portion of the dataset in order to keep file sizes small for AWS costs.  A confusion matrix can be seen below for what the results looked like.
+
+
+
+The necessary scripts and files for deploying a model to SageMaker Studio can be found in the directory `deployment`. 
 
 
 # AWS AutoML Experiment Design: 
