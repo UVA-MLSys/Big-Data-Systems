@@ -126,11 +126,13 @@ AWS services used for analysis and exploration beyond the original specification
 
 - AWS Athena - We used AWS Athena to perform some initial interactive queries on the source data file Base.csv.  We loaded the Base.csv file into an S3 bucket.  We then issued a few AWS CLI commands to partition the data into the Parquet format along the dimension of the employment_status field.  This was intended to understand how the AWS Athena service worked and its ability to enable us to query data directly from S3 thus not requiring us to load data into a Red Shift data warehouse.
 
-We tested the query performance in Athena using the raw table from S3 as well as the data partioned by the employment_status column.  Using the raw table we observed a total runtime performance of 2.5 seconds for a sample query.
+We tested the query performance in Athena using the raw table from S3 as well as the data partioned by the employment_status column using the parquet format.  Using the raw table we observed a total runtime performance of 2.5 seconds for a sample query.
   ![best_model](Images/athena_regular.png)
 
-After partioning the data by employment_status_column, we observed total runtim of 1.2 seconds, over a 100% improvement in query performance.  
+After partioning the data by employment_status_column using the parquet, we observed total runtime of 1.2 seconds, over a 100% improvement in query performance.  
   ![best_model](Images/athena_parquet.png)
+
+  Other services that we experimented with using for our project included:
 
 - AWS Lake Formation: In addition, we experimented with the AWS Lakehouse Formation.  We created an AWS Lakehouse and created a database for the semester project that housed a fraud_tbl and fraud_tbl_parquet, providing centralized access to our data sources. 
 
