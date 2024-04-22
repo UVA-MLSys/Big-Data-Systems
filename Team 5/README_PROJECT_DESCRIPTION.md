@@ -100,9 +100,9 @@ To be able to create an endpoint, the model artifacts needed to first be uploade
 
 Afterwards, we created a deployable model in SageMaker by providing the model artifacts with specifications for what the container and framework would be. We created and deployed the model using the Python SDK with boto3 components to be able to connect it to the AWS account. The framework we used was Scikit-Learn since the model was trained using a Scikit-Learn logistic regression model. After the model was created, it could then also be deployed using SageMaker Studio to create an endpoint, where we defined the different configurations. The configurations that were decided was to use a one instance of ml.c5.large with a maximum of 8. Additionally, we are using 1 CPU core with a minimum of 128 CPU memory. Once the model endpoint is deployed, it can then be evoked to test real-time inference.
 
-To invoke the endpoint, we used the Python SDK with boto3 components to connect to the endpoint and send an inference request in order to evaluate the model. The script defined the endpoint name and loaded in a sample dataset for inference. The sample dataset is only a small portion of the full test portion of the dataset in order to keep file sizes small for AWS costs.  A confusion matrix can be seen below for what the results looked like.
+To invoke the endpoint, we used the Python SDK with boto3 components to connect to the endpoint and send an inference request in order to evaluate the model. The script defined the endpoint name and loaded in a sample dataset for inference. The sample dataset is only a small portion of the full test portion of the dataset in order to keep file sizes small for AWS costs.  A confusion matrix can be seen below for what the results looked like. The true positive rate for detecting fraud is 100% and the true negative rate for correctly detecting something isn't fraud is 83%. The recall is 100%, the  precision is 85.5%, and the F-1 score is 91%.
 
-
+![Images/confusion matrix tuning.png](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%205/Images/Confusion%20matrix.jpg)
 
 The necessary scripts and files for deploying a model to SageMaker Studio can be found in the directory `deployment`. 
 
@@ -205,7 +205,7 @@ The following shows the detailed metrics within the confusion matrix.
 We ran a manual batch test within Canvas using our test data set of 75,000 rows.  This was performed from within the Canvas interface. It demonstrated that the model was working and ready for deployment.  We did not deploy the model; however, this can be done from within the Canvas console.
 
 # Costs
-
+## AutoML
 When using the AutoML for model training with the default settings, the major cost drivers were training and processing on large instances, specifically the ml.m5.12x and the ml.rd.16x instances.
 
 The costs for training the model using the AutoML were as follows:
@@ -214,6 +214,11 @@ The costs for training the model using the AutoML were as follows:
 - $4.838 per Processing ml.r5.16xlarge hour for 8.046 hrs , $38.93
 
 The total costs for running our model training in the AutoML environment were $109.88.
+
+## AWS Model Inference
+The table below summarizes estimated AWS costs for deploying a model into SageMaker Studio to run real-time inference. The most expensive is using the studio notebook. The total for running inference is around $50. Note that these costs are based off a subset of the training dataset in order to keep costs low when using the class instance of AWS.
+
+![Images/confusion matrix tuning.png](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%205/Images/AWS_inference_costs.jpg)
 
 # Conclusions
 
