@@ -1,8 +1,6 @@
 # Identifying Fraudulent Bank Account Applications
 By: Katherine Sejas, Michelle Wu, and Bruce McGregor
 
-###  Exploration of Sagemaker AWS AutoML Capabilities Applied to Bank Account Fraud Detection  
-
 # Introduction: 
 
 Identifying fraudulent bank account applications, such as ones based on stolen identities or with false information. This adversely impacts the victim’s (whose identity was stolen) ability to then later open bank accounts and obtain credit. Based on the FTC Consumer Sentinel Network Data Book 2023 - there were over 1 million identity theft related reports filed. ​
