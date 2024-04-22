@@ -196,8 +196,16 @@ We ran a manual batch test within Canvas using our test data set of 75,000 rows.
 
 # Costs
 
+When using the AutoML for model training with the default settings, the major cost drivers were training on processing on large instances, specificall
+The costs for training the model using the AutoML were as follows:
+
+- $2.765 per Training ml.m5.12xlarge hour  for 25.094 hours , $69.38
+- $4.838 per Processing ml.r5,16xlarge hour for 8.046 hrs , $38.93
+
+The total costs for running our model training in the AutoML environment were $109.88.
 
 # Conclusions
+
 
 #### Results Comparison 
 
