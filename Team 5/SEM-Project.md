@@ -1,8 +1,13 @@
-# MSDS Big Data Systems Semester Project 
+# Identifying Fraudulent Bank Account Applications
+By: Katherine Sejas, Michelle Wu, and Bruce McGregor
 
 ###  Exploration of Sagemaker AWS AutoML Capabilities Applied to Bank Account Fraud Detection  
 
 # Introduction: 
+
+Identifying fraudulent bank account applications, such as ones based on stolen identities or with false information. This adversely impacts the victim’s (whose identity was stolen) ability to then later open bank accounts and obtain credit. Based on the FTC Consumer Sentinel Network Data Book 2023 - there were over 1 million identity theft related reports filed. ​
+
+Our objective is to develop a model that identifes fradulent bank account applications that maximizes the f1 score since both false positives and false negatives are costly. A false positive would deny a person from opening a bank account when there is no fraudulent intention, while a false negative would approve opening a bank account for a person with fraudulent intention, therefore to balance out both of these concerns we are using the F1 score instead of just either recall or precision. 
 
 AWS offers many advanced capabilities that can accelerate model development time compared to traditional model building processes. These capabilities include: 
 
@@ -188,18 +193,98 @@ We ran a manual batch test within Canvas using our test data set of 75,000 rows.
 
 # Conclusions
 
+#### Results Comparison 
+
+### Inference​
+
+Predictor Variables: 'current_address_months_count', 'customer_age', 'intended_balcon_amount'  'zip_count_4w', 'bank_branch_count_8w', 'credit_risk_score'​
+
+Recall: 1​
+
+Precision: 0.855​
+
+F-1 Score: 0.91​
+
+### AWS Studio Classic​
+
+Predictor Variables: name_email_similarity, intended_balcon_amount, days_since_request, velocity_6h, device_os, velocity_24​
+
+Recall: 0.62​
+
+Precision: 0.147​
+
+F-1 Score: 0.189​
+
+### AWS Sagemaker Canvas ​
+
+Predictor Variables: Prev_address_months_count, current_address_months_count, device_os, phone_home_valid, email_is_free, keep_alive_session, has_other_cards, housing_status, income​
+
+Recall: 0.303​
+
+Precision: 0.194​
+
+F-1 Score: 0.237
+
+
 #### Overall
+
+Model results were superior using custom model development compared to AutoML​.
+
+The use of 6 predictor variables in a model yielded the best results. 
+
+Simple process to integrate custom model into AWS SageMaker Studio Inference Pipeline.
 
 The results using the two different AutoML processes produced different model results. The Sagemaker studio classic provided all the model results and reports back to the S3 bucket, providing full model building transparency.
 
-#### Advantages
+
+#### Advantages of using AWS vs Traditional Model Building Process
 - Simple, intuitive interface that requires no coding to get a model up a running quickly
 - AWS selects the best algorithm based on the use case (e.g., 2 category prediction)
-- Fully automates process of splitting data set, model building and tuning
-- Runs many different combinations of hyper parameters and provides you top performing model
+- Fully automates process of splitting dataset, model building, and model tuning
+- Runs many different combinations of hyperparameters and provides you with a top performing model
 - Easy to run manual and batch predictions 
 - Simple model deployment
 
 #### Disadvantages
 - Costly using AWS environment  to run everything inside AWS
-- Less control over the algorithm choice and hyper parameter choices
+- Less control over the algorithm choice and hyperparameter choices
+
+# Project Environment Setup: 
+
+import numpy as np
+
+import pandas as pd
+
+import os
+
+import sys
+
+import matplotlib.pyplot as plt
+
+import seaborn as sns
+
+import plotly.express as pexp
+
+from sklearn.linear_model import GradientBoostingClassifier
+
+from sklearn.linear_model import LogisticRegression
+
+from sklearn.model_selection import train_test_split
+
+from sklearn.metrics import classification_report, confusion_matrix, roc_curve, auc
+
+import itertools
+
+from imblearn.over_sampling import SMOTE
+
+from pycaret.classification import *
+
+from imblearn.over_sampling import SMOTE
+
+import pickle
+
+try:
+    import pycaret
+except:
+    !pip install pycaret
+
