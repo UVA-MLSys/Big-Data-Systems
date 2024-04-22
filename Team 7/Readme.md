@@ -606,7 +606,7 @@ This file includes all of the necessary libraries and versions for running our c
 
 This file contains the best model from [Models.ipynb](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/Jupyter%20Notebooks/Models.ipynb).
 
-- ### [MVP_Presentation_Slides.pdf](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/MVP_Presentation_Slides.pdf)
+- #### [MVP_Presentation_Slides.pdf](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/MVP_Presentation_Slides.pdf)
 
 This PDF file contains our final presentation slides.
 
