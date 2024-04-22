@@ -102,7 +102,7 @@ Afterwards, we created a deployable model in SageMaker by providing the model ar
 
 To invoke the endpoint, we used the Python SDK with boto3 components to connect to the endpoint and send an inference request in order to evaluate the model. The script defined the endpoint name and loaded in a sample dataset for inference. The sample dataset is only a small portion of the full test portion of the dataset in order to keep file sizes small for AWS costs.  A confusion matrix can be seen below for what the results looked like. The true positive rate for detecting fraud is 100% and the true negative rate for correctly detecting something isn't fraud is 83%. The recall is 100%, the  precision is 85.5%, and the F-1 score is 91%.
 
-![Images/Confusion matrix.jpg](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%205/Images/Confusion%20matrix.jpg)
+![Images/confusion_matrix.jpg](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%205/Images/confusion_matrix.jpg)
 
 The necessary scripts and files for deploying a model to SageMaker Studio can be found in the directory `deployment`. 
 
