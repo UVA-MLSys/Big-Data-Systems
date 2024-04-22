@@ -2,12 +2,37 @@
 
 Environment Setup: 
 `import numpy as np
+
 import pandas as pd
+
 import os
+
 import sys
+
 import matplotlib.pyplot as plt
+
 import seaborn as sns
+
 import plotly.express as pexp
+
+from sklearn.linear_model import GradientBoostingClassifier
+
+from sklearn.linear_model import LogisticRegression
+
+from sklearn.model_selection import train_test_split
+
+from sklearn.metrics import classification_report, confusion_matrix, roc_curve, auc
+
+import itertools
+
+from imblearn.over_sampling import SMOTE
+
+from pycaret.classification import *
+
+from imblearn.over_sampling import SMOTE
+
+import pickle
+
 try:
     import pycaret
 except:
@@ -23,3 +48,5 @@ Problem Statement: Identifying fraudulent bank account applications, such as one
 Objective: To develop a model that identifes fradulent bank account applications. The metric we are using to evaluate our models is the F1 score since both false positives and false negatives are costly. A false positive would deny a person from opening a bank account when there is no fraudulent intention, while a false negative would approve opening a bank account for a person with fraudulent intention, therefore to balance out both of these concerns we are using the F1 score instead of just either recall or precision. 
 
 Our models utilize the “fraud_bool” field as our response variable. It is an indicator variable, which is equal to 1 if the bank account opening application is fraudulent and equal to 0 if it is not fraudulent, thus a legitimate bank account application. 
+
+
