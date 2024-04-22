@@ -218,7 +218,7 @@ The total costs for running our model training in the AutoML environment were $1
 ## AWS Model Inference
 The table below summarizes estimated AWS costs for deploying a model into SageMaker Studio to run real-time inference. The most expensive is using the studio notebook. The total for running inference is around $50. Note that these costs are based off a subset of the training dataset in order to keep costs low when using the class instance of AWS.
 
-![Images/AWS_inference_costs.jpg](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%205/Images/AWS_inference_costs.jpg)
+![Images/inference_costs.jpg](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%205/Images/inference_costs.jpg)
 
 # Conclusions
 
