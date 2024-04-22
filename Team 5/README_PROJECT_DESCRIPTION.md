@@ -233,14 +233,11 @@ F-1 Score: 0.237
 
 
 #### Overall
-
-Model results were superior using custom model development compared to AutoML​.
-
-The use of 6 predictor variables in a model yielded the best results. 
-
-Simple process to integrate custom model into AWS SageMaker Studio Inference Pipeline.
-
-The results using the two different AutoML processes produced different model results. The Sagemaker studio classic provided all the model results and reports back to the S3 bucket, providing full model building transparency.
+- Model results were superior using custom model development compared to AutoML​.
+- The use of 6 predictor variables in a model yielded the best results.
+- Simple process to integrate custom model into AWS SageMaker Studio Inference Pipeline.
+- The results using the two different AutoML processes produced different model results.
+- The Sagemaker studio classic provided all the model results and reports back to the S3 bucket, providing full model building transparency.
 
 
 #### Advantages of using AWS vs Traditional Model Building Process
