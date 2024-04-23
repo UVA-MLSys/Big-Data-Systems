@@ -206,7 +206,8 @@ We ran a manual batch test within Canvas using our test data set of 75,000 rows.
 
 # Costs
 ## AutoML
-When using the AutoML for model training with the default settings, the major cost drivers were training and processing on large instances, specifically the ml.m5.12x and the ml.rd.16x instances.
+
+AutoML experiments were run within a personal AWS account. When using the AutoML for model training with the default settings, the major cost drivers were training and processing on large instances, specifically the ml.m5.12x and the ml.rd.16x instances.
 
 The costs for training the model using the AutoML were as follows:
 
