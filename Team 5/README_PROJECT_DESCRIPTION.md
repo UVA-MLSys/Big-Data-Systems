@@ -153,7 +153,7 @@ After partioning the data by employment_status_column using the parquet, we obse
 The following shows the results from a data analysis results obtained from Sagemaker AutoML.
 
 ![analysis](Images/analysis.png)# 
-Results 
+
 
 We will first review the results from the AutoML process run under the Studio Classic, and then share the results produced under the Sagemaker Canvas service. 
 
