@@ -204,7 +204,7 @@ The model accurately predicts the MVP for each of the five seasons in the test s
 After obtianing the 10 features that are most important in determing the MVP, the next steps were to predict the share and index value for each player for a given year. These share and index metrics were easily plottable as singlular quanitified values, and were appended to the larger data set to eventually be imported into AWS Quicksight. QuickSight allows us to select features to appear for a given data point when it is hovered over. The charts make it easy to distinguish how players rank, and the interactive features allow the user to get a better sense of what the player did not attain their relative rank. See below an example of the 2022 Analysis conducted by the team.
 
 <h1 align="center">
-    <img src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/images/2022">
+    <img src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/images/2022_Analysis_Pic.jpg">
 </h1>
 <p align="center">
 
