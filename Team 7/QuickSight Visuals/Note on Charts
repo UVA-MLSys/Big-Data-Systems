@@ -1,0 +1,1 @@
+Given that the access to AWS QuickSight was to be shut down, we exported the charts as PDFs. This does not maintain the interactive element of the charts.
