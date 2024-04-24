@@ -43,4 +43,5 @@ Our team will process, analyze, and build predictive models that can accurately 
 
 We will also utilize AWS and the larger dataset to determine if there are other insights that can be generated to help Ryanair improve customer experience.​
 
-![Alt text](relative%20path/to/img.jpg?raw=true "Title")
+# Architecture
+![screenshot](img/architecture.png)
