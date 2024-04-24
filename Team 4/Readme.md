@@ -49,3 +49,13 @@ We will also utilize AWS and the larger dataset to determine if there are other 
 
 ## Architecture
 ![screenshot](img/architecture.png)
+
+## Data Pre-processing
+* No outliers were identified/removed​
+* Transformed raw customer feedback to BERT embeddings by performing:​
+    * Tokenization​ - Break raw text into tokens (words, sub-words, or characters).​ BERT typically uses WordPiece tokenization.​
+    * Vocabulary Creation​ - BERT has a fixed-size vocabulary of common tokens.​ Tokens not in the vocabulary are split into sub-word units.​
+    * Token ID Mapping​ - Map each token to a unique integer ID in the BERT vocabulary.​
+    * Special Tokens​ - Add special tokens ([CLS], [SEP]) to indicate sentence boundaries.​
+    * Padding and Truncation​ - Adjust tokenized text to fit BERT's fixed input length.​
+    * Attention Mask​ - Create a mask to indicate which tokens are words and which are padding.​
