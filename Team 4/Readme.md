@@ -8,7 +8,9 @@
 ## Introduction
 Predicting customer satisfaction by analyzing historical customer feedback involves leveraging data analytics and machine learning techniques to gain insights into customer sentiments, preferences, and areas of concern. This proactive approach allows businesses to anticipate future issues, enabling them to react promptly and enhance overall customer experience.​
 
-In the next couple weeks, 
+For this project, our team used AWS to process, analyze, and build a model that would accurately predict customer recommendation by looking Ryanair customers in reviews.​
+
+We utilized AWS and the Ryanair dataset to determine if there are other insights that can be generated to help improve customer experience.​
 
 ## Dataset
 Ryanair – Passenger Experience Reviews​: https://www.kaggle.com/datasets/cristaliss/ryanair-reviews-ratings
