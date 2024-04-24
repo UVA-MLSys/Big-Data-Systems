@@ -199,6 +199,15 @@ The table below shows whether the model correctly predicted the top four ranking
 
 The model accurately predicts the MVP for each of the five seasons in the test set. The predictions for the 2018 season were perfect in terms of ranking, but the model's rankings for the next four seasons are slightly off. The rankings for 1st and 2nd for the 2019 season are correct, but the model swaps the 3rd and 4th place candidates. For the 2020 season, the model correctly ranks the 1st and 4th place candidates but swaps 2nd and 3rd place. The model correctly ranks the 1st and 2nd place candidates for the 2021 season but places 3rd and 4th out of order. For the 2022 season, the model incorrectly ranks the 2nd and 3rd place candidates but correctly ranks 1st and 4th.
 
+### Visualization
+
+After obtianing the 10 features that are most important in determing the MVP, the next steps were to predict the share and index value for each player for a given year. These share and index metrics were easily plottable as singlular quanitified values, and were appended to the larger data set to eventually be imported into AWS Quicksight. QuickSight allows us to select features to appear for a given data point when it is hovered over. The charts make it easy to distinguish how players rank, and the interactive features allow the user to get a better sense of what the player did not attain their relative rank. See below an example of the 2022 Analysis conducted by the team.
+
+<h1 align="center">
+    <img src="https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%207/images/2022">
+</h1>
+<p align="center">
+
 ### Conclusions
 <a name="conclusions"></a>
 
