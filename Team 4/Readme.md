@@ -1,14 +1,16 @@
-## Team 4 Members:
+# Ryanair: Better Service through AI​
+
+### Team 4 Members:
 * Matt C. Scheffel
 * Shrikant T. Mishra
 * Daniel E. Kiss
 
-# Introduction
+## Introduction
 Predicting customer satisfaction by analyzing historical customer feedback involves leveraging data analytics and machine learning techniques to gain insights into customer sentiments, preferences, and areas of concern. This proactive approach allows businesses to anticipate future issues, enabling them to react promptly and enhance overall customer experience.​
 
 In the next couple weeks, 
 
-# Dataset
+## Dataset
 Ryanair – Passenger Experience Reviews​: https://www.kaggle.com/datasets/cristaliss/ryanair-reviews-ratings
 
 * CSV source file​
@@ -38,10 +40,10 @@ Dataset Columns:
 * Inflight Entertainment
 * Wifi & Connectivity
 
-# Process
+## Process
 Our team will process, analyze, and build predictive models that can accurately predict ratings given customer experience reviews.​
 
 We will also utilize AWS and the larger dataset to determine if there are other insights that can be generated to help Ryanair improve customer experience.​
 
-# Architecture
+## Architecture
 ![screenshot](img/architecture.png)
