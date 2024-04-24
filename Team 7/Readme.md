@@ -27,6 +27,7 @@ Click on the Report dropdown menu below to learn about the data, experimental de
       * [Modeling](#modeling)
    * [Results](#results)
    * [Testing](#testing)
+   * [Visualization](#visualization)
    * [Conclusions](#conclusions)
 <!--te-->
 
