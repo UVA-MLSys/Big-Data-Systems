@@ -1,0 +1,14 @@
+﻿Format,File Extension (optional),Extenstions for Compressed Files,Full File Extension,Name,Classification,Average Data Scanned (MB) (All records),1 Query Per Day ($),100 Queries Per day ($),1000 Queries Per Day ($)
+Comma-separated values,.csv,.gz,.csv.gz,output_csv_gzip,csv,63.12,0.01,0.92,9.15
+Comma-separated values,.csv,.lz4,.csv.lz4,output_csv_lz,unknown,,,,
+Comma-separated values,.csv,.snappy,.csv.snappy,output_csv_snappy,csv,129.35,0.02,1.88,18.76
+JSON,.json,.gz,.json.gz,output_json_gzip,json,78.17,0.01,1.13,11.34
+JSON,.json,.lz4,.json.lz4,output_json_lz,unknown,,,,
+JSON,.json,.snappy,.json.snappy,output_json_snappy,json,194.53,0.03,2.82,28.21
+Apache ORC,.orc,.snappy,.snappy.orc,output_orc_snappy,orc,54.46,0.01,0.79,7.9
+Apache ORC,.orc,.zlib,.zlib.orc,output_orc_zlib,orc,41.05,0.01,0.6,5.95
+Apache Parquet,.parquet,.gz,.gz.parquet,output_parquet_gzip,Parquet,38.5,0.01,0.56,5.58
+Apache Parquet,.parquet,.lz4,.lz4.parquet,output_parquet_lz4,Parquet,50.04,0.01,0.73,7.26
+Apache Parquet,.parquet,.lz4,.lz4.parquet,output_parquet_lzo,Parquet,49.63,0.01,0.72,7.2
+Apache Parquet,.parquet,.snappy,.snappy.parquet,output_parquet_snappy,Parquet,50.03,0.01,0.73,7.26
+Apache Parquet,.parquet,.zstd,.zstd.parquet,output_parquet_zstd,Parquet,38.89,0.01,0.56,5.64

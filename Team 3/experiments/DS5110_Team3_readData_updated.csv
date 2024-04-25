@@ -1,0 +1,26 @@
+﻿Format,File Extension (optional),Extenstions for Compressed Files,Full File Extension,Name,Classification,Table Creation time (ms),Average Reads (s) (10 Records),Average Data Scanned (MB) (10 records),Average Reads (s) (10000 Records),Average Data Scanned (MB) (10000 records),Average Reads (s) (All Records),Average Data Scanned (MB) (All records),Trial 1:  Reads (s) (10 records),Trial 1: Data Scanned (MB) (10 records),Trial 2: Reads (s) (10 records),Trial 2: Data Scanned (MB) (10 records),Trial 3: Reads (s) (10 records),Trial 3: Data Scanned (MB) (10 records),Trial 1: Reads (s) (10000 records),Trial 1: Data Scanned (MB) (10000 records),Trial 2: Reads (s) (10000 records),Trial 2: Data Scanned (MB) (10000 records),Trial 3: Reads (s) (10000 records),Trial 3: Data Scanned (MB) (10000 records),Trial 1: Reads (s) (All records),Trial 1: Data Scanned (MB) (All records),Trial 2: Reads (s) (All records),Trial 2: Data Scanned (MB) (All records),Trial 3: Reads (s) (All records),Trial 3: Data Scanned (MB) (All records)
+Comma-separated values,.csv,.gz,.csv.gz,output_csv_gzip,csv,16,0.841666667,0.43599,0.804666667,0.345083333,20.77,63.12,0.872,0.62841,0.813,0.16688,0.84,0.51268,0.914,0.47387,0.682,0.21543,0.818,0.34595,26.978,63.12,17.382,63.12,17.95,63.12
+Comma-separated values,.csv,.lz4,.csv.lz4,output_csv_lz,unknown,2.7,,,,,,,0.204,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Comma-separated values,.csv,.snappy,.csv.snappy,output_csv_snappy,csv,0.1,0.746333333,0.441486667,0.789333333,0.728913333,20.459,129.35,0.648,0.17757,0.922,0.96754,0.669,0.17935,0.804,0.6372,0.696,0.89187,0.868,0.65767,17.265,129.35,17.011,129.35,27.101,129.35
+JSON,.json,.gz,.json.gz,output_json_gzip,json,8.4,0.967666667,0.41092,0.766333333,0.472266667,32.58066667,78.17,1.449,0.98446,0.819,0.08242,0.635,0.16588,0.772,0.58131,0.697,0.27117,0.83,0.56432,33.23,78.17,32.245,78.17,32.267,78.17
+JSON,.json,.lz4,.json.lz4,output_json_lz,unknown,52.9,0.062333333,,,,,,0.187,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+JSON,.json,.snappy,.json.snappy,output_json_snappy,json,0.8,0.78,1.204753333,0.869,1.86,27.48333333,194.53,0.957,0.77275,0.7,0.38151,0.683,2.46,0.796,2.76,0.912,1.54,0.899,1.28,32.701,194.53,17.306,194.53,32.443,194.53
+Apache ORC,.orc,.snappy,.snappy.orc,output_orc_snappy,orc,6.4,0.736,10.51,0.945,23.87,19.08066667,54.46,0.668,5.88,0.685,1.45,0.855,24.2,1.038,24.48,0.835,22.97,0.962,24.16,18.134,54.46,20.776,54.46,18.332,54.46
+Apache ORC,.orc,.zlib,.zlib.orc,output_orc_zlib,orc,4.1,0.734,18.716,0.836666667,17.05333333,17.96366667,41.05,0.915,18.04,0.576,18.18,0.711,19.928,0.912,18.14,0.659,14.72,0.939,18.3,16.607,41.05,17.356,41.05,19.928,41.05
+Apache Parquet,.parquet,.gz,.gz.parquet,output_parquet_gzip,Parquet,1.6,0.725333333,3.926666667,0.624333333,10.3,28.08733333,38.5,0.711,3.26,0.605,3.24,0.86,5.28,0.653,10.51,0.658,7.61,0.562,12.78,27.632,38.5,28.546,38.5,28.084,38.5
+Apache Parquet,.parquet,.lz4,.lz4.parquet,output_parquet_lz4,Parquet,0.3,0.802333333,21.92666667,0.808666667,19.27,28.926,50.04,1.142,22.27,0.637,22.37,0.628,21.14,0.739,17.95,0.674,17.93,1.013,21.93,31.433,50.04,27.639,50.04,27.706,50.04
+Apache Parquet,.parquet,.lz4,.lz4.parquet,output_parquet_lzo,Parquet,1.1,0.784,22.23,0.974,22.13,27.67533333,49.63,0.802,22.18,0.779,22.38,0.771,22.13,0.87,22.17,1.228,22,0.824,22.22,28.557,49.63,27.313,49.63,27.156,49.63
+Apache Parquet,.parquet,.snappy,.snappy.parquet,output_parquet_snappy,Parquet,0,0.645,4.306666667,0.799,14.44,30.00133333,50.03,0.674,4.24,0.661,1.4,0.6,7.28,0.753,18.18,0.665,5.5,0.979,19.64,26.976,50.03,28.065,50.03,34.963,50.03
+Apache Parquet,.parquet,.zstd,.zstd.parquet,output_parquet_zstd,Parquet,0.9,0.815333333,15.76333333,1.000666667,16.36333333,27.60866667,38.89,0.737,12.6,0.907,17.26,0.802,17.43,0.886,16.86,1.162,15.03,0.954,17.2,27.416,38.89,28.248,38.89,27.162,38.89
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,   ,,,,,,,,,,,,,,,,,,
