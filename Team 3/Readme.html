@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Readme.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="center-the-etl-data-pipelinecenter"><center> The ETL Data Pipeline</center></h1>
+<h3 id="centersuraj-kunthu-wyatt-priddy-and-atif-siddiquicenter"><center>Suraj Kunthu, Wyatt Priddy, and Atif Siddiqui</center></h3>
+<h3 id="centerteam-3-projectcenter"><center><strong>Team 3 Project</strong></center></h3>
+<h4 id="center-ds-5110-spring-2024center"><center> DS 5110: Spring 2024</center></h4>
+<h2 id="introduction"><strong>Introduction</strong></h2>
+<p>We are working on a Data Engineering focused project​. Rather than create a Machine Learning model, we are setting up an ETL (Extract, Transform, Load) pipeline for data scientists​ to highlight the importance of <strong>storage</strong> and <strong>organizing</strong> data. We will compare query processes for optimal performance when working with Big Data sets and show the associated costs​.</p>
+<h2 id="importance-of-storage-and-organization">Importance of Storage and Organization</h2>
+<p><strong>Improved Performance:​</strong></p>
+<ul>
+<li>Faster query execution: Organized data with proper partitioning and indexing allows data processing tools to locate relevant information quickly, leading to faster query execution times.​</li>
+<li>Reduced processing overhead: Compressed data files require less storage space, which translates to less data to transfer and process during data pipelines. This reduces the overall processing overhead and improves efficiency.​</li>
+</ul>
+<p><strong>Reduced Storage Costs:​</strong></p>
+<ul>
+<li>Efficient storage utilization: Organized data often eliminates redundancy and allows for optimized storage formats, significantly reducing the amount of physical storage needed.​</li>
+<li>Compression benefits: Compressed data files occupy less space, leading to lower storage costs on AWS services like S3. This is especially beneficial for large datasets.​
+​
+<strong>​Enhanced Scalability:​</strong></li>
+<li>Easier data management: Organized data with clear structure facilitates adding new data or scaling existing datasets efficiently. This makes it easier to handle growing data volumes without performance degradation.​</li>
+<li>Cost-effective scaling: Lower storage requirements from compression allow for scaling your data processing pipelines with minimal impact on storage costs.​</li>
+</ul>
+<p><strong>​Improved Data Quality:​</strong></p>
+<ul>
+<li>Reduced errors: Organized data structures help mitigate errors during data ingestion and processing due to inconsistencies or ambiguity.​</li>
+<li>Data validation: Organizing data allows for easier implementation of data validation checks to ensure the integrity and accuracy of your data before processing.​</li>
+</ul>
+<h2 id="the-data">The Data</h2>
+<h3 id="source-and-description">Source and Description</h3>
+<p>The court records data from was collected from both circuit and district courts across the Commonwealth of Virginia - home to the University of Virginia. Formed from existing real world court data, we are hoping to predict the outcome of misdemeanor and felony court cases within the general district court based on case type and demographics surrounding the defendant.</p>
+<ul>
+<li>the full data set was sourced by <a href="https://virginiacourtdata.org/">virginiacourtdata.org</a> and includes over 20 million rows of court cases from district and circuit courts from 2010-2020.</li>
+<li>We are using a subsection of the dataset for General District Criminal Courts from 2010 - 2020 regarding misdemeanors and felonies.</li>
+<li>~93 different files Merged together used for feature engineering</li>
+<li>There are 7,196,322 data points across 11 variables being utilized:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+<th style="text-align:center">Data Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Final Disposition</td>
+<td>The outcome of the court case.</td>
+<td style="text-align:center">str</td>
+</tr>
+<tr>
+<td>Court</td>
+<td>The court system within Virginia where the case was heard.</td>
+<td style="text-align:center">str</td>
+</tr>
+<tr>
+<td>Complanaint</td>
+<td>The arrest officers in the case.</td>
+<td style="text-align:center">str</td>
+</tr>
+<tr>
+<td>Public Defender</td>
+<td>Whether a public defender was assigned to the case</td>
+<td style="text-align:center">bool</td>
+</tr>
+<tr>
+<td>Gender</td>
+<td>Gender of the defendant</td>
+<td style="text-align:center">str</td>
+</tr>
+<tr>
+<td>Race</td>
+<td>Race of the defendant</td>
+<td style="text-align:center">str</td>
+</tr>
+<tr>
+<td>Case Type</td>
+<td>Indication of whether the case was a mideameanor or felony</td>
+<td style="text-align:center">str</td>
+</tr>
+<tr>
+<td>Class</td>
+<td>The level of misdemeanor or felony committed</td>
+<td style="text-align:center">str</td>
+</tr>
+<tr>
+<td>CodeSection</td>
+<td>A reference to the law that was violated — can be state or local law</td>
+<td style="text-align:center">str</td>
+</tr>
+<tr>
+<td>ChargeAmended</td>
+<td>Whether the original charge was amended</td>
+<td style="text-align:center">bool</td>
+</tr>
+<tr>
+<td>SentenceTime</td>
+<td>The duration of a jail or prison sentence from the outcome of the case</td>
+<td style="text-align:center">int</td>
+</tr>
+</tbody>
+</table>
+<h3 id="preprocessing-and-feature-engineering">Preprocessing and feature engineering:</h3>
+<h4 id="preprocessing">Preprocessing:</h4>
+<p>The <code>Race</code> variable contained multiple variations of the different race types so a mapping function was applied to get succinct data.</p>
+<p>The <code>Class</code> variable had null variables so we gave all null variables the status of &quot;None&quot; as not all charges have subclasses.</p>
+<p><code>CodeSection</code>, or the charges applied, had 6 null variables. These were dropped from the dataset.</p>
+<p><code>SentenceTime</code> or the length of the sentence applied at the outcome of a case has null values so 0's were inputed as no sentence would have a length of 0.</p>
+<p>The results of the case, <code>FinalDisposition</code>, had a substantial amount of records (~89k) with null values. These were omitted from the dataset as this will likely be our response variable for a classification model.</p>
+<h4 id="data-cleaning-highlights%E2%80%8B">Data Cleaning Highlights:​</h4>
+<p><code>Final Disposition</code>:​</p>
+<ul>
+<li>The response variable for a potential classification model had ~89k records with null values representing 1.2% of the dataset. These values were removed from the dataset. ​</li>
+</ul>
+<p><code>SentenceTime</code>:​</p>
+<ul>
+<li>The response variable for a regression model had ~447k records with null values representing 6.2% of the dataset. 0 values were input to represent no sentence time for the case. ​</li>
+</ul>
+<p><code>Charge</code> <em>Class</em>:​</p>
+<ul>
+<li>The <em>Class</em> feature had numerous entries (~2.4 million) with null values. It is not always applicable that a charge has a class therefore a value of &quot;<em>None</em>&quot; was inputed for these values.</li>
+</ul>
+<h4 id="feature-engineering-highlights">Feature Engineering Highlights:</h4>
+<p><code>Court</code> Variable: ​</p>
+<ul>
+<li>Distinction by court was given in the Federal Information Processing Standard (FIPS) format. Supplemental data from the Federal Communication Commission was used to map FIPS code to court name​</li>
+<li>Example Conversion: <em>&quot;51540&quot;</em> -&gt; <em>&quot;Charlottesville City&quot;​</em></li>
+</ul>
+<p><code>ChargeAmended</code> Variable:</p>
+<ul>
+<li>A new variable was created, <code>ChargeAmended</code>, to indicate whether a charge was changed from the original charge. This is usually done when an initial charge is too much of a far reach for the prosecutor and a lesser charge is needed to convict.</li>
+</ul>
+<p><code>Public Defender</code> Variable:​</p>
+<ul>
+<li>Manipulation of free-form text entry of the <code>Defense Attorney</code> field in the raw data to discern whether a defendant was assigned a public defender.​</li>
+<li>Example Entries: <em>&quot;Public Defender&quot;, &quot;Public Def&quot;, &quot;P Def&quot;, &quot;Pub Def&quot;, &quot;PD&quot;</em></li>
+</ul>
+<h2 id="etl-pipeline">ETL Pipeline</h2>
+<p><img src="./readme_images/etl.png" alt="ETL"></p>
+<table>
+<thead>
+<tr>
+<th>Data Preprocessing</th>
+<th>SageMaker / Notebooks</th>
+<th>Clean and Merge source files</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data Processing</td>
+<td>Glue</td>
+<td>Job to Compress and Load data into  different File formats</td>
+</tr>
+<tr>
+<td></td>
+<td>Glue Crawlers</td>
+<td>Schema definition for all different formats​</td>
+</tr>
+<tr>
+<td></td>
+<td>Lambda</td>
+<td>Execute Automated crawlers whenever S3 event is created​</td>
+</tr>
+<tr>
+<td></td>
+<td>Athena</td>
+<td>Read data from S3 and Glue Catalog​</td>
+</tr>
+<tr>
+<td></td>
+<td>Redshift Spectrum</td>
+<td>Read data from S3 as external objects​</td>
+</tr>
+<tr>
+<td></td>
+<td>Redshift</td>
+<td>Load data into different formats for experimentation​</td>
+</tr>
+<tr>
+<td></td>
+<td>SageMaker / Notebooks</td>
+<td>Experimental Analysis</td>
+</tr>
+<tr>
+<td></td>
+<td>QuickSight</td>
+<td>Dashboard  for Result visualization​</td>
+</tr>
+</tbody>
+</table>
+<p>​</p>
+<h2 id="experimental-design">Experimental Design</h2>
+<p>Measure Performance of big data reports based on the different file and compression formats supported by AWS​</p>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>File Extension (optional)</th>
+<th>Extensions for compressed files</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Comma-separated values​</td>
+<td>.csv</td>
+<td>.gz, .snappy, .lz4, .bz2, .deflate​</td>
+</tr>
+<tr>
+<td>Microsoft Excel workbook​</td>
+<td>.xlsx​</td>
+<td>No compression support​</td>
+</tr>
+<tr>
+<td>JSON (JSON document and JSON lines)​</td>
+<td>.json, .jsonl​</td>
+<td>.gz​, .snappy​, .lz4​, .bz2​, .deflate​</td>
+</tr>
+<tr>
+<td>Apache ORC​</td>
+<td>.orc</td>
+<td>.zlib​, .snappy​</td>
+</tr>
+<tr>
+<td>Apache Parquet​</td>
+<td>.parquet​</td>
+<td>.gz, .snappy​, .lz4​</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://docs.aws.amazon.com/databrew/latest/dg/supported-data-file-sources.html">source</a></p>
+<h3 id="experiment">Experiment</h3>
+<p>For the tables created, execution time was retrieved from CloudWatch Logs​.</p>
+<p>AWS Athena was leveraged to query different compression formats in S3 buckets​</p>
+<ul>
+<li>3 READ queries performed of varying record sizes, 3 times each:​
+<ul>
+<li>10 records &lt;-- (ex: <code>head</code> or <code>tail</code> of data)​</li>
+<li>10,000 records &lt;-- (ex: sampling)​</li>
+<li>All records &lt;-- (ex: full data query)​</li>
+</ul>
+</li>
+<li>Query times (seconds) and Data Scanned (MB) was recorded​</li>
+</ul>
+<p>Data was then averaged, exported as a .csv, and loaded onto QuickSight for visualization</p>
+<p><a href="https://us-east-1.quicksight.aws.amazon.com/sn/accounts/211125778552/dashboards/df177a27-eeaf-4861-ab23-9bd5c4da0aec/sheets/df177a27-eeaf-4861-ab23-9bd5c4da0aec_9cee886f-53d0-4865-9995-c78eaa190ebc">Link to QuickSight Dashboard</a></p>
+<h2 id="results">Results</h2>
+<h3 id="data-compression">Data Compression</h3>
+<p>Source Data Size after data cleaning and preparation - 1 GB</p>
+<table>
+<thead>
+<tr>
+<th>Data Format​</th>
+<th>Compression​</th>
+<th>Comp S3 Size​</th>
+<th>Redshift Size​</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>csv</td>
+<td>gzip</td>
+<td>​ 63 MB</td>
+<td>388 MB​</td>
+</tr>
+<tr>
+<td>csv</td>
+<td>​snappy​</td>
+<td>129 MB​</td>
+<td>360 MB​</td>
+</tr>
+<tr>
+<td>json</td>
+<td>gzip</td>
+<td>78 MB​</td>
+<td>224 MB​</td>
+</tr>
+<tr>
+<td>json​</td>
+<td>snappy​</td>
+<td>80 MB​</td>
+<td>224 MB​</td>
+</tr>
+<tr>
+<td>orc​</td>
+<td>snappy​</td>
+<td>54.5 MB​</td>
+<td>210 MB​</td>
+</tr>
+<tr>
+<td>orc​</td>
+<td>zlib​</td>
+<td>41.1. MB​</td>
+<td>224 MB​</td>
+</tr>
+<tr>
+<td>parquet​</td>
+<td>gzip​</td>
+<td>38.7 MB</td>
+<td>224 MB​</td>
+</tr>
+<tr>
+<td>parquet​</td>
+<td>lz4</td>
+<td>50.4 MB​</td>
+<td>--</td>
+</tr>
+<tr>
+<td>parquet​</td>
+<td>lzo​</td>
+<td>49.9 MB​</td>
+<td>--​</td>
+</tr>
+<tr>
+<td>parquet​</td>
+<td>snappy​</td>
+<td>50.3. MB​</td>
+<td>220 MB​</td>
+</tr>
+<tr>
+<td>parquet​</td>
+<td>zstd​</td>
+<td>39.1 MB​</td>
+<td>210 MB​</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Lz compression is not supported with Athena  for Csv and Json​</li>
+<li>Redshift Deflates the data and then stores it in its cluster – Until Unless column level compression is defined.</li>
+</ul>
+<h3 id="athena-query">Athena Query</h3>
+<h4 id="table-creation">Table Creation</h4>
+<p><img src="./readme_images/table_creation.png" alt="Table Creation"></p>
+<ul>
+<li>.json.lz takes the longest at 52.9 seconds</li>
+<li>.snappy.parquet takes the shortest at nearly 0 seconds</li>
+</ul>
+<h4 id="10-records">10 Records</h4>
+<p>Graphs of Trials
+<img src="./readme_images/10records_trials.png" alt="10 Records, trials"></p>
+<ul>
+<li>One interesting note, trials do vary on both the amount of data scanned and query times.</li>
+<li>.snappy.parquet tends to have the most volatility on data scanned</li>
+</ul>
+<p>Graphs of Average Data Scanned &amp; Read Query Time
+<img src="./readme_images/10records_avg.png" alt="10 Records, avg"></p>
+<ul>
+<li>For 10 records, .csv.snappy is the most ideal format for the read time/data scan ratio</li>
+<li>0.44 MB read in 0.74 seconds</li>
+<li>NOTE: .lz compression is not supported by AWS Athena</li>
+</ul>
+<h4 id="10000-records">10,000 Records</h4>
+<p>Graphs of Trials
+<img src="./readme_images/10krecords_trials.png" alt="10K Records, trials"></p>
+<ul>
+<li>Again, .snappy.parquet tends to have the most volatility on data scanned</li>
+</ul>
+<p>Graphs of Average Data Scanned &amp; Read Query Time
+<img src="./readme_images/10krecords_avg.png" alt="10K Records, avg"></p>
+<ul>
+<li>For sampling data with 10,000 records, .json.gzip is the most ideal format for the read time/data scan ratio</li>
+<li>0.47 MB read in 0.77 seconds</li>
+</ul>
+<h4 id="all-records">All Records</h4>
+<p>Graphs of Trials
+<img src="./readme_images/All_trials.png" alt="All Records, trials"></p>
+<p>Graphs of Average Data Scanned &amp; Read Query Time
+<img src="./readme_images/All_avg.png" alt="All Records, avg"></p>
+<ul>
+<li>For retrieving all records, .orc.zlib is the most ideal format for the read time/data scan ratio</li>
+<li>41.05 MB read in 17.86 seconds</li>
+</ul>
+<h4 id="query-costs">Query Costs</h4>
+<p>Cost of 1 Read, 100 Reads, 1000 Reads per day
+<img src="./readme_images/All_cost_trials.png" alt="Query Cost"></p>
+<ul>
+<li>For 1000 reads per day, .parquet.gzip is the most cost effective format for Athena READS</li>
+<li>$5.58 for 38.5 MB read for 1000 reads/day</li>
+</ul>
+<p>1000 Reads per day of Aggregated Format
+<img src="./readme_images/All_cost_aggregate.png" alt="Query Cost"></p>
+<ul>
+<li>For 1000 reads per day, the apache ORC format tends to be most cost effective format for Athena READS</li>
+<li>Aggregate cost is $13.85 for 96.51 MB read for 1000 reads/day</li>
+</ul>
+<h3 id="project-cost">Project Cost</h3>
+<p><img src="./readme_images/ProjectCost.png" alt="Total Cost"></p>
+<ul>
+<li>Monthly cost: $18.78/month</li>
+<li>Project annual cost: $225.36</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<h3 id="athena--s3">Athena &amp; S3</h3>
+<p><strong>Data format and Compression​</strong></p>
+<ul>
+<li>Select appropriate data formats (e.g., Parquet, ORC) and compression types (e.g., Snappy, Zstandard) based on your data characteristics and query patterns.​</li>
+</ul>
+<p><strong>​Organize Data in S3​</strong></p>
+<ul>
+<li>Organize data in Amazon S3 using partitioning and bucketing techniques to improve query performance and reduce query costs.​</li>
+</ul>
+<p><strong>​​Define Schema​</strong></p>
+<ul>
+<li>Define the schema for your data in Athena either through AWS Glue Data Catalog or by creating tables using CREATE TABLE AS queries.​</li>
+</ul>
+<p><strong>​Optimize Query Performance​</strong></p>
+<ul>
+<li>Optimize query performance by leveraging partition pruning, predicate pushdown, and column projection to reduce data scanned by queries.​</li>
+</ul>
+<p><strong>​Optimize Data Access Patterns​</strong></p>
+<ul>
+<li>Optimize data access patterns by using AWS Glue Crawlers, updating partitions, and leveraging the AWS Glue Data Catalog for metadata management.​</li>
+</ul>
+<p><strong>Monitor and Analyze</strong></p>
+<ul>
+<li>Monitor and analyze query performance using AWS CloudWatch metrics and Athena query execution plans to identify bottlenecks and areas for optimization.​</li>
+</ul>
+<h3 id="redshift">Redshift</h3>
+<p><strong>Data format and Compression​</strong></p>
+<ul>
+<li>Choose Data Format and Compression: Select appropriate data formats (e.g., CSV, Parquet) and compression types (e.g., GZIP, ZSTD) based on your data characteristics and query patterns.​</li>
+</ul>
+<p><strong>Load Data (Glue, COPY, Python)​</strong></p>
+<ul>
+<li>Load Data to Amazon Redshift: Load data into Redshift using preferred methods such as COPY command, INSERT statements, or Glue from S3 for large datasets.​</li>
+</ul>
+<p><strong>Optimize Data Distribution &amp; sorting​</strong></p>
+<ul>
+<li>Optimize Data Distribution &amp; Sorting: Utilize appropriate distribution and sort keys (DISTKEY, SORTKEY) to optimize data distribution and storage on Redshift.​</li>
+</ul>
+<p><strong>Analyze and Regular Vacuum​</strong></p>
+<ul>
+<li>Perform Regular Vacuum and Analyze: Schedule regular Vacuum and Analyze operations to reclaim disk space and update statistics for query optimization.​</li>
+</ul>
+<p>**Optimize Query Performance (Tuning)**​</p>
+<ul>
+<li>Optimize Query Performance: Fine-tune and optimize queries for better performance, including indexing, query structure, and data distribution strategies.​</li>
+</ul>
+<p><strong>Monitor and Analyze</strong></p>
+<ul>
+<li>Monitor and Analyze Query Performance: Continuously monitor query performance metrics and analyze query execution plans to identify bottlenecks and areas for improvement.​​</li>
+</ul>
+<h2 id="appendix">Appendix</h2>
+<p>S3 Bucket
+<img src="./readme_images/S3bucket.png" alt="S3 Bucket"></p>
+<p>Athena Query
+<img src="./readme_images/Athena.png" alt="Athena Query"></p>
+<p>Redshift
+<img src="./readme_images/Redshift.png" alt="Redshift"></p>
+<p>QuickSight Dashboard
+<img src="./readme_images/Quicksight.png" alt="QuickSight Dashboard"></p>
+<p>SageMaker
+<img src="./readme_images/sagemaker.png" alt="SageMaker"></p>
+
+</body>
+</html>
