@@ -59,3 +59,5 @@ We will also utilize AWS and the larger dataset to determine if there are other 
     * Special Tokens​ - Add special tokens ([CLS], [SEP]) to indicate sentence boundaries.​
     * Padding and Truncation​ - Adjust tokenized text to fit BERT's fixed input length.​
     * Attention Mask​ - Create a mask to indicate which tokens are words and which are padding.​
+ 
+## EDA
