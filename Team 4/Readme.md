@@ -68,3 +68,9 @@ We will also utilize AWS and the larger dataset to determine if there are other 
 ![screenshot](img/EDA_3.png)
 ### Trends in Airline Service Quality Over Time
 ![screenshot](img/EDA_4.png)
+
+## Training and Testing
+* Used pre-trained BERT model and measured train/val/test loss and accuracy
+* Fit Random Forest classifier and generated permutation importance metrics (sklearn)
+
+## Results
