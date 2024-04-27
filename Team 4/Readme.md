@@ -61,7 +61,10 @@ We will also utilize AWS and the larger dataset to determine if there are other 
     * Attention Mask​ - Create a mask to indicate which tokens are words and which are padding.​
  
 ## EDA
+### Comparative Overview of Airline Service Ratings
 ![screenshot](img/EDA_1.png)
+### Key Terms and Rating Correlations in Airline Reviews
 ![screenshot](img/EDA_2.png)
 ![screenshot](img/EDA_3.png)
+### Trends in Airline Service Quality Over Time
 ![screenshot](img/EDA_4.png)
