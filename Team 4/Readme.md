@@ -74,3 +74,16 @@ We will also utilize AWS and the larger dataset to determine if there are other 
 * Fit Random Forest classifier and generated permutation importance metrics (sklearn)
 
 ## Results
+![screenshot](img/results_0.png)
+
+## Conclusion
+* 10 labels is a more complex task than 2​
+* Reviews tend to be polarized​
+* Maximizing customer satisfaction is important​
+* Next steps: identifying customer pain points in comment text​
+
+![screenshot](img/results_1.png)
+![screenshot](img/results_2.png)
+
+## AWS Cost Analysis
+![screenshot](img/cost.png)
