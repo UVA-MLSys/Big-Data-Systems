@@ -61,3 +61,7 @@ We will also utilize AWS and the larger dataset to determine if there are other 
     * Attention Mask​ - Create a mask to indicate which tokens are words and which are padding.​
  
 ## EDA
+![screenshot](img/EDA_1.png)
+![screenshot](img/EDA_2.png)
+![screenshot](img/EDA_3.png)
+![screenshot](img/EDA_4.png)
