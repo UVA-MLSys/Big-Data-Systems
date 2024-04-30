@@ -59,15 +59,29 @@ Our team processed and analyzed the Ryanair dataset, and then built a text class
     * Attention Mask​ - Create a mask to indicate which tokens are words and which are padding.​
  
 ### EDA
+
+The dataset comprised of 2249 entries across 21 columns, including a variety of data types such as integer, float, and object. Unnecessary columns such as 'Unnamed: 0' were dropped. Date fields were converted to datetime objects, facilitating time-based analyses. We then performed a number of univariate and multivariate analyses of the data to gain useful insights before conducting our model training and testing.
+
 #### Comparative Overview of Airline Service Ratings
 ![screenshot](img/EDA_1.png)
 
 #### Key Terms and Rating Correlations in Airline Reviews
+
+When running various versions of the word cloudvisualization, frequent words like "comfortable", "efficient", and "friendly" were prominent when running various versions of the word cloud, suggesting positive feedback in these areas. Words like "delay" and "cramped" also appeared, indicating areas of frequent complaints.
+
 ![screenshot](img/EDA_2.png)
+
+The heatmap revealed Value for Money and Overall Rating have a high positive correlation (0.88), suggesting that passengers’ perception of value for money strongly influences their overall satisfaction. Ground Service also has a strong positive correlation with Overall Rating (0.85), indicating that efficient ground services significantly impact overall passenger satisfaction.
+
 ![screenshot](img/EDA_3.png)
 
 #### Trends in Airline Service Quality Over Time
+
+There is significant volatility in the ratings across all categories - perhaps suggesting the impact of seasonality and that custmer experiences may vary from month to month. The line graph of Overall Rating showed a notable improvement in ratings around mid-2023, possibly linked to service enhancements made by the company.
+
 ![screenshot](img/EDA_4.png)
+
+Ultimately, our EDA offered comprehensive and useful insights into the Ryanair customer experience dataset which allowed us to accurately build out our model in the next phase of our project.
 
 ### Training and Testing
 * Used BERT model and measured train/validation/test loss and accuracy
