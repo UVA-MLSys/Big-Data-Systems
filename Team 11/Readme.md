@@ -3,7 +3,7 @@
 ## Alex Kendrick, Casey Nguyen, Grant Hanley
 
 ## Introduction
-Computer vision is an important task in machine learning. Many models used for computer vision tasks are large and expensive to train.Transfer learning with small models can mitigate some of the barriers to entry for computer vision tasks. With transfer learing the base model structure is already defined and fine tuning existing weights is often less expensive than training them from scratch. Smaller models may lack the capacity of larger, more complex models but having less weights to train reduces overall training cost. We seek to benchmark some of the lightest weight models readily available on Pytorch to gauge their effectiveness.
+Computer vision is an important task in machine learning. Many models used for computer vision tasks are large and expensive to train. Transfer learning with small models can mitigate some of the barriers to entry for computer vision tasks. With transfer learning, the base model structure is already defined and fine-tuning existing weights is often less expensive than training them from scratch. Smaller models may lack the capacity of larger, more complex models but having less weights to train reduces overall training cost. We seek to benchmark some of the lightest weight models readily available on Pytorch to gauge their effectiveness.
 
 ## The Data
 ### Source and Description
