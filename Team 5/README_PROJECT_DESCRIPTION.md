@@ -285,7 +285,7 @@ F-1 Score: 0.237
 - Less control over the algorithm choice and hyperparameter choices
 
 # Project Environment Setup: 
-
+```
 import numpy as np
 
 import pandas as pd
@@ -322,7 +322,7 @@ try:
     import pycaret
 except:
     !pip install pycaret
-
+```
 # Codes for Replication and GitHub Team 5 Repo Structure
 
 The Import_Data_and_Pre_AWS_Model_Experiments_Part1.ipynb and Import_Data_and_Pre_AWS_Model_Experiments_Part2.ipynb notebooks contains the import code of our data, data cleaning, exploratory data analysis, and pre-aws model experiments. The Import_Data_and_Pre_AWS_Model_Experiments_Part1.ipynb notebook in the first cells contains a list of the experiments run pre-aws modeling along with the name of the excel workbook that contains the results of the experiment where applicable. The top performing model based on our experiments was saved as logistic_model. 
