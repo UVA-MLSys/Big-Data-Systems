@@ -45,6 +45,9 @@ The final results and performance metrics of our models are summarized below.
 
 ![Imgur Image](https://imgur.com/2baMF6n.png)
 
+- **Predictions on Unseen Data (Test Set):**
+![Imgur Image](https://i.imgur.com/s7G8hNJ.png)
+
 ## Set project environment
 1. Open Code Editor in AWS Sagemaker Studio and create a new conda environment via terminal with command line below
    - conda create --name project-1 python=3.10
