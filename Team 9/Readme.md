@@ -53,7 +53,7 @@ The final results and performance metrics of our models are summarized below.
 4. Restart kernel and python environment is ready to run model training notebooks and create model sagemaker endpoint.
 
 ## Uploading Data Guidelines for Optimal Uploading Speed from Local or S3 bucketand into Sagemaker Notebook
-To load data from local into aws s3 bucket recommend using aws cli since it achieves multipart parallel uploading automatically (~7MiB/s). Without AWS Cli and using S3 bucket UI via console depending on internet connection is significantly slower (400kB/s) due to lack of multipart parallel uploading. 
+To load data from local into aws s3 bucket recommend using aws cli since it achieves multipart parallel uploading automatically (~7MiB/s). Without AWS CLI and using S3 bucket UI via console depending on internet connection is significantly slower (400kB/s) due to lack of multipart parallel uploading. 
 To load data from aws s3 bucket into aws sagemaker studio code editor directory also recommend using aws cli (~14MiB/s).
 
 ## Full Repository Manifest
