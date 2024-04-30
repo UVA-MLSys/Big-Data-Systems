@@ -45,7 +45,7 @@ The final results and performance metrics of our models are summarized below.
 
 ![Imgur Image](https://imgur.com/2baMF6n.png)
 
-- **Predictions on Unseen Data (Test Set):**
+- **Predictions on Unseen Data (Test Set) by ResNet50 Trained Model:**
 ![Imgur Image](https://i.imgur.com/s7G8hNJ.png)
 
 ## Set project environment
