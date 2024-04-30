@@ -5,12 +5,12 @@
 * Shrikant T. Mishra
 * Daniel E. Kiss
 
-## Introduction
-Predicting customer satisfaction by analyzing historical customer feedback involves leveraging data analytics and machine learning techniques to gain insights into customer sentiments, preferences, and areas of concern. This proactive approach allows businesses to anticipate future issues, enabling them to react promptly and enhance overall customer experience.​
+## Introduction and Problem Statement
+Predicting customer satisfaction by analyzing historical customer feedback involves leveraging data analytics and machine learning techniques to gain insights into customer sentiments, preferences, and areas of concern. This proactive approach allows businesses to anticipate future issues and capture previously obscure patterns in the data, enabling them to react promptly and enhance overall customer experience.​
 
-For this project, our team used AWS to process, analyze, and build a model that would accurately predict customer recommendation by looking Ryanair customers in reviews.​
+For this project, our team used AWS to process, analyze, and build a model that would accurately predict customer recommendation by reading in Ryanair customer reviews.​
 
-We utilized AWS and the Ryanair dataset to determine if there are other insights that can be generated to help improve customer experience.​
+We also utilized AWS and the Ryanair dataset to determine if there are other insights that can be generated to help improve customer experience.​
 
 ## Dataset
 Ryanair – Passenger Experience Reviews​: https://www.kaggle.com/datasets/cristaliss/ryanair-reviews-ratings
@@ -42,15 +42,13 @@ Dataset Columns:
 * Inflight Entertainment
 * Wifi & Connectivity
 
-## Process
-Our team will process, analyze, and build predictive models that can accurately predict ratings given customer experience reviews.​
+## Experiment Process
+Our team processed and analyzed the Ryanair dataset, and then built a text classification model that can predict ratings given customer experience reviews.​ Each subsection below covers the details of the process.
 
-We will also utilize AWS and the larger dataset to determine if there are other insights that can be generated to help Ryanair improve customer experience.​
-
-## Architecture
+### Architecture
 ![screenshot](img/architecture.png)
 
-## Data Pre-processing
+### Data Pre-processing
 * No outliers were identified/removed​
 * Transformed raw customer feedback to BERT embeddings by performing:​
     * Tokenization​ - Break raw text into tokens (words, sub-words, or characters).​ BERT typically uses WordPiece tokenization.​
@@ -60,30 +58,48 @@ We will also utilize AWS and the larger dataset to determine if there are other 
     * Padding and Truncation​ - Adjust tokenized text to fit BERT's fixed input length.​
     * Attention Mask​ - Create a mask to indicate which tokens are words and which are padding.​
  
-## EDA
-### Comparative Overview of Airline Service Ratings
+### EDA
+#### Comparative Overview of Airline Service Ratings
 ![screenshot](img/EDA_1.png)
-### Key Terms and Rating Correlations in Airline Reviews
+
+#### Key Terms and Rating Correlations in Airline Reviews
 ![screenshot](img/EDA_2.png)
 ![screenshot](img/EDA_3.png)
-### Trends in Airline Service Quality Over Time
+
+#### Trends in Airline Service Quality Over Time
 ![screenshot](img/EDA_4.png)
 
-## Training and Testing
-* Used pre-trained BERT model and measured train/val/test loss and accuracy
+### Training and Testing
+* Used BERT model and measured train/validation/test loss and accuracy
+   * Initial X: transformed "comment" field
+  * Initial y: "Overall Rating" (ranges from 1-10)
 * Fit Random Forest classifier and generated permutation importance metrics (sklearn)
+   * Permutation feature importance was used over the standard feature importance metric as to not give higher preference to numerical columns
+   * The five most important features are shown in the Results section below
 
-## Results
+### Results
 ![screenshot](img/results_0.png)
 
-## Conclusion
-* 10 labels is a more complex task than 2​
-* Reviews tend to be polarized​
-* Maximizing customer satisfaction is important​
-* Next steps: identifying customer pain points in comment text​
+Initially, we meant to predict the "Overall Rating", but even though training accuracy was in the 0.9s for us, throughout separate runs, the validation accuracy was very poor for predicting this field. Thus, we switched our target variable to the "Recommended" field, which is either "yes" or "no". Preparing the data and training the model using this approach led to much better results, and after just an epoch of training, train, validation, and test accuracy are very high. Keeping in mind resource limits, we did not train the model for too many more epochs, but this goes to show the improvements that were made by switching the target variable.
+
+The five most important features intuitively make sense, as these variables had the highest correlation with the overall rating field in the correlation matrix earlier in the EDA section.
+
+
+### Conclusion
+![screenshot](img/results_2.png)
+
+The results make sense intuitively, as reviews may tend to be polarizing in nature. If a customer sits down to write a review for a service, chances are they are motivated either becuase they had a very poor experience, or a very great experience. As you can see in the plot above, the 1/10 and the 10/10 ratings are the most popular out of all the ratings. The differences between a 4/10 and a 5/10 review are probably too nuanced for the model to understand without much more data.
+
+As seen in the bottom plot, the recommended field has more balanced out categories, and only two, which may explain why it seems to be much easier to predict "yes" or "no" in this regard.
 
 ![screenshot](img/results_1.png)
-![screenshot](img/results_2.png)
+
 
 ## AWS Cost Analysis
 ![screenshot](img/cost.png)
+
+
+## Setting up environment
+The notebooks should be run sequentially from `00_Explore_Dataset.ipynb` to `07_Deploy_Model.ipynb` ensure that the pipeline works as expected. Any notebooks with "_Rec" refer to the final model using "Recommended" as the target variable. Any packages not already available can be installed via `pip install`.
+
+To cleanup the artifacts of the notebooks, such as the created S3 bucket, `99_Cleanup.ipynb` should be run. The deployed endpoint will need to be deleted manually from the AWS console.
