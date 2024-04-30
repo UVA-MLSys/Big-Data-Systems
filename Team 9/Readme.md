@@ -71,20 +71,35 @@ Team 9/
 │ │ ├── full_resnet50_trained_model.h5
 
 │ │ ├── model_architecture.json
+
 │ │ └── model_weights.h5
+
 │ │
+
 │ └── tflite/
+
 │    └── model.tflite
+
 │
+
 ├── notebooks/
-│ ├── cnn_tflite_image_classification.ipynb
-│ ├── deploy_model_create_endpoint.ipynb
-│ └── s3_transferlearning_nursinghome.ipynb
+
+│ │ ├── cnn_tflite_image_classification.ipynb
+
+│ │ ├── deploy_model_create_endpoint.ipynb
+
+│ │ └── s3_transferlearning_nursinghome.ipynb
+
 │
+
 ├── BigDataFinalSlides.pdf
+
 │
+
 ├── bds_aws_budget_report.pdf
+
 │
+
 └── Readme.md
 
 ## AWS Resources
