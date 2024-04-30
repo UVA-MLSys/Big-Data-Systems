@@ -8,9 +8,9 @@ How will we use AWS to process image data at scale for successful ML image class
 
 ## Primary Repository Contents
 
-- 
-- 
-- 
+- Project Budget
+- Classification Model
+- Environment Setup
 
 ## Data Description
 
