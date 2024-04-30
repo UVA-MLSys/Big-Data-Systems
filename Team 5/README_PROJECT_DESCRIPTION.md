@@ -111,7 +111,7 @@ The necessary scripts and files for deploying a model to SageMaker Studio can be
 
 To reduce training costs, the original data set was subsetted using the SciKit learn library’s train_test_split function to reduce the data set to a smaller subset of records. We used a Python script to create two smaller subsets from the Base.csv dataset. 
 
-The python script used to sample the original data set can be found at: 
+The python script used to sample the original data set can be found in the directory 'scripts' of this repo. 
 
 The train and test datasets created are:
 
@@ -152,7 +152,7 @@ After partioning the data by employment_status_column using the parquet, we obse
 
 The following shows the results from a data analysis results obtained from Sagemaker AutoML.
 
-![analysis](Images/analysis.png)# 
+![analysis](Images/analysis.png) 
 
 
 We will first review the results from the AutoML process run under the Studio Classic, and then share the results produced under the Sagemaker Canvas service. 
@@ -168,14 +168,17 @@ The following shows the results from 100 different model builds performed by Sag
 ![best_model](Images/bestmodel.png)
 
 ## Model Performance
+The table below shows the metrics of the best model selected by AutoML, such as the F1 score of 0.189, recall of 0.26, precision of 0.14, and accuracy of 0.975. 
 
 ![model_performance](Images/model_performance.png)
 
 ## Feature Importance and Model Explainability
+The image below shows that the features name_email_similarity, intended_balcon_amount, days_since_request, and velocity_6h as important features contributing to the AutoML model. In our traditional pre-aws model experiments we also had identified name_email_similarity and intended_balcon_amount as important features conciding with what AWS found. 
 
 ![feature_importance](Images/explainability.png)
 
 ## Confusion Matrix
+Below is the confusion matrix corresponding to the best model selected by AutoML. The best model selected by AutoML did not perform as well relative to the top performing model we identified through our traditional approach. 
 
 ![confusion_matrix](Images/confusion_matrix.png)
 
@@ -185,7 +188,7 @@ Sagemaker Canvas is a new user interface and experience for automated model buil
 
 
 ## Model Leaderboard
-The model leaderboard shows the top performing models 
+The model leaderboard shows the top performing models.  
 ![leader](Images/leaderboard.png)
 
 
