@@ -61,15 +61,20 @@ To load data from aws s3 bucket into aws sagemaker studio code editor directory 
 
 ## Full Repository Manifest
 Team 9/
+
 ├── models/
+
 │ ├── resnet50_trained/
+
 │ │ ├── my_model.tf/ (tensorflow format directory)
+
 │ │ ├── full_resnet50_trained_model.h5
+
 │ │ ├── model_architecture.json
 │ │ └── model_weights.h5
 │ │
 │ └── tflite/
-│ └── model.tflite
+│    └── model.tflite
 │
 ├── notebooks/
 │ ├── cnn_tflite_image_classification.ipynb
