@@ -46,6 +46,11 @@ The final results and performance metrics of our models are summarized below.
 ![Imgur Image](https://imgur.com/2baMF6n.png)
 
 ## Set project environment
+1. Open Code Editor in AWS Sagemaker Studio and create a new conda environment via terminal with command line below
+   - conda create --name project-1 python=3.10
+2. Activate environment with 'conda activate project-1' and restart the space so new project-1 env shows up as an available kernel for notebook
+3. In the project-1 conda python environment run 'pip install tensorflow==2.15 boto3==1.34.94 matplotlib==3.8.4 pillow==10.3.0 numpy==1.26.4'
+4. Restart kernel and python environment is ready to run model training notebooks and create model sagemaker endpoint. 
 
 ## Full Repository Manifest
 
