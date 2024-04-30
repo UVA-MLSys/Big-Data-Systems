@@ -50,15 +50,19 @@ The final results and performance metrics of our models are summarized below.
    - conda create --name project-1 python=3.10
 2. Activate environment with 'conda activate project-1' and restart the space so new project-1 env shows up as an available kernel for notebook
 3. In the project-1 conda python environment run 'pip install tensorflow==2.15 boto3==1.34.94 matplotlib==3.8.4 pillow==10.3.0 numpy==1.26.4'
-4. Restart kernel and python environment is ready to run model training notebooks and create model sagemaker endpoint. 
+4. Restart kernel and python environment is ready to run model training notebooks and create model sagemaker endpoint.
+
+## Uploading Data Guidelines for Optimal Uploading Speed from Local or S3 bucketand into Sagemaker Notebook
+To load data from local into aws s3 bucket recommend using aws cli since it achieves multipart parallel uploading automatically (~7MiB/s). Without AWS Cli and using S3 bucket UI via console depending on internet connection is significantly slower (400kB/s) due to lack of multipart parallel uploading. 
+To load data from aws s3 bucket into aws sagemaker studio code editor directory also recommend using aws cli (~14MiB/s).
 
 ## Full Repository Manifest
 
 ## AWS Resources
 - S3 Bucket for storage
-- Sagemaker/jupyter notebook to run model development code
-- AWS Lambda to assist in model inference
-- Amazon API Gateway, Amazon Polly, AWS Amplify to assist in inference/app development
+- Sagemaker/jupyter notebook to run model development code in Code Editor
+- AWS Lambda to assist in model inference (Not in Repo Notebooks, This is a proposed next step/aws resource to be used.)
+- Amazon API Gateway, Amazon Polly, AWS Amplify to assist in inference/app development (Not in Repo Notebooks, This is a proposed next step/aws resource to be used.)
 
 ## Resources
 - **Deep Convolutional Networks for Large-Scale Image Recognition:**  https://keras.io/api/applications/vgg/
