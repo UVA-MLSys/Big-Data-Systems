@@ -137,9 +137,11 @@ AWS services used for analysis and exploration beyond the original specification
 - AWS Athena - We used AWS Athena to perform some initial interactive queries on the source data file Base.csv.  We loaded the Base.csv file into an S3 bucket.  We then issued a few AWS CLI commands to partition the data into the Parquet format along the dimension of the employment_status field.  This was intended to understand how the AWS Athena service worked and its ability to enable us to query data directly from S3 thus not requiring us to load data into a Red Shift data warehouse.
 
 We tested the query performance in Athena using the raw table from S3 as well as the data partioned by the employment_status column using the parquet format.  Using the raw table we observed a total runtime performance of 2.5 seconds for a sample query.
+
   ![best_model](Images/athena_regular.png)
 
 After partioning the data by employment_status_column using the parquet, we observed total runtime of 1.2 seconds, over a 100% improvement in query performance.  
+
   ![best_model](Images/athena_parquet.png)
 
   Other services that we experimented with using for our project included:
@@ -189,23 +191,25 @@ Sagemaker Canvas is a new user interface and experience for automated model buil
 
 ## Model Leaderboard
 The model leaderboard shows the top performing models.  
+
 ![leader](Images/leaderboard.png)
 
 
 ## Model Results
-The following displays the overall model accuracy, F1 score and impact each data element contributed to the score.
+The following displays the overall model accuracy, F1 score and the impact each data element contributed to the score.
 
 ![Model_results](Images/model_results.png)
 
 
 
 ## Confusion Matrix
-The following shows the detailed metrics within the confusion matrix.
+The following shows the detailed metrics within the confusion matrix from the top model based on Sagemaker Canvas. When you compare these results to the metrics from our inference using the top performing model identified through our pre-AWS experiments we see that the these results from the Sagemaker canvas' model performed less well.  
+
 ![confusion_canvas](Images/confusion_canvas.png)
 
 # Testing
 
-We ran a manual batch test within Canvas using our test data set of 75,000 rows.  This was performed from within the Canvas interface. It demonstrated that the model was working and ready for deployment.  We did not deploy the model; however, this can be done from within the Canvas console.
+We ran a manual batch test within Canvas using our test data set of 75,000 rows.  This was performed from within the Canvas interface. It demonstrated that the model was working and ready for deployment.  We did not deploy this particular model though; however, this can be done from within the Canvas console.
 
 # Costs
 ## AutoML
@@ -220,7 +224,7 @@ The costs for training the model using the AutoML were as follows:
 The total costs for running our model training in the AutoML environment were $109.88.
 
 ## AWS Model Inference
-The table below summarizes estimated AWS costs for deploying a model into SageMaker Studio to run real-time inference. The most expensive is using the studio notebook. The total for running inference is around $50. Note that these costs are based off a subset of the training dataset in order to keep costs low when using the class instance of AWS.
+The table below summarizes our estimated AWS costs for deploying a model into SageMaker Studio to run real-time inference. The most expensive component is using the studio notebook. The total for running inference is around $50. Note that these costs are based off of using a subset of the training dataset in order to keep costs low when using the class instance of AWS.
 
 ![Images/inference_costs.jpg](https://github.com/UVA-MLSys/Big-Data-Systems/blob/main/Team%205/Images/inference_costs.jpg)
 
@@ -276,7 +280,7 @@ F-1 Score: 0.237
 - Easy to run manual and batch predictions 
 - Simple model deployment
 
-#### Disadvantages
+#### Disadvantages of using AWS vs Traditional Model Building Process
 - Costly using AWS environment  to run everything inside AWS
 - Less control over the algorithm choice and hyperparameter choices
 
