@@ -77,7 +77,7 @@ The heatmap revealed Value for Money and Overall Rating have a high positive cor
 
 #### Trends in Airline Service Quality Over Time
 
-There is significant volatility in the ratings across all categories - perhaps suggesting the impact of seasonality and that custmer experiences may vary from month to month. The line graph of Overall Rating showed a notable improvement in ratings around mid-2023, possibly linked to service enhancements made by the company.
+There is significant volatility in the ratings across all categories - perhaps suggesting the impact of seasonality and that customer experiences may vary from month to month. The line graph of Overall Rating showed a notable improvement in ratings around mid-2023, possibly linked to service enhancements made by the company.
 
 ![screenshot](img/EDA_4.png)
 
