@@ -78,7 +78,7 @@ Team 9/
 
 │ └── tflite/
 
-│    └── model.tflite
+│ │ └── model.tflite
 
 │
 
