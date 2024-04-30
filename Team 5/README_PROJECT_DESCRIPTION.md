@@ -316,3 +316,15 @@ try:
 except:
     !pip install pycaret
 
+# Codes for Replication and GitHub Team 5 Repo Structure
+
+The Import_Data_and_Pre_AWS_Model_Experiments_Part1.ipynb and Import_Data_and_Pre_AWS_Model_Experiments_Part2.ipynb notebooks contains the import code of our data, data cleaning, exploratory data analysis, and pre-aws model experiments. The Import_Data_and_Pre_AWS_Model_Experiments_Part1.ipynb notebook in the first cells contains a list of the experiments run pre-aws modeling along with the name of the excel workbook that contains the results of the experiment where applicable. The top performing model based on our experiments was saved as logistic_model. 
+
+The necessary scripts and files for deploying a model to SageMaker Studio can be found in the directory `deployment`, which is what we used to conduct our inference in AWS based on using the top performing model identified through our pre-AWS model experiments. 
+
+The Final MSDS Project Slides contains our powerpoint presentation. 
+
+The directory 'scripts' contains the code to create the training and test datasets used in AWS AutoML Experiment Design. 
+
+The directory 'images' contains images of summary tables showing the results and metrics of our pre-aws experiments, AWS inference using top performing model, and from our AWS AutoML Experiments. 
+
