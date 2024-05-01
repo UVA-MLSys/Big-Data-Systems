@@ -601,6 +601,8 @@ This module contains various helper functions for system information retrieval, 
 <details>
 <summary><h3 style="font-size: 14px;">QuickSight Visuals</h3></summary>
 
+- #### [QuickSight Visuals](https://github.com/UVA-MLSys/Big-Data-Systems/tree/main/Team%207/QuickSight%20Visuals):
+
 This folder contains the visuals from our QuickSight demonstration.
 
 </details>
