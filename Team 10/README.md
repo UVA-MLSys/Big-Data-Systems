@@ -24,7 +24,7 @@ Our team used local classical computing resources to combine the data files and 
 - README.md - This file providing an overview of the project.
 - Data Files – main file: output_no_2018.csv indexed mapping files by column name: competed_map.csv, contract_type_map.csv, country_map.csv, funding_agency_map.csv, vendor_name_map.csv
 - DS5110_Team10_Project.pptx
-- data_link.txt :this is the link to the output_no_2018.csv data file
+- data_link.txt (this is the link to the output_no_2018.csv data file)
 
 ## Contributors
 - Mary Evanston
